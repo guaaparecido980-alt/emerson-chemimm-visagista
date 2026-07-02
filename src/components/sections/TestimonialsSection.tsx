@@ -6,6 +6,7 @@ import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import SectionTitle from "@/components/ui/SectionTitle";
 import PremiumCard from "@/components/ui/PremiumCard";
 import { testimonials } from "@/data/testimonials";
+import { siteConfig } from "@/data/site";
 
 export default function TestimonialsSection() {
   return (
@@ -21,7 +22,7 @@ export default function TestimonialsSection() {
           />
         </AnimatedContainer>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-md md:max-w-none mx-auto">
           {testimonials.map((test, idx) => (
             <AnimatedContainer
               key={test.id}
@@ -51,11 +52,10 @@ export default function TestimonialsSection() {
                     <h4 className="text-sm font-bold text-[#f4f7fb]">
                       {test.name}
                     </h4>
-                    {test.role && (
-                      <p className="text-[10px] text-[#a7b0be] uppercase tracking-wider">
-                        {test.role} • <span className="text-[#0a84ff]/80">{test.service}</span>
-                      </p>
-                    )}
+                    <p className="text-[10px] text-[#a7b0be] uppercase tracking-wider">
+                      {test.role && `${test.role} • `}
+                      <span className="text-[#0a84ff]/80">{test.service}</span>
+                    </p>
                   </div>
                 </div>
               </PremiumCard>
@@ -65,7 +65,15 @@ export default function TestimonialsSection() {
 
         <div className="mt-12 text-center">
           <p className="text-xs text-[#a7b0be]">
-            * Os depoimentos acima representam depoimentos de clientes reais que serão inseridos após a coleta de feedbacks.
+            Depoimento real de cliente, com identidade preservada. Mais relatos em vídeo disponíveis no{" "}
+            <a
+              href={siteConfig.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#0a84ff] hover:underline"
+            >
+              Instagram
+            </a>.
           </p>
         </div>
       </div>

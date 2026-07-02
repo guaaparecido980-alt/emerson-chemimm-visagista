@@ -11,29 +11,10 @@ export interface TestimonialItem {
 export const testimonials: TestimonialItem[] = [
   {
     id: "depoimento-1",
-    name: "Substituir por Depoimento Real",
-    role: "Advogado",
-    content: "Excelente atendimento. O Emerson fez uma análise visual antes de cortar que eu nunca tinha visto em outra barbearia. O corte realmente se adaptou ao formato do meu rosto e me deu mais segurança profissional.",
+    name: "Cliente Verificado",
+    content: "Faço meu cabelo aqui e não é fácil achar uma barbearia boa assim. É muito top, você corta do jeito que quiser. Além de tudo, o Emerson e toda a equipe aqui são muito bons. Barbearia muito boa, recomendo para todo mundo.",
     rating: 5,
-    service: "Corte com Visagismo",
-    initials: "SR"
-  },
-  {
-    id: "depoimento-2",
-    name: "Substituir por Depoimento Real",
-    role: "Empresário",
-    content: "Minha barba sempre parecia desalinhada, não importava onde eu fizesse. O Emerson explicou sobre a proporção da minha mandíbula e desenhou a barba de um jeito que valorizou muito mais meu queixo. Sensacional.",
-    rating: 5,
-    service: "Corte + Barba Premium",
-    initials: "SR"
-  },
-  {
-    id: "depoimento-3",
-    name: "Substituir por Depoimento Real",
-    role: "Consultor de Vendas",
-    content: "Mudança total de visual. Eu usava o mesmo corte há 10 anos e tinha medo de mudar. A consultoria me deu a certeza de qual caminho seguir. Hoje me sinto muito mais confiante e recebi muitos elogios.",
-    rating: 5,
-    service: "Transformação Completa",
-    initials: "SR"
+    service: "Barbearia Clube",
+    initials: "CV"
   }
 ];

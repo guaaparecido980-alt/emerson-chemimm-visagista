@@ -2,8 +2,8 @@ export const siteConfig = {
   name: "Emerson Chemimm",
   role: "Barbeiro Visagista",
   instagram: "https://www.instagram.com/emersonchemimm/",
-  whatsapp: "[INSERIR_WHATSAPP]", // Ex: "5541999999999" (somente números)
-  whatsappUrl: "https://wa.me/5541999999999", // Placeholder URL
+  whatsapp: "5541995977587",
+  whatsappUrl: "https://wa.me/5541995977587",
   googleBusinessProfile: "[INSERIR_LINK]",
   googleMaps: "[INSERIR_LINK]",
   

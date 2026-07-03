@@ -26,7 +26,7 @@ export default function TransformationsGallery() {
               key={trans.id}
               delay={0.2 * (idx + 1)}
               yOffset={30}
-              className="flex flex-col h-full"
+              className={`flex flex-col h-full ${idx === 2 ? "lg:col-span-2 lg:max-w-xl lg:mx-auto lg:w-full" : ""}`}
             >
               <BeforeAfterCompare
                 beforeImage={trans.beforeImage}

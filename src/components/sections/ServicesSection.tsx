@@ -39,7 +39,7 @@ export default function ServicesSection() {
             <AnimatedContainer
               key={service.id}
               delay={0.1 * (idx + 1)}
-              className="h-full flex"
+              className={`h-full flex ${idx === 3 ? "lg:col-start-2" : ""}`}
             >
               <PremiumCard
                 className={`w-full flex flex-col justify-between border ${

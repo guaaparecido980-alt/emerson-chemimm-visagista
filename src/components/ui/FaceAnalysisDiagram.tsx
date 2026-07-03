@@ -78,8 +78,8 @@ export default function FaceAnalysisDiagram({ pillars }: { pillars: Pillar[] }) 
             </filter>
           </defs>
 
-          {/* Anel rotativo de fundo */}
-          <motion.circle
+          {/* Anel de fundo (estático — animação contínua removida por instabilidade no WebKit/Safari) */}
+          <circle
             cx="250"
             cy="325"
             r="270"
@@ -88,9 +88,6 @@ export default function FaceAnalysisDiagram({ pillars }: { pillars: Pillar[] }) 
             strokeOpacity="0.08"
             strokeWidth="1"
             strokeDasharray="2 10"
-            animate={shouldReduceMotion ? undefined : { rotate: 360 }}
-            transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-            style={{ transformOrigin: "250px 325px" }}
           />
 
           {/* Linhas-guia de proporção (regra dos terços) */}
@@ -221,14 +218,6 @@ export default function FaceAnalysisDiagram({ pillars }: { pillars: Pillar[] }) 
                   r="5"
                   fill="#0a84ff"
                   variants={popVariants}
-                  animate={shouldReduceMotion ? undefined : {
-                    opacity: [1, 0.3, 1],
-                  }}
-                  transition={shouldReduceMotion ? undefined : {
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: 1 + 0.15 * i,
-                  }}
                 />
                 <motion.foreignObject
                   x={node.side === "left" ? node.labelX - 240 : node.side === "right" ? node.labelX : midX - 120}

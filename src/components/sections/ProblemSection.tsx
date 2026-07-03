@@ -1,5 +1,5 @@
 import React from "react";
-import { UserMinus, Sparkles, Briefcase, HelpCircle, AlertTriangle } from "lucide-react";
+import { UserMinus, Sparkles, Briefcase, HelpCircle, AlertTriangle, RefreshCw } from "lucide-react";
 import PremiumCard from "@/components/ui/PremiumCard";
 import SectionTitle from "@/components/ui/SectionTitle";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
@@ -31,6 +31,11 @@ export default function ProblemSection() {
       title: "Medo de mudar e não gostar",
       description: "O receio de arriscar um visual novo faz muita gente manter o mesmo corte por anos, mesmo sem estar totalmente satisfeito.",
     },
+    {
+      icon: RefreshCw,
+      title: "Corte bom na hora, difícil de manter em casa",
+      description: "Sai bem da cadeira, mas sem orientação de produto e técnica, fica difícil reproduzir o mesmo resultado no dia a dia.",
+    },
   ];
 
   return (
@@ -51,7 +56,6 @@ export default function ProblemSection() {
               <AnimatedContainer
                 key={prob.title}
                 delay={0.1 * (idx + 1)}
-                className={idx === 4 ? "md:col-span-2 lg:col-span-1" : ""}
               >
                 <PremiumCard className="h-full flex flex-col items-start">
                   <div className="rounded-lg bg-[#071b33] border border-[#0a84ff]/20 p-3 text-[#0a84ff] mb-6">

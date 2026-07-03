@@ -1,5 +1,5 @@
 import React from "react";
-import { Sliders, Shield, Ruler, Sparkles, Award, Coffee, RefreshCw } from "lucide-react";
+import { Sliders, Shield, Ruler, Sparkles, Award, Coffee, RefreshCw, CheckCircle2 } from "lucide-react";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import SectionTitle from "@/components/ui/SectionTitle";
 import PremiumCard from "@/components/ui/PremiumCard";
@@ -41,6 +41,11 @@ export default function DifferentialsSection() {
       title: "Atendimento com Calma",
       description: "Cada sessão tem tempo reservado para conversa e diagnóstico, sem pressa entre um cliente e outro.",
     },
+    {
+      icon: CheckCircle2,
+      title: "Continuidade entre Sessões",
+      description: "Seu histórico de corte fica registrado, então cada retorno mantém a mesma referência e o mesmo padrão.",
+    },
   ];
 
   return (
@@ -54,7 +59,7 @@ export default function DifferentialsSection() {
           />
         </AnimatedContainer>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {diffs.map((diff, idx) => {
             const Icon = diff.icon;
             return (

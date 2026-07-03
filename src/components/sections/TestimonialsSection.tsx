@@ -1,13 +1,54 @@
 "use client";
 
-import React from "react";
-import { Star } from "lucide-react";
+import React, { useState } from "react";
+import { Star, Play } from "lucide-react";
+import Image from "next/image";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import SectionTitle from "@/components/ui/SectionTitle";
 import PremiumCard from "@/components/ui/PremiumCard";
 import { testimonials } from "@/data/testimonials";
 import { siteConfig } from "@/data/site";
 import { withBasePath } from "@/lib/paths";
+
+function VideoTestimonial() {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <div className="relative mx-auto aspect-[9/16] w-full max-h-[420px] overflow-hidden rounded-xl bg-slate-900">
+      {isPlaying ? (
+        <video
+          controls
+          autoPlay
+          playsInline
+          className="h-full w-full object-cover"
+        >
+          <source src={withBasePath("/videos/depoimento-cliente.mp4")} type="video/mp4" />
+        </video>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setIsPlaying(true)}
+          aria-label="Reproduzir depoimento em vídeo"
+          className="group relative h-full w-full"
+        >
+          <Image
+            src={withBasePath("/images/depoimento-poster.webp")}
+            alt="Depoimento em vídeo de cliente"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 400px"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-950/30 transition-colors group-hover:bg-slate-950/40">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#0a84ff] text-white shadow-lg shadow-[#0a84ff]/30 transition-transform group-hover:scale-110">
+              <Play className="h-6 w-6 fill-white" />
+            </div>
+          </div>
+        </button>
+      )}
+    </div>
+  );
+}
 
 export default function TestimonialsSection() {
   return (
@@ -26,17 +67,7 @@ export default function TestimonialsSection() {
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           <AnimatedContainer delay={0.1} className="h-full flex">
             <PremiumCard className="w-full flex flex-col p-3">
-              <div className="relative mx-auto aspect-[9/16] w-full max-h-[420px] overflow-hidden rounded-xl bg-slate-900">
-                <video
-                  controls
-                  playsInline
-                  preload="none"
-                  poster={withBasePath("/images/depoimento-poster.webp")}
-                  className="h-full w-full object-cover"
-                >
-                  <source src={withBasePath("/videos/depoimento-cliente.mp4")} type="video/mp4" />
-                </video>
-              </div>
+              <VideoTestimonial />
               <p className="mt-3 text-center text-xs text-[#a7b0be]">Depoimento em vídeo de cliente</p>
             </PremiumCard>
           </AnimatedContainer>

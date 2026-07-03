@@ -276,10 +276,10 @@
     position: relative;
     border-radius: 4px;
     overflow: hidden;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 5;
   }
   @media (min-width: 1024px) {
-    .hero-visual { order: 2; aspect-ratio: 3 / 5; max-height: 78vh; }
+    .hero-visual { order: 2; aspect-ratio: 3 / 5; }
   }
   .hero-visual img {
     width: 100%; height: 100%;
@@ -393,65 +393,46 @@
   .pillar h3 { font-size: 1.25rem; font-weight: 600; }
   .pillar p { color: var(--muted); font-size: 0.98rem; }
 
-  /* ---------- ANTES E DEPOIS (cinematic) ---------- */
-  .transform-pin {
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    padding-block: 0;
+  /* ---------- ANTES E DEPOIS ---------- */
+  .transform-list {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 64px;
+    margin-top: 56px;
   }
-  .transform-inner {
+  @media (min-width: 768px) {
+    .transform-list { gap: 96px; }
+  }
+  .transform-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  @media (min-width: 900px) {
+    .transform-item { grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
+  }
+  .transform-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: center;
   }
-  @media (min-width: 1024px) {
-    .transform-inner { grid-template-columns: 1fr 1fr; gap: 80px; }
-  }
-  .transform-slide {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: center;
-    padding-block: 60px;
-    opacity: 0;
-  }
-  .transform-slide.slide-active { opacity: 1; }
-  @media (min-width: 1024px) {
-    .transform-slide { grid-template-columns: 1fr 1fr; gap: 80px; }
-  }
-  .transform-slide .container { width: 100%; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
-  @media (min-width: 1024px) {
-    .transform-slide .container { grid-template-columns: 1fr 1fr; gap: 80px; }
-  }
-  .transform-visual {
+  .transform-images .img-wrap {
     position: relative;
     aspect-ratio: 4 / 5;
-    max-height: 62vh;
-    margin-inline: auto;
-    width: 100%;
-    max-width: 420px;
     border-radius: 4px;
     overflow: hidden;
   }
-  .transform-visual img {
-    position: absolute; inset: 0;
+  .transform-images img {
     width: 100%; height: 100%;
     object-fit: cover;
     object-position: top center;
   }
-  .transform-visual .img-after { opacity: 0; }
   .transform-badge {
     position: absolute;
-    bottom: 16px; left: 16px;
+    bottom: 12px; left: 12px;
     z-index: 2;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     padding: 5px 12px;
@@ -463,40 +444,11 @@
   .transform-badge.badge-after {
     background: var(--accent);
     color: #fff;
-    opacity: 0;
   }
   .transform-copy .eyebrow { margin-bottom: 12px; }
-  .transform-copy h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 16px; }
+  .transform-copy h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 14px; }
   .transform-copy p { color: var(--muted); max-width: 46ch; }
-  .transform-progress {
-    position: absolute;
-    bottom: 32px; left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-    z-index: 5;
-  }
-  .transform-progress span {
-    width: 28px; height: 2px;
-    background: var(--line);
-    position: relative;
-    overflow: hidden;
-  }
-  .transform-progress span i {
-    position: absolute; inset: 0;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    display: block;
-  }
-  .transform-progress span.dot-active i { transform: scaleX(1); }
-
-  .transform-mobile-list { display: flex; flex-direction: column; gap: 48px; }
-  .transform-mobile-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .transform-mobile-pair .img-wrap { position: relative; aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; }
-  .transform-mobile-pair img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-  .transform-mobile-item h3 { font-size: 1.15rem; margin-bottom: 8px; margin-top: 16px; }
-  .transform-mobile-item p { color: var(--muted); font-size: 0.92rem; }
+  .transform-copy p + p { margin-top: 12px; }
 
   /* ---------- DEPOIMENTOS ---------- */
   .testimonial-grid {
@@ -785,96 +737,52 @@
   </div>
 </section>
 
-<!-- ANTES E DEPOIS — desktop cinematic pin, mobile simple list -->
-<section id="transformacoes" style="padding-top:60px;">
-  <div class="container" style="padding-bottom:40px;">
+<!-- ANTES E DEPOIS -->
+<section id="transformacoes">
+  <div class="container">
     <p class="eyebrow">Transformações</p>
     <h2 class="section-title">Transformações reais. Homens reais. Resultado visível.</h2>
-    <p class="section-lead">Cada cliente teve uma análise específica focada em seu objetivo pessoal. Role para acompanhar a transformação.</p>
-  </div>
+    <p class="section-lead">Cada cliente teve uma análise específica focada em seu objetivo pessoal.</p>
 
-  <!-- desktop pinned cinematic sequence -->
-  <div class="transform-pin" id="transformPin">
-    <div class="transform-slide slide-active" data-slide="0">
-      <div class="container">
-        <div class="transform-visual">
-          <img class="img-before" src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada">
-          <img class="img-after" src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada">
-          <span class="transform-badge badge-before">Antes</span>
-          <span class="transform-badge badge-after">Depois</span>
+    <div class="transform-list">
+      <div class="transform-item">
+        <div class="transform-images">
+          <div class="img-wrap"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"><span class="transform-badge">Antes</span></div>
+          <div class="img-wrap"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"><span class="transform-badge badge-after">Depois</span></div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Redesenho de Barba</p>
           <h3>Barba Cheia Redesenhada</h3>
           <p><strong style="color:var(--text)">Objetivo:</strong> Alinhar as linhas da barba à estrutura do rosto.</p>
-          <p style="margin-top:12px;">Barba volumosa sem contorno definido foi aparada e desenhada com navalha, criando linhas mais retas no maxilar e destacando os traços do rosto.</p>
+          <p>Barba volumosa sem contorno definido foi aparada e desenhada com navalha, criando linhas mais retas no maxilar e destacando os traços do rosto.</p>
         </div>
       </div>
-    </div>
-    <div class="transform-slide" data-slide="1">
-      <div class="container">
-        <div class="transform-visual">
-          <img class="img-before" src="images/before-2.webp" alt="Antes: Renovação de Corte e Barba">
-          <img class="img-after" src="images/after-2.webp" alt="Depois: Renovação de Corte e Barba">
-          <span class="transform-badge badge-before">Antes</span>
-          <span class="transform-badge badge-after">Depois</span>
+
+      <div class="transform-item">
+        <div class="transform-images">
+          <div class="img-wrap"><img src="images/before-2.webp" alt="Antes: Renovação de Corte e Barba"><span class="transform-badge">Antes</span></div>
+          <div class="img-wrap"><img src="images/after-2.webp" alt="Depois: Renovação de Corte e Barba"><span class="transform-badge badge-after">Depois</span></div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Corte + Barba</p>
           <h3>Renovação de Corte e Barba</h3>
           <p><strong style="color:var(--text)">Objetivo:</strong> Visual mais leve e cuidado no dia a dia.</p>
-          <p style="margin-top:12px;">Cabelo e barba sem manutenção foram reestruturados na mesma sessão, trazendo mais leveza ao visual e um acabamento muito mais cuidado.</p>
+          <p>Cabelo e barba sem manutenção foram reestruturados na mesma sessão, trazendo mais leveza ao visual e um acabamento muito mais cuidado.</p>
         </div>
       </div>
-    </div>
-    <div class="transform-slide" data-slide="2">
-      <div class="container">
-        <div class="transform-visual">
-          <img class="img-before" src="images/before-3.webp" alt="Antes: Renovação Completa de Visual">
-          <img class="img-after" src="images/after-3.webp" alt="Depois: Renovação Completa de Visual">
-          <span class="transform-badge badge-before">Antes</span>
-          <span class="transform-badge badge-after">Depois</span>
+
+      <div class="transform-item">
+        <div class="transform-images">
+          <div class="img-wrap"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"><span class="transform-badge">Antes</span></div>
+          <div class="img-wrap"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"><span class="transform-badge badge-after">Depois</span></div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Corte + Barba</p>
           <h3>Renovação Completa de Visual</h3>
           <p><strong style="color:var(--text)">Objetivo:</strong> Visual mais moderno e alinhado ao rosto.</p>
-          <p style="margin-top:12px;">Cabelo e barba renovados por completo, trazendo um contorno mais definido e um visual mais atual.</p>
+          <p>Cabelo e barba renovados por completo, trazendo um contorno mais definido e um visual mais atual.</p>
         </div>
       </div>
-    </div>
-    <div class="transform-progress" id="transformProgress">
-      <span class="dot-active"><i></i></span>
-      <span><i></i></span>
-      <span><i></i></span>
-    </div>
-  </div>
-
-  <!-- mobile fallback: simple static list, no pin -->
-  <div class="container transform-mobile-list" id="transformMobileList" style="display:none;">
-    <div class="transform-mobile-item">
-      <div class="transform-mobile-pair">
-        <div class="img-wrap"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"></div>
-        <div class="img-wrap"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"></div>
-      </div>
-      <h3>Barba Cheia Redesenhada</h3>
-      <p>Barba volumosa sem contorno definido foi aparada e desenhada com navalha, criando linhas mais retas no maxilar e destacando os traços do rosto.</p>
-    </div>
-    <div class="transform-mobile-item">
-      <div class="transform-mobile-pair">
-        <div class="img-wrap"><img src="images/before-2.webp" alt="Antes: Renovação de Corte e Barba"></div>
-        <div class="img-wrap"><img src="images/after-2.webp" alt="Depois: Renovação de Corte e Barba"></div>
-      </div>
-      <h3>Renovação de Corte e Barba</h3>
-      <p>Cabelo e barba sem manutenção foram reestruturados na mesma sessão, trazendo mais leveza ao visual e um acabamento muito mais cuidado.</p>
-    </div>
-    <div class="transform-mobile-item">
-      <div class="transform-mobile-pair">
-        <div class="img-wrap"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"></div>
-        <div class="img-wrap"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"></div>
-      </div>
-      <h3>Renovação Completa de Visual</h3>
-      <p>Cabelo e barba renovados por completo, trazendo um contorno mais definido e um visual mais atual.</p>
     </div>
   </div>
 </section>
@@ -1104,8 +1012,8 @@ if (typeof SplitType !== 'undefined' && typeof gsap !== 'undefined') {
 /* Reveal staggered on sections */
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   document.querySelectorAll('section').forEach(section => {
-    if (section.id === 'transformacoes' || section.classList.contains('cta-section')) return;
-    const items = section.querySelectorAll('.eyebrow, .section-title, .section-lead, .pillar, .sobre-visual, .testimonial-grid > *, .faq-item, .info-row');
+    if (section.classList.contains('cta-section')) return;
+    const items = section.querySelectorAll('.eyebrow, .section-title, .section-lead, .pillar, .sobre-visual, .testimonial-grid > *, .faq-item, .info-row, .transform-item');
     if (!items.length) return;
     gsap.from(items, {
       opacity: 0,
@@ -1125,61 +1033,6 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     opacity: 0, y: 24, duration: 0.8, stagger: 0.1,
     scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
   });
-}
-
-/* Cinematic pin+scrub: Antes e Depois (desktop only) */
-function initTransformPin() {
-  const pinEl = document.getElementById('transformPin');
-  const desktopWrap = pinEl;
-  const mobileList = document.getElementById('transformMobileList');
-
-  if (isMobile || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-    desktopWrap.style.display = 'none';
-    mobileList.style.display = 'flex';
-    return;
-  }
-
-  const slides = gsap.utils.toArray('.transform-slide');
-  const dots = gsap.utils.toArray('#transformProgress span');
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: pinEl,
-      start: 'top top',
-      end: '+=2400',
-      pin: true,
-      scrub: 1,
-      anticipatePin: 1
-    }
-  });
-
-  slides.forEach((slide, i) => {
-    const after = slide.querySelector('.img-after');
-    const badgeAfter = slide.querySelector('.badge-after');
-    const badgeBefore = slide.querySelector('.badge-before');
-
-    if (i > 0) {
-      tl.to(slides[i - 1], { opacity: 0, duration: 0.4 }, `slide${i}-in`);
-      tl.to(slide, { opacity: 1, duration: 0.4 }, `slide${i}-in`);
-      tl.set(dots, { }, `slide${i}-in`);
-      tl.call(() => {
-        dots.forEach((d, di) => d.classList.toggle('dot-active', di === i));
-      }, null, `slide${i}-in`);
-    }
-
-    tl.to(after, { opacity: 1, duration: 0.6 }, (i === 0 ? 0 : `slide${i}-in`) + (i === 0 ? '' : '+=0.1'));
-    tl.to(badgeAfter, { opacity: 1, duration: 0.3 }, '<');
-    tl.to(badgeBefore, { opacity: 0.5, duration: 0.3 }, '<');
-
-    tl.to({}, { duration: 0.5 });
-  });
-}
-
-if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-  initTransformPin();
-} else {
-  document.getElementById('transformPin').style.display = 'none';
-  document.getElementById('transformMobileList').style.display = 'flex';
 }
 
 window.addEventListener('resize', () => {

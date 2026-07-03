@@ -3,14 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emerson Chemimm | Barbeiro Visagista</title>
-<meta name="description" content="Corte masculino, barba e visagismo com atendimento personalizado para homens que querem uma imagem mais alinhada, natural e profissional. Agende com Emerson Chemimm.">
+<title>Emerson Chemimm | Barbeiro Visagista em Curitiba</title>
+<meta name="description" content="Emerson Chemimm — 10 anos de experiência em visagismo masculino em Curitiba. Corte, barba e imagem personalizados na Barbearia Clube. Agende sua avaliação.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="Emerson Chemimm | Barbeiro Visagista">
-<meta property="og:description" content="Corte masculino, barba e visagismo com atendimento personalizado para homens que querem uma imagem mais alinhada, natural e profissional.">
-<meta property="og:image" content="images/og-image.jpg">
+<meta property="og:url" content="https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/">
+<meta property="og:title" content="Emerson Chemimm | Barbeiro Visagista em Curitiba">
+<meta property="og:description" content="10 anos de experiência em visagismo masculino. Corte, barba e imagem personalizados na Barbearia Clube, Curitiba.">
+<meta property="og:image" content="https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/images/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Emerson Chemimm | Barbeiro Visagista em Curitiba">
+<meta name="twitter:description" content="10 anos de experiência em visagismo masculino. Agende sua avaliação.">
+<meta name="twitter:image" content="https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/images/og-image.jpg">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Emerson Chemimm - Barbeiro Visagista","description":"Visagismo masculino personalizado em Curitiba. 10 anos de experiência.","url":"https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/","telephone":"+5541995977587","image":"https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/images/emerson-hero.webp","priceRange":"$$$","address":{"@type":"PostalAddress","streetAddress":"Av. Cândido Hartmann, 1580","addressLocality":"Curitiba","addressRegion":"PR","addressCountry":"BR"},"geo":{"@type":"GeoCoordinates","latitude":-25.4256375,"longitude":-49.2993375},"openingHours":"Mo-Fr 09:00-20:00, Sa 09:00-17:00","sameAs":["https://www.instagram.com/emersonchemimm/"]}
+</script>
 
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -18,6 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -35,11 +46,12 @@
     --line: #1E293B;
     --accent: #0A84FF;
     --accent-soft: #4DB2FF;
+    --accent-dim: rgba(10,132,255,0.12);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
 
   body {
     background: var(--bg);
@@ -48,6 +60,7 @@
     font-weight: 400;
     line-height: 1.65;
     overflow-x: hidden;
+    max-width: 100vw;
   }
 
   img {
@@ -87,10 +100,7 @@
 
   .section-elevated { background: var(--bg-elevated); }
 
-  .hairline {
-    border: none;
-    border-top: 1px solid var(--line);
-  }
+  .hairline { border: none; border-top: 1px solid var(--line); }
 
   .eyebrow {
     display: inline-flex;
@@ -123,13 +133,79 @@
     margin-top: 24px;
   }
 
+  /* ═══ CURSOR CUSTOMIZADO (desktop only) ═══ */
+  #cursor { position: fixed; width: 10px; height: 10px; background: var(--accent-soft); border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); mix-blend-mode: difference; }
+  #cursor-ring { position: fixed; width: 38px; height: 38px; border: 1px solid rgba(77,178,255,0.45); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: all 0.15s ease-out; }
+  #cursor-ring.hovering { transform: translate(-50%,-50%) scale(1.7); border-color: var(--accent-soft); background: rgba(10,132,255,0.08); }
+  body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none !important; }
+  @media (hover: none), (max-width: 1023px) { #cursor, #cursor-ring { display: none !important; } }
+
+  /* ═══ LOADING SCREEN ═══ */
+  #loader {
+    position: fixed; inset: 0; z-index: 999999;
+    background: #050505;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1.75rem;
+    transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), visibility 0.8s;
+  }
+  #loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+  #loader::before, #loader::after {
+    content: ''; position: absolute; left: 0; right: 0; height: 70px; background: #000;
+    transition: height 0.7s 0.25s cubic-bezier(0.16,1,0.3,1);
+  }
+  #loader::before { top: 0; } #loader::after { bottom: 0; }
+  #loader.hide::before, #loader.hide::after { height: 0; }
+  .loader-name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 7vw, 3.6rem);
+    font-weight: 600; font-style: italic;
+    letter-spacing: 0.06em;
+    color: transparent;
+    position: relative;
+  }
+  .loader-name::after {
+    content: attr(data-text);
+    position: absolute; inset: 0;
+    color: var(--accent-soft);
+    clip-path: inset(0 100% 0 0);
+    animation: textReveal 1.1s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+  }
+  @keyframes textReveal { to { clip-path: inset(0 0% 0 0); } }
+  .loader-sub { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(77,178,255,0.55); opacity: 0; animation: fadeIn 0.8s ease 1.1s forwards; }
+  @keyframes fadeIn { to { opacity: 1; } }
+  .loader-bar { width: 110px; height: 1px; background: rgba(77,178,255,0.15); position: relative; overflow: hidden; opacity: 0; animation: fadeIn 0.5s ease 0.7s forwards; }
+  .loader-bar::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, var(--accent-soft), transparent); animation: barSweep 1s ease 0.7s forwards; }
+  @keyframes barSweep { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+  body.loading { overflow: hidden; }
+
+  /* ═══ PARTÍCULAS / LINHAS CINEMATOGRÁFICAS ═══ */
+  .cinematic-lines { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+  .particle { position: absolute; width: 2px; height: 2px; background: var(--accent-soft); border-radius: 50%; opacity: 0; animation: floatUp 9s infinite; }
+  @keyframes floatUp {
+    0% { transform: translateY(100%) translateX(0); opacity: 0; }
+    10% { opacity: 0.55; }
+    90% { opacity: 0.25; }
+    100% { transform: translateY(-15%) translateX(24px); opacity: 0; }
+  }
+
+  /* ═══ BARRA DE URGÊNCIA ═══ */
+  #urgency-bar {
+    background: linear-gradient(90deg, rgba(10,132,255,0.1), rgba(13,18,31,0.9), rgba(10,132,255,0.1));
+    border-bottom: 1px solid rgba(10,132,255,0.18);
+    position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+    backdrop-filter: blur(10px);
+    text-align: center;
+  }
+  .vaga-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; display: inline-block; animation: blink 1.5s infinite; flex-shrink: 0; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
   /* ---------- NAV ---------- */
   header {
     position: fixed;
-    top: 0; left: 0; right: 0;
+    left: 0; right: 0;
     z-index: 100;
-    padding: 20px 0;
-    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    padding: 18px 0;
+    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1), top 0.3s;
     border-bottom: 1px solid transparent;
   }
   header.scrolled {
@@ -148,10 +224,10 @@
   footer .logo img { height: 40px; }
   nav.desktop-nav { display: none; }
   @media (min-width: 1024px) {
-    nav.desktop-nav { display: flex; gap: 36px; }
+    nav.desktop-nav { display: flex; gap: 32px; }
   }
   nav.desktop-nav a {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--muted);
     position: relative;
     padding-bottom: 4px;
@@ -168,6 +244,7 @@
   nav.desktop-nav a:hover { color: var(--text); }
   nav.desktop-nav a:hover::after { width: 100%; }
 
+  /* ═══ BOTÕES — variedade proposital ═══ */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -178,374 +255,276 @@
     border-radius: 100px;
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
     white-space: nowrap;
+    position: relative; overflow: hidden;
   }
-  .btn-primary {
-    background: var(--accent);
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -8px rgba(10,132,255,0.5); background: var(--accent-soft); }
+  .btn-outline { border: 1px solid var(--line); color: var(--text); }
+  .btn-outline:hover { border-color: var(--accent-soft); transform: translateY(-2px); }
+
+  /* Botão hero: gradiente animado */
+  .btn-hero {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 50%, var(--accent) 100%);
+    background-size: 200% auto;
     color: #fff;
-    box-shadow: 0 0 0 rgba(10,132,255,0);
+    box-shadow: 0 8px 32px rgba(10,132,255,0.35);
   }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px -8px rgba(10,132,255,0.5);
-    background: var(--accent-soft);
+  .btn-hero:hover { background-position: right center; transform: translateY(-3px); box-shadow: 0 18px 40px rgba(10,132,255,0.5); }
+
+  /* Botão ghost com preenchimento no hover */
+  .btn-ghost {
+    background: transparent; color: var(--accent-soft);
+    border: 1.5px solid var(--accent); padding: 12px 26px;
   }
-  .btn-outline {
-    border: 1px solid var(--line);
-    color: var(--text);
+  .btn-ghost::before { content:''; position:absolute; inset:0; background: rgba(10,132,255,0.1); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); z-index: -1; }
+  .btn-ghost:hover { border-color: var(--accent-soft); color: #fff; transform: translateY(-3px); }
+  .btn-ghost:hover::before { transform: scaleX(1); }
+
+  /* Botão pill outline (usado na CTA de resultados) */
+  .btn-pill-outline {
+    background: rgba(10,132,255,0.06); color: var(--accent-soft);
+    border: 1px solid rgba(10,132,255,0.4);
   }
-  .btn-outline:hover {
-    border-color: var(--accent-soft);
-    transform: translateY(-2px);
+  .btn-pill-outline:hover { background: rgba(10,132,255,0.15); border-color: var(--accent-soft); color: #fff; transform: translateY(-3px); }
+
+  /* Botão glass full-width (contato) */
+  .btn-glass-full {
+    display: flex; width: 100%; justify-content: center;
+    background: rgba(10,132,255,0.08); color: var(--accent-soft);
+    border: 1px solid rgba(10,132,255,0.3);
+    backdrop-filter: blur(10px);
   }
+  .btn-glass-full:hover { background: rgba(10,132,255,0.16); border-color: var(--accent-soft); color: #fff; transform: translateY(-2px); }
 
   .hamburger {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    width: 26px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
+    display: flex; flex-direction: column; gap: 5px; width: 26px;
+    background: none; border: none; cursor: pointer; padding: 6px;
   }
   @media (min-width: 1024px) { .hamburger { display: none; } }
-  .hamburger span {
-    display: block;
-    height: 1.5px;
-    background: var(--text);
-    transition: transform 0.3s, opacity 0.3s;
-  }
+  .hamburger span { display: block; height: 1.5px; background: var(--text); transition: transform 0.3s, opacity 0.3s; }
 
   .mobile-menu {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 99;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 28px;
-    padding: 24px;
+    position: fixed; inset: 0; background: var(--bg); z-index: 99;
+    display: flex; flex-direction: column; justify-content: center; gap: 24px; padding: 24px;
     transform: translateY(-100%);
     transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .mobile-menu.open { transform: translateY(0); }
-  .mobile-menu a:not(.btn) {
-    font-family: 'Fraunces', serif;
-    font-size: 1.9rem;
-    font-weight: 500;
-  }
-  .mobile-menu a.btn {
-    width: fit-content;
-    white-space: normal;
-    text-align: center;
-  }
+  .mobile-menu a:not(.btn) { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 500; }
+  .mobile-menu a.btn { width: fit-content; white-space: normal; text-align: center; }
 
   /* ---------- HERO ---------- */
   .hero {
     min-height: 100svh;
-    display: flex;
-    align-items: center;
-    padding-top: 110px;
-    padding-bottom: 60px;
+    display: flex; align-items: center;
+    padding-top: 150px; padding-bottom: 60px;
+    position: relative; overflow: hidden;
+    background: radial-gradient(ellipse at 65% 35%, rgba(10,132,255,0.08) 0%, transparent 55%);
   }
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 48px;
-    align-items: center;
+  .hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 180px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
   }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; position: relative; z-index: 2; }
   @media (min-width: 1024px) {
     .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 64px; }
   }
+  .hero-visual-wrap { order: -1; position: relative; }
+  @media (min-width: 1024px) { .hero-visual-wrap { order: 2; max-width: 380px; margin-inline: auto; } }
+  .hero-visual-wrap::before {
+    content: ''; position: absolute; inset: -2px; border-radius: 6px;
+    background: linear-gradient(135deg, var(--accent), transparent 40%, transparent 60%, var(--accent-soft));
+    animation: borderPulse 4s ease-in-out infinite; z-index: 0;
+  }
+  @keyframes borderPulse { 0%,100% { opacity: 0.35; } 50% { opacity: 0.9; } }
   .hero-visual {
-    order: -1;
-    position: relative;
-    border-radius: 4px;
-    overflow: hidden;
-    aspect-ratio: 4 / 5;
+    position: relative; z-index: 1;
+    border-radius: 4px; overflow: hidden; aspect-ratio: 4 / 5;
   }
-  @media (min-width: 1024px) {
-    .hero-visual { order: 2; aspect-ratio: 3 / 5; }
-  }
-  .hero-visual img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: top center;
-  }
+  @media (min-width: 1024px) { .hero-visual { aspect-ratio: 3 / 5; } }
+  .hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
   .hero-visual::after {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(5,7,10,0.55), transparent 40%);
     pointer-events: none;
   }
-  h1.hero-headline {
-    font-size: clamp(2.4rem, 6.2vw, 4.6rem);
-    font-weight: 600;
+  .hero-badge {
+    position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); z-index: 10;
+    background: linear-gradient(135deg, #0a0e18, #0d1526);
+    border: 1px solid rgba(10,132,255,0.4);
+    border-radius: 1.1rem; padding: 11px 18px;
+    backdrop-filter: blur(20px);
+    display: flex; align-items: center; gap: 10px;
+    animation: badgeFloat 4s ease-in-out infinite;
+    white-space: nowrap;
   }
-  h1.hero-headline em {
-    font-style: italic;
-    color: var(--accent-soft);
-    font-weight: 400;
-  }
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 40px;
-  }
-  .hero-proof {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
-    margin-top: 48px;
-    padding-top: 28px;
-    border-top: 1px solid var(--line);
-  }
-  .hero-proof div {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
+  @keyframes badgeFloat { 0%,100% { transform: translate(-50%,0); } 50% { transform: translate(-50%,-6px); } }
+  h1.hero-headline { font-size: clamp(2.4rem, 6.2vw, 4.6rem); font-weight: 600; }
+  h1.hero-headline em { font-style: italic; color: var(--accent-soft); font-weight: 400; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 40px; }
+  .hero-proof { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); }
+  .hero-proof div { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--muted); }
+  .scroll-indicator { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); display: none; flex-direction: column; align-items: center; gap: 8px; z-index: 5; }
+  @media (min-width: 1024px) { .scroll-indicator { display: flex; } }
+  .scroll-indicator span { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--accent-soft), transparent); animation: scrollLine 2s ease-in-out infinite; }
+  @keyframes scrollLine { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform: scaleY(1); transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee-container { display: flex; overflow: hidden; width: 100%; padding: 1.75rem 0; border-block: 1px solid var(--line); background: var(--bg-elevated); }
+  .marquee-slide { display: flex; white-space: nowrap; animation: marqueeSlide 36s linear infinite; }
+  .marquee-slide span { color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; margin: 0 2.25rem; font-size: 0.68rem; }
+  @keyframes marqueeSlide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ---------- STATS ---------- */
+  .stats-section { border-bottom: 1px solid var(--line); }
+  .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; text-align: center; }
+  @media (min-width: 768px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
+  .stat-card { padding: 1.75rem 1rem; position: relative; }
+  .stat-number { font-family: 'Fraunces', serif; font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 600; font-style: italic; color: var(--accent-soft); line-height: 1; }
+  .stat-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-top: 10px; }
 
   /* ---------- SOBRE ---------- */
-  .sobre-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-  @media (min-width: 1024px) {
-    .sobre-grid { grid-template-columns: 0.8fr 1.2fr; gap: 80px; }
-  }
-  .sobre-visual {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    border-radius: 4px;
-    overflow: hidden;
-  }
+  .sobre-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+  @media (min-width: 1024px) { .sobre-grid { grid-template-columns: 0.8fr 1.2fr; gap: 80px; } }
+  .sobre-visual { position: relative; aspect-ratio: 1 / 1; border-radius: 4px; overflow: hidden; }
   .sobre-visual img { width: 100%; height: 100%; object-fit: cover; }
   .sobre-body p { color: var(--muted); margin-bottom: 20px; max-width: 56ch; }
   .sobre-body strong { color: var(--text); font-weight: 600; }
 
-  .info-row {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    margin-top: 40px;
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
-  }
-  @media (min-width: 640px) {
-    .info-row { flex-direction: row; gap: 56px; }
-  }
+  .info-row { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--line); }
+  @media (min-width: 640px) { .info-row { flex-direction: row; gap: 56px; } }
   .info-row h4 {
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent-soft);
-    margin-bottom: 8px;
+    font-family: 'Newsreader', serif; font-style: italic; font-weight: 400;
+    font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent-soft); margin-bottom: 8px;
   }
   .info-row p { font-size: 0.95rem; }
 
   /* ---------- CONCEITO / PILARES ---------- */
-  .pillars {
-    margin-top: 64px;
-    display: flex;
-    flex-direction: column;
-  }
-  .pillar {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding-block: 32px;
-    border-top: 1px solid var(--line);
-  }
+  .pillars { margin-top: 64px; display: flex; flex-direction: column; }
+  .pillar { display: grid; grid-template-columns: 1fr; gap: 12px; padding-block: 32px; border-top: 1px solid var(--line); }
   .pillar:last-child { border-bottom: 1px solid var(--line); }
-  @media (min-width: 768px) {
-    .pillar { grid-template-columns: 140px 1fr 1.3fr; gap: 32px; align-items: baseline; }
-  }
-  .pillar-num {
-    font-family: 'Fraunces', serif;
-    font-weight: 300;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    color: var(--accent);
-    opacity: 0.85;
-  }
+  @media (min-width: 768px) { .pillar { grid-template-columns: 140px 1fr 1.3fr; gap: 32px; align-items: baseline; } }
+  .pillar-num { font-family: 'Fraunces', serif; font-weight: 300; font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--accent); opacity: 0.85; }
   .pillar h3 { font-size: 1.25rem; font-weight: 600; }
   .pillar p { color: var(--muted); font-size: 0.98rem; }
 
+  /* ---------- PROCESSO ---------- */
+  .process-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
+  @media (min-width: 768px) { .process-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+  .process-step { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .process-num {
+    width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(10,132,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 1.2rem;
+    color: var(--accent-soft); background: var(--accent-dim);
+  }
+  .process-step h4 { font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .process-step p { color: var(--muted); font-size: 0.92rem; max-width: 32ch; }
+
   /* ---------- ANTES E DEPOIS ---------- */
-  .transform-list {
-    display: flex;
-    flex-direction: column;
-    gap: 64px;
-    margin-top: 56px;
+  .transform-list { display: flex; flex-direction: column; gap: 64px; margin-top: 56px; }
+  @media (min-width: 768px) { .transform-list { gap: 96px; } }
+  .transform-item { display: grid; grid-template-columns: 1fr; gap: 28px; }
+  @media (min-width: 900px) { .transform-item { grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; } }
+
+  .ba-card {
+    position: relative; border-radius: 1.5rem; overflow: hidden;
+    border: 1px solid rgba(10,132,255,0.15); background: var(--surface);
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s, border-color 0.4s;
   }
-  @media (min-width: 768px) {
-    .transform-list { gap: 96px; }
+  .ba-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.5); border-color: rgba(10,132,255,0.35); }
+  .ba-labels { display: flex; height: 34px; position: relative; z-index: 4; }
+  .ba-label-antes, .ba-label-depois {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
   }
-  .transform-item {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
+  .ba-label-antes { color: var(--muted); border-bottom: 1px solid var(--line); background: rgba(0,0,0,0.2); }
+  .ba-label-depois { color: var(--accent-soft); border-bottom: 1px solid rgba(10,132,255,0.25); background: rgba(10,132,255,0.06); }
+  .ba-images { display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+  .ba-divider { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; background: linear-gradient(to bottom, rgba(10,132,255,0.5), rgba(10,132,255,0.1) 70%, transparent); z-index: 3; pointer-events: none; }
+  .ba-divider::before {
+    content: '✦'; position: absolute; top: 25%; left: 50%; transform: translate(-50%,-50%);
+    color: var(--accent-soft); font-size: 0.65rem; background: var(--surface);
+    padding: 5px 6px; border-radius: 50%; border: 1px solid rgba(10,132,255,0.3); line-height: 1;
   }
-  @media (min-width: 900px) {
-    .transform-item { grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
-  }
-  .transform-images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    width: 100%;
-  }
-  .transform-images .img-wrap {
-    position: relative;
-    aspect-ratio: 4 / 5;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--surface);
-  }
-  .transform-images img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center center;
-  }
-  .transform-badge {
-    position: absolute;
-    bottom: 12px; left: 12px;
-    z-index: 2;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 5px 12px;
-    border-radius: 100px;
-    background: rgba(13,18,31,0.85);
-    color: var(--muted);
-    backdrop-filter: blur(4px);
-  }
-  .transform-badge.badge-after {
-    background: var(--accent);
-    color: #fff;
-  }
+  .ba-images .img-wrap { position: relative; overflow: hidden; }
+  .ba-images img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+  .ba-card:hover .ba-images img { transform: scale(1.03); }
+
   .transform-copy .eyebrow { margin-bottom: 12px; }
   .transform-copy h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 14px; }
   .transform-copy p { color: var(--muted); max-width: 46ch; }
   .transform-copy p + p { margin-top: 12px; }
 
   /* ---------- DEPOIMENTOS ---------- */
-  .testimonial-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    margin-top: 64px;
-  }
-  @media (min-width: 768px) {
-    .testimonial-grid { grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: center; }
-  }
-  .video-frame {
-    position: relative;
-    aspect-ratio: 9/16;
-    max-width: 320px;
-    margin-inline: auto;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--bg-elevated);
-  }
+  .testimonial-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
+  @media (min-width: 768px) { .testimonial-grid { grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: center; } }
+  .video-frame { position: relative; aspect-ratio: 9/16; max-width: 320px; margin-inline: auto; border-radius: 1.5rem; overflow: hidden; background: var(--bg-elevated); border: 1px solid rgba(10,132,255,0.15); transition: transform 0.3s, box-shadow 0.3s; }
+  .video-frame:hover { transform: translateY(-4px); box-shadow: 0 24px 50px rgba(0,0,0,0.4); }
   .video-frame img, .video-frame video { width: 100%; height: 100%; object-fit: cover; }
-  .play-btn {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(5,7,10,0.25);
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
+  .play-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(5,7,10,0.25); border: none; cursor: pointer; transition: background 0.3s; }
   .play-btn:hover { background: rgba(5,7,10,0.4); }
-  .play-circle {
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 12px 30px -6px rgba(10,132,255,0.5);
-    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  .play-circle { width: 60px; height: 60px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; box-shadow: 0 12px 30px -6px rgba(10,132,255,0.5); transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
   .play-btn:hover .play-circle { transform: scale(1.1); }
 
   .stars { display: flex; gap: 4px; margin-bottom: 20px; color: var(--accent-soft); }
-  blockquote {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
-    line-height: 1.5;
-  }
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 28px;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
-  }
-  .avatar-badge {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--accent-soft);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem;
-    color: var(--accent-soft);
-  }
+  blockquote { font-family: 'Fraunces', serif; font-style: italic; font-weight: 400; font-size: clamp(1.15rem, 2.2vw, 1.5rem); line-height: 1.5; }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+  .avatar-badge { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--accent-soft); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: var(--accent-soft); }
   .testimonial-author h4 { font-family: 'Newsreader', serif; font-weight: 600; font-size: 0.95rem; }
   .testimonial-author p { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ---------- AMENIDADES + LOCALIZAÇÃO ---------- */
+  .amenities-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 32px; }
+  @media (min-width: 640px) { .amenities-grid { grid-template-columns: repeat(3, 1fr); } }
+  .amenity-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 1.1rem 1.3rem; border-radius: 1rem;
+    border: 1px solid var(--line); background: var(--bg-elevated);
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .amenity-card:hover { border-color: rgba(10,132,255,0.35); transform: translateY(-2px); }
+  .amenity-card i { color: var(--accent-soft); font-size: 1.1rem; width: 22px; text-align: center; flex-shrink: 0; }
+  .amenity-card span { font-size: 0.88rem; color: var(--text); }
+
+  .local-grid { display: grid; grid-template-columns: 1fr; gap: 48px; margin-top: 56px; }
+  @media (min-width: 1024px) { .local-grid { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; } }
+  .local-info { display: flex; flex-direction: column; gap: 18px; }
+  .local-info-row { display: flex; align-items: center; gap: 14px; }
+  .local-info-row i { color: var(--accent-soft); font-size: 1.15rem; width: 26px; text-align: center; flex-shrink: 0; }
+  .local-info-row a, .local-info-row p { font-size: 1rem; }
+  .map-wrap { border-radius: 1rem; overflow: hidden; border: 1px solid var(--line); }
+  .map-wrap iframe { width: 100%; height: 300px; display: block; border: 0; filter: invert(92%) hue-rotate(180deg) brightness(0.9) contrast(1.05); }
+
+  .btn-save-contact {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%; background: transparent; color: var(--muted);
+    border: 1px dashed var(--line);
+    padding: 0.85rem 1.5rem; border-radius: 1rem;
+    font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;
+    cursor: pointer; transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+    font-family: 'Newsreader', serif; margin-top: 12px;
+  }
+  .btn-save-contact:hover { background: rgba(10,132,255,0.06); border-color: rgba(10,132,255,0.5); border-style: solid; color: var(--accent-soft); }
+  .btn-save-contact.saved { border-style: solid; border-color: rgba(34,197,94,0.5); color: #22c55e; background: rgba(34,197,94,0.05); }
 
   /* ---------- FAQ ---------- */
   .faq-list { margin-top: 56px; max-width: 780px; }
   .faq-item { border-top: 1px solid var(--line); }
   .faq-item:last-child { border-bottom: 1px solid var(--line); }
   .faq-q {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding-block: 24px;
-    background: none;
-    border: none;
-    color: var(--text);
-    text-align: left;
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    font-weight: 500;
-    cursor: pointer;
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding-block: 24px; background: none; border: none; color: var(--text); text-align: left;
+    font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 500; cursor: pointer;
   }
-  .faq-q .plus {
-    flex-shrink: 0;
-    width: 22px; height: 22px;
-    position: relative;
-  }
-  .faq-q .plus::before, .faq-q .plus::after {
-    content: '';
-    position: absolute;
-    background: var(--accent-soft);
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  .faq-q .plus { flex-shrink: 0; width: 22px; height: 22px; position: relative; }
+  .faq-q .plus::before, .faq-q .plus::after { content: ''; position: absolute; background: var(--accent-soft); transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
   .faq-q .plus::before { top: 50%; left: 0; width: 100%; height: 1px; }
   .faq-q .plus::after { left: 50%; top: 0; height: 100%; width: 1px; }
   .faq-item.open .faq-q .plus::after { transform: rotate(90deg); }
-  .faq-a {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
   .faq-a p { padding-bottom: 24px; color: var(--muted); max-width: 62ch; }
 
   /* ---------- CTA / FOOTER ---------- */
@@ -554,14 +533,8 @@
   .cta-section .btn-primary { margin-top: 36px; font-size: 1.05rem; padding: 16px 36px; }
 
   footer { border-top: 1px solid var(--line); padding-block: 60px 32px; }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-  @media (min-width: 768px) {
-    .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
-  }
+  .footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+  @media (min-width: 768px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; } }
   footer p { color: var(--muted); font-size: 0.9rem; }
   footer h4 {
     font-family: 'Newsreader', serif; font-style: italic; font-weight: 400;
@@ -572,26 +545,14 @@
   footer a.footer-link { color: var(--muted); font-size: 0.92rem; transition: color 0.3s; }
   footer a.footer-link:hover { color: var(--text); }
   .footer-bottom {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    font-size: 0.8rem;
-    color: var(--muted);
+    margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 12px; font-size: 0.8rem; color: var(--muted);
   }
-  @media (min-width: 768px) {
-    .footer-bottom { flex-direction: row; justify-content: space-between; }
-  }
+  @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
 
   .whatsapp-float {
-    position: fixed;
-    bottom: 24px; right: 24px;
-    z-index: 90;
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: #25D366;
+    position: fixed; bottom: 24px; right: 24px; z-index: 90;
+    width: 56px; height: 56px; border-radius: 50%; background: #25D366;
     display: flex; align-items: center; justify-content: center;
     box-shadow: 0 10px 30px -6px rgba(0,0,0,0.5);
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -600,13 +561,70 @@
 
   .icon { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
+  /* ---------- EXIT INTENT POPUP ---------- */
+  #exit-popup {
+    display: none; position: fixed; inset: 0; z-index: 10001;
+    background: rgba(0,0,0,0.9); backdrop-filter: blur(18px);
+    align-items: center; justify-content: center; padding: 20px;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .exit-popup-content {
+    max-width: 480px; width: 100%;
+    background: linear-gradient(135deg, #0a0e18, #0d1526);
+    border: 1px solid rgba(10,132,255,0.3); border-radius: 1.75rem;
+    padding: 2.5rem; position: relative; text-align: center;
+  }
+  .exit-popup-close { position: absolute; top: 1.25rem; right: 1.25rem; background: none; border: none; color: rgba(77,178,255,0.5); font-size: 1.3rem; cursor: pointer; line-height: 1; }
+  .exit-popup-icon { width: 60px; height: 60px; border-radius: 50%; border: 1px solid rgba(10,132,255,0.4); background: var(--accent-dim); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: var(--accent-soft); font-size: 1.4rem; }
+
   ::selection { background: rgba(10,132,255,0.3); color: #fff; }
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+  /* ---------- MOBILE TUNING ---------- */
+  @media (max-width: 767px) {
+    #urgency-bar .desktop-msg { display: none !important; }
+    header { padding: 14px 0; }
+    .hero { padding-top: 128px; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .ba-images .img-wrap { aspect-ratio: 1/1; }
+  }
+  @media (min-width: 768px) {
+    #urgency-bar .mobile-msg { display: none !important; }
+  }
 </style>
 </head>
-<body>
+<body class="loading">
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-name" data-text="Emerson Chemimm">Emerson Chemimm</div>
+  <div class="loader-bar"></div>
+  <p class="loader-sub">Barbeiro Visagista</p>
+</div>
+
+<!-- CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- BARRA DE URGÊNCIA -->
+<div id="urgency-bar">
+  <p class="desktop-msg" style="font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent-soft);display:flex;align-items:center;justify-content:center;gap:10px;margin:0;padding:9px 16px;">
+    <span class="vaga-dot"></span>
+    <span>Agenda de Emerson com poucos horários livres</span>
+    <span style="color:rgba(10,132,255,0.35)">·</span>
+    <span id="vagas-bar">Carregando...</span>
+    <span style="color:rgba(10,132,255,0.35)">·</span>
+    <a href="https://wa.me/5541995977587?text=Ol%C3%A1%20Emerson%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o" style="color:var(--accent-soft);text-decoration:underline;text-underline-offset:3px;">Garantir horário →</a>
+  </p>
+  <p class="mobile-msg" style="font-size:0.58rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent-soft);display:flex;align-items:center;justify-content:center;gap:6px;margin:0;padding:8px 12px;white-space:nowrap;">
+    <span class="vaga-dot"></span>
+    <span id="vagas-bar-mobile">Carregando</span>
+    <span style="color:rgba(10,132,255,0.35)">·</span>
+    <a href="https://wa.me/5541995977587?text=Ol%C3%A1%20Emerson%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o" style="color:var(--accent-soft);text-decoration:underline;">Agendar →</a>
+  </p>
+</div>
 
 <header id="siteHeader">
   <div class="container nav-row">
@@ -617,6 +635,7 @@
       <a href="#visagismo">Visagismo</a>
       <a href="#transformacoes">Antes e Depois</a>
       <a href="#depoimentos">Depoimentos</a>
+      <a href="#localizacao">Localização</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div style="display:flex; align-items:center; gap:16px;">
@@ -634,19 +653,30 @@
   <a href="#visagismo">Visagismo</a>
   <a href="#transformacoes">Antes e Depois</a>
   <a href="#depoimentos">Depoimentos</a>
+  <a href="#localizacao">Localização</a>
   <a href="#faq">FAQ</a>
   <a href="https://wa.me/5541995977587" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:12px; align-self:flex-start;">Agendar pelo WhatsApp</a>
 </div>
 
 <!-- HERO -->
 <section class="hero" id="inicio">
+  <div class="cinematic-lines" aria-hidden="true">
+    <div class="particle" style="left:10%;animation-delay:0s;animation-duration:10s"></div>
+    <div class="particle" style="left:25%;animation-delay:2s;animation-duration:12s"></div>
+    <div class="particle" style="left:50%;animation-delay:4s;animation-duration:9s"></div>
+    <div class="particle" style="left:70%;animation-delay:1s;animation-duration:13s"></div>
+    <div class="particle" style="left:85%;animation-delay:3s;animation-duration:11s"></div>
+    <div class="particle" style="left:40%;animation-delay:5s;animation-duration:10s"></div>
+  </div>
   <div class="container hero-grid">
     <div>
       <p class="eyebrow">Especialista em Visagismo Masculino</p>
       <h1 class="hero-headline">Um corte pensado para o <em>seu rosto</em>, não copiado de outra pessoa.</h1>
       <p class="section-lead" style="margin-top:28px;">Emerson Chemimm trabalha com visagismo masculino para alinhar corte, barba e imagem de forma natural, respeitando seu rosto, sua rotina e o estilo que você quer transmitir.</p>
       <div class="hero-actions">
-        <a href="https://wa.me/5541995977587?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener" class="btn btn-primary">Agendar pelo WhatsApp</a>
+        <a href="https://wa.me/5541995977587?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener" class="btn btn-hero">
+          <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+        </a>
         <a href="#transformacoes" class="btn btn-outline">Ver antes e depois</a>
       </div>
       <div class="hero-proof">
@@ -655,8 +685,53 @@
         <div><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Resultado natural</div>
       </div>
     </div>
-    <div class="hero-visual">
-      <img src="images/emerson-hero.webp" alt="Emerson Chemimm, barbeiro visagista">
+    <div class="hero-visual-wrap">
+      <div class="hero-visual">
+        <img src="images/emerson-hero.webp" alt="Emerson Chemimm, barbeiro visagista">
+      </div>
+      <div class="hero-badge">
+        <span class="vaga-dot"></span>
+        <div>
+          <p style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-soft)">Disponível este mês</p>
+          <p id="vagas-texto" style="font-size:0.78rem;font-weight:600;color:#fff">Carregando...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <p style="font-size:0.6rem;text-transform:uppercase;letter-spacing:0.3em;font-weight:700;color:rgba(77,178,255,0.5)">scroll</p>
+    <span></span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-container" aria-hidden="true">
+  <div class="marquee-slide">
+    <span>✦ Visagismo Estratégico</span><span>✦ 10 Anos de Experiência</span><span>✦ Atendimento Personalizado</span><span>✦ Barbearia Clube</span><span>✦ Corte e Barba sob Medida</span><span>✦ Curitiba</span>
+    <span>✦ Visagismo Estratégico</span><span>✦ 10 Anos de Experiência</span><span>✦ Atendimento Personalizado</span><span>✦ Barbearia Clube</span><span>✦ Corte e Barba sob Medida</span><span>✦ Curitiba</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-section" style="padding-block:0;">
+  <div class="container" style="padding-block:0;">
+    <div class="stats-grid">
+      <div class="stat-card" data-count="10" data-suffix=" Anos">
+        <p class="stat-number"><span class="counter">0</span> Anos</p>
+        <p class="stat-label">De experiência</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number">100%</p>
+        <p class="stat-label">Atendimento individual</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number">1:1</p>
+        <p class="stat-label">Análise personalizada</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-number">✦</p>
+        <p class="stat-label">Visagismo estratégico</p>
+      </div>
     </div>
   </div>
 </section>
@@ -671,13 +746,13 @@
       <p class="eyebrow">O Especialista</p>
       <h2 class="section-title">Por trás do corte, existe leitura de imagem, técnica e experiência.</h2>
       <div style="margin-top:32px;">
-        <p><strong>Eu sou o Emerson Chemimm</strong>, especialista em visagismo masculino personalizado. Acredito que o cabelo e a barba de um homem não devem seguir modismos passageiros, mas sim contar a sua história e valorizar a sua essência.</p>
+        <p><strong>Eu sou o Emerson Chemimm</strong>, especialista em visagismo masculino personalizado, com <strong>10 anos de experiência</strong>. Acredito que o cabelo e a barba de um homem não devem seguir modismos passageiros, mas sim contar a sua história e valorizar a sua essência.</p>
         <p>Meu foco é realizar um atendimento cuidadoso, individual e focado no detalhe. Na minha cadeira, você não recebe apenas um corte comum, mas sim uma consultoria estética completa que busca alinhar a proporção do seu rosto com seus objetivos pessoais e profissionais.</p>
       </div>
       <div class="info-row">
         <div>
           <h4>Localização</h4>
-          <p>Local de atendimento informado no agendamento</p>
+          <p>Barbearia Clube — Curitiba, PR</p>
         </div>
         <div>
           <h4>Horário de Atendimento</h4>
@@ -725,8 +800,32 @@
   </div>
 </section>
 
+<!-- COMO FUNCIONA -->
+<section>
+  <div class="container">
+    <p class="eyebrow" style="justify-content:center;">Como funciona</p>
+    <div class="process-grid" style="margin-top:56px;">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Agendamento</h4>
+        <p>Você entra em contato pelo WhatsApp e escolhe o melhor horário disponível.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Análise e Execução</h4>
+        <p>Conversa inicial, análise do formato do rosto e execução do corte e/ou barba.</p>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <h4>Resultado Alinhado</h4>
+        <p>Você sai com uma imagem mais alinhada ao seu rosto, seu estilo e seus objetivos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ANTES E DEPOIS -->
-<section id="transformacoes">
+<section class="section-elevated" id="transformacoes">
   <div class="container">
     <p class="eyebrow">Transformações</p>
     <h2 class="section-title">Transformações reais. Homens reais. Resultado visível.</h2>
@@ -734,9 +833,16 @@
 
     <div class="transform-list">
       <div class="transform-item">
-        <div class="transform-images">
-          <div class="img-wrap" style="aspect-ratio:1200/978;"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"><span class="transform-badge">Antes</span></div>
-          <div class="img-wrap" style="aspect-ratio:1200/978;"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"><span class="transform-badge badge-after">Depois</span></div>
+        <div class="ba-card">
+          <div class="ba-labels">
+            <span class="ba-label-antes">Antes</span>
+            <span class="ba-label-depois">Depois</span>
+          </div>
+          <div class="ba-images" style="aspect-ratio:1200/978;">
+            <div class="ba-divider"></div>
+            <div class="img-wrap"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"></div>
+            <div class="img-wrap"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"></div>
+          </div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Redesenho de Barba</p>
@@ -747,9 +853,16 @@
       </div>
 
       <div class="transform-item">
-        <div class="transform-images">
-          <div class="img-wrap" style="aspect-ratio:1000/970;"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"><span class="transform-badge">Antes</span></div>
-          <div class="img-wrap" style="aspect-ratio:1000/970;"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"><span class="transform-badge badge-after">Depois</span></div>
+        <div class="ba-card">
+          <div class="ba-labels">
+            <span class="ba-label-antes">Antes</span>
+            <span class="ba-label-depois">Depois</span>
+          </div>
+          <div class="ba-images" style="aspect-ratio:1000/970;">
+            <div class="ba-divider"></div>
+            <div class="img-wrap"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"></div>
+            <div class="img-wrap"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"></div>
+          </div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Corte + Barba</p>
@@ -763,7 +876,7 @@
 </section>
 
 <!-- DEPOIMENTOS -->
-<section class="section-elevated" id="depoimentos">
+<section id="depoimentos">
   <div class="container">
     <p class="eyebrow">Depoimentos</p>
     <h2 class="section-title">O resultado aparece no espelho. A confiança aparece nos depoimentos.</h2>
@@ -788,6 +901,56 @@
           </div>
         </div>
         <p style="margin-top:24px; font-size:0.85rem;">Depoimento real de cliente, com identidade preservada. Mais relatos em vídeo no <a href="https://www.instagram.com/emersonchemimm/" target="_blank" rel="noopener" style="color:var(--accent-soft); text-decoration:underline;">Instagram</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section class="section-elevated" id="localizacao">
+  <div class="container">
+    <p class="eyebrow">Onde nos encontrar</p>
+    <h2 class="section-title">Localização</h2>
+    <p class="section-lead">Atendimento na Barbearia Clube, em Curitiba — estrutura completa para o seu momento de cuidado.</p>
+
+    <div class="amenities-grid">
+      <div class="amenity-card"><i class="fas fa-square-parking"></i><span>Estacionamento gratuito</span></div>
+      <div class="amenity-card"><i class="fas fa-snowflake"></i><span>Ambiente climatizado</span></div>
+      <div class="amenity-card"><i class="fas fa-mug-saucer"></i><span>Área de espera com café</span></div>
+    </div>
+
+    <div class="local-grid">
+      <div class="local-info">
+        <div class="local-info-row">
+          <i class="fas fa-location-dot"></i>
+          <p>Barbearia Clube — Av. Cândido Hartmann, 1580 — Curitiba, PR</p>
+        </div>
+        <div class="local-info-row">
+          <i class="fab fa-whatsapp"></i>
+          <a href="https://wa.me/5541995977587" target="_blank" rel="noopener" style="font-weight:600;">(41) 99597-7587</a>
+        </div>
+        <div class="local-info-row">
+          <i class="fab fa-instagram"></i>
+          <a href="https://www.instagram.com/emersonchemimm/" target="_blank" rel="noopener" style="font-weight:600;">@emersonchemimm</a>
+        </div>
+        <div class="local-info-row">
+          <i class="fas fa-clock"></i>
+          <p>Segunda a Sexta 09:00–20:00 · Sábado 09:00–17:00</p>
+        </div>
+        <a href="https://wa.me/5541995977587?text=Ol%C3%A1%20Emerson%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o" target="_blank" rel="noopener" class="btn btn-glass-full" style="margin-top:8px;">
+          <i class="fab fa-whatsapp"></i> Agendar Agora
+        </a>
+        <button onclick="salvarContato()" class="btn-save-contact">
+          <i class="fas fa-address-card"></i>
+          <span>Salvar Contato no Celular</span>
+        </button>
+      </div>
+      <div class="map-wrap">
+        <iframe
+          title="Localização Barbearia Clube – Emerson Chemimm, Curitiba"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3602.5!2d-49.2993375!3d-25.4256375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dce3e413aa0447%3A0x1567913d87428796!2sBarbearia+Clube!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
+        </iframe>
       </div>
     </div>
   </div>
@@ -830,7 +993,7 @@
       </div>
       <div class="faq-item">
         <button class="faq-q"><span>Onde fica o atendimento?</span><span class="plus"></span></button>
-        <div class="faq-a"><p>O local exato é informado no momento do agendamento pelo WhatsApp.</p></div>
+        <div class="faq-a"><p>Na Barbearia Clube, Av. Cândido Hartmann, 1580, Curitiba/PR. O endereço completo e a confirmação também são enviados no agendamento pelo WhatsApp.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q"><span>Posso levar referências de corte?</span><span class="plus"></span></button>
@@ -850,7 +1013,9 @@
     <p class="eyebrow" style="justify-content:center;">Próximo Passo</p>
     <h2 class="section-title">Quer descobrir qual corte combina melhor com você?</h2>
     <p class="section-lead" style="margin-inline:auto;">Agende um horário e receba uma leitura personalizada de visagismo para sair com um visual mais alinhado ao seu rosto, estilo e momento de vida.</p>
-    <a href="https://wa.me/5541995977587?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener" class="btn btn-primary">Agendar pelo WhatsApp</a>
+    <a href="https://wa.me/5541995977587?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener" class="btn btn-pill-outline">
+      <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+    </a>
   </div>
 </section>
 
@@ -868,6 +1033,7 @@
           <li><a href="#visagismo" class="footer-link">Visagismo</a></li>
           <li><a href="#transformacoes" class="footer-link">Antes e Depois</a></li>
           <li><a href="#depoimentos" class="footer-link">Depoimentos</a></li>
+          <li><a href="#localizacao" class="footer-link">Localização</a></li>
           <li><a href="#faq" class="footer-link">FAQ</a></li>
         </ul>
       </div>
@@ -876,7 +1042,7 @@
         <ul>
           <li><a href="https://wa.me/5541995977587" target="_blank" rel="noopener" class="footer-link">WhatsApp: 41 99597-7587</a></li>
           <li><a href="https://www.instagram.com/emersonchemimm/" target="_blank" rel="noopener" class="footer-link">Instagram</a></li>
-          <li><span class="footer-link" style="cursor:default;">Local informado no agendamento</span></li>
+          <li><span class="footer-link" style="cursor:default;">Barbearia Clube, Curitiba/PR</span></li>
         </ul>
       </div>
     </div>
@@ -887,18 +1053,74 @@
   </div>
 </footer>
 
+<!-- WHATSAPP FIXO -->
 <a href="https://wa.me/5541995977587" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Agendar pelo WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.24 0 4.34.87 5.92 2.45a8.23 8.23 0 0 1 2.42 5.79c0 4.55-3.71 8.26-8.27 8.26a8.3 8.3 0 0 1-4.21-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.4c.01-4.55 3.72-8.24 8.2-8.24m-.29 3.05c-.83 0-1.13.79-1.44 1.4-.31.61-.98 1.6-1.09 1.71-.11.11-.22.44 0 .82.22.38.87 1.35 1.87 2.35 1.3 1.3 2.32 1.65 2.75 1.8.31.11.6.09.8-.05.2-.14.9-1.05 1.14-1.41.24-.36.48-.29.8-.17.31.12 2.02.95 2.37 1.12.35.17.58.26.66.4.09.14.09.79-.18 1.55-.27.76-1.56 1.44-2.13 1.5-.57.06-1.11.24-3.73-.78-3.14-1.23-5.12-4.44-5.27-4.65-.15-.21-1.24-1.65-1.24-3.15s.78-2.23 1.05-2.53c.27-.3.6-.38.8-.38h.57z"/></svg>
 </a>
+
+<!-- EXIT INTENT POPUP -->
+<div id="exit-popup">
+  <div class="exit-popup-content">
+    <button class="exit-popup-close" onclick="fecharExitPopup()" aria-label="Fechar">✕</button>
+    <div class="exit-popup-icon"><i class="fas fa-calendar-check"></i></div>
+    <p style="font-size:0.62rem;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent-soft);margin-bottom:1rem;">Antes de sair</p>
+    <h3 style="font-family:'Fraunces',serif;font-size:clamp(1.4rem,4vw,1.9rem);font-style:italic;font-weight:600;margin-bottom:1rem;">Seu horário ainda pode estar disponível.</h3>
+    <p style="color:var(--muted);line-height:1.7;margin-bottom:2rem;font-size:0.95rem;">A agenda do Emerson costuma fechar rápido. Uma conversa rápida no WhatsApp já garante seu horário.</p>
+    <a href="https://wa.me/5541995977587?text=Ol%C3%A1%20Emerson%2C%20vi%20que%20talvez%20ainda%20tenha%20hor%C3%A1rio%20e%20gostaria%20de%20agendar" onclick="fecharExitPopup()" class="btn btn-hero" style="width:100%; justify-content:center; margin-bottom:1rem;">
+      <i class="fab fa-whatsapp"></i> Garantir meu horário
+    </a>
+    <button onclick="fecharExitPopup()" style="background:none;border:none;color:#52525b;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:underline;text-underline-offset:3px;">Continuar sem agendar</button>
+  </div>
+</div>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const isMobile = window.matchMedia('(max-width: 1023px)').matches || 'ontouchstart' in window && window.innerWidth < 1024;
 
+/* ── Loading screen ── */
+function esconderLoader() {
+  const loader = document.getElementById('loader');
+  if (!loader) return;
+  loader.classList.add('hide');
+  document.body.classList.remove('loading');
+  setTimeout(() => { if (loader && loader.parentNode) loader.remove(); }, 900);
+}
+window.addEventListener('load', () => setTimeout(esconderLoader, 400));
+setTimeout(esconderLoader, 2200);
+
+/* ── Cursor customizado (desktop) ── */
+if (!isMobile && window.matchMedia('(hover: hover)').matches) {
+  document.body.classList.add('has-cursor');
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, [onclick]').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+  });
+}
+
 /* header scroll state */
 const header = document.getElementById('siteHeader');
 const navCta = document.getElementById('navCta');
+const urgencyBar = document.getElementById('urgency-bar');
+function positionHeader() {
+  const barH = urgencyBar.offsetHeight;
+  header.style.top = barH + 'px';
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
 window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
@@ -932,7 +1154,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
   });
 });
 
-/* video testimonial: click to play (avoids autoplay/poster edge cases) */
+/* video testimonial: click to play */
 const playBtn = document.getElementById('playBtn');
 const videoFrame = playBtn.closest('.video-frame');
 playBtn.addEventListener('click', () => {
@@ -951,7 +1173,113 @@ playBtn.addEventListener('click', () => {
   videoFrame.appendChild(video);
 });
 
-/* Lenis smooth scroll (desktop only) */
+/* ── Vagas (contador de urgência, consistente entre barra/hero/popup) ── */
+function calcularVagas() {
+  const seed = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 3));
+  return (seed % 3) + 1;
+}
+const vagas = calcularVagas();
+const elTexto = document.getElementById('vagas-texto');
+const elBar = document.getElementById('vagas-bar');
+const elBarMobile = document.getElementById('vagas-bar-mobile');
+if (elTexto) elTexto.textContent = vagas + (vagas === 1 ? ' horário livre este mês' : ' horários livres este mês');
+if (elBar) elBar.textContent = vagas + (vagas === 1 ? ' horário livre este mês' : ' horários livres este mês');
+if (elBarMobile) elBarMobile.textContent = vagas + (vagas === 1 ? ' horário livre' : ' horários livres');
+
+/* ── Salvar contato (vCard) ── */
+function salvarContato() {
+  const btn = document.querySelector('.btn-save-contact');
+  const vcard = [
+    'BEGIN:VCARD',
+    'VERSION:3.0',
+    'FN:Emerson Chemimm',
+    'N:Chemimm;Emerson;;;',
+    'ORG:Emerson Chemimm - Barbeiro Visagista',
+    'TITLE:Barbeiro Visagista',
+    'TEL;TYPE=CELL,PREF:+5541995977587',
+    'ADR;TYPE=WORK:;;Av. Cândido Hartmann\\, 1580;Curitiba;PR;;Brasil',
+    'NOTE:Barbearia Clube – Visagismo Masculino – Curitiba/PR',
+    'X-SOCIALPROFILE;type=instagram:https://instagram.com/emersonchemimm',
+    'END:VCARD'
+  ].join('\r\n');
+  const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Emerson-Chemimm.vcf';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  btn.classList.add('saved');
+  btn.innerHTML = '<i class="fas fa-check"></i><span>Contato Salvo!</span>';
+  setTimeout(() => {
+    btn.classList.remove('saved');
+    btn.innerHTML = '<i class="fas fa-address-card"></i><span>Salvar Contato no Celular</span>';
+  }, 3000);
+}
+
+/* ── Exit intent ── */
+let exitShown = false;
+let pageTime = 0;
+const pageTimer = setInterval(() => { pageTime++; }, 1000);
+document.addEventListener('mouseleave', e => {
+  if (e.clientY <= 5 && !exitShown && pageTime >= 8 && !isMobile) {
+    exitShown = true;
+    clearInterval(pageTimer);
+    const popup = document.getElementById('exit-popup');
+    popup.style.display = 'flex';
+    setTimeout(() => { popup.style.opacity = '1'; }, 10);
+  }
+});
+let mobileTimer;
+function resetMobileTimer() {
+  clearTimeout(mobileTimer);
+  mobileTimer = setTimeout(() => {
+    if (!exitShown) {
+      exitShown = true;
+      const popup = document.getElementById('exit-popup');
+      popup.style.display = 'flex';
+      setTimeout(() => { popup.style.opacity = '1'; }, 10);
+    }
+  }, 90000);
+}
+if (isMobile) {
+  ['touchstart', 'scroll'].forEach(e => document.addEventListener(e, resetMobileTimer, { passive: true }));
+  resetMobileTimer();
+}
+function fecharExitPopup() {
+  const popup = document.getElementById('exit-popup');
+  popup.style.opacity = '0';
+  setTimeout(() => popup.style.display = 'none', 300);
+}
+document.getElementById('exit-popup').addEventListener('click', function (e) {
+  if (e.target === this) fecharExitPopup();
+});
+
+/* ── Contador animado (stats) ── */
+function animateCounter(el) {
+  const target = 10;
+  const duration = 1800;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.floor(eased * target);
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+const counterEl = document.querySelector('.counter');
+if (counterEl) {
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounter(counterEl); counterObs.unobserve(counterEl); } });
+  }, { threshold: 0.5 });
+  counterObs.observe(counterEl);
+}
+
+/* ── Lenis smooth scroll (desktop only) ── */
 if (typeof Lenis !== 'undefined' && !isMobile) {
   try {
     const lenis = new Lenis({
@@ -987,8 +1315,8 @@ if (typeof SplitType !== 'undefined' && typeof gsap !== 'undefined') {
 /* Reveal staggered on sections */
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   document.querySelectorAll('section').forEach(section => {
-    if (section.classList.contains('cta-section')) return;
-    const items = section.querySelectorAll('.eyebrow, .section-title, .section-lead, .pillar, .sobre-visual, .testimonial-grid > *, .faq-item, .info-row, .transform-item');
+    if (section.classList.contains('cta-section') || section.classList.contains('stats-section')) return;
+    const items = section.querySelectorAll('.eyebrow, .section-title, .section-lead, .pillar, .sobre-visual, .testimonial-grid > *, .faq-item, .info-row, .transform-item, .process-step, .amenity-card, .local-info, .map-wrap');
     if (!items.length) return;
     gsap.from(items, {
       opacity: 0,
@@ -1004,7 +1332,12 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     });
   });
 
-  gsap.from('.cta-section h2, .cta-section .section-lead, .cta-section .btn-primary, .cta-section .eyebrow', {
+  gsap.from('.stat-card', {
+    opacity: 0, y: 20, duration: 0.7, stagger: 0.08,
+    scrollTrigger: { trigger: '.stats-section', start: 'top 90%' }
+  });
+
+  gsap.from('.cta-section h2, .cta-section .section-lead, .cta-section .btn, .cta-section .eyebrow', {
     opacity: 0, y: 24, duration: 0.8, stagger: 0.1,
     scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
   });

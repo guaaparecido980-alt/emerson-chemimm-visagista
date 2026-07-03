@@ -14,7 +14,7 @@ export default function AboutSection() {
   const hasLocationInfo = hasAddress || hasCity;
 
   return (
-    <section id="sobre" className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
+    <section id="sobre" className="relative py-24 md:py-32 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
       <div className="neon-glow-2 top-[20%] right-[-10%]" />
       
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
@@ -26,7 +26,7 @@ export default function AboutSection() {
               <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-[#1e293b] shadow-2xl bg-gradient-to-tr from-[#05070a] to-[#071b33]">
                 {!imageError ? (
                   <Image
-                    src={withBasePath("/images/emerson-about.jpg")}
+                    src={withBasePath("/images/emerson-about.webp")}
                     alt={`Retrato de ${siteConfig.name}, ${siteConfig.role}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"

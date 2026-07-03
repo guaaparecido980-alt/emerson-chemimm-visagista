@@ -11,7 +11,7 @@ import { withBasePath } from "@/lib/paths";
 
 export default function TestimonialsSection() {
   return (
-    <section id="depoimentos" className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
+    <section id="depoimentos" className="relative py-24 md:py-32 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
       <div className="neon-glow-1 bottom-[10%] right-[-10%]" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
@@ -31,7 +31,7 @@ export default function TestimonialsSection() {
                   controls
                   playsInline
                   preload="none"
-                  poster={withBasePath("/images/depoimento-poster.jpg")}
+                  poster={withBasePath("/images/depoimento-poster.webp")}
                   className="h-full w-full object-cover"
                 >
                   <source src={withBasePath("/videos/depoimento-cliente.mp4")} type="video/mp4" />

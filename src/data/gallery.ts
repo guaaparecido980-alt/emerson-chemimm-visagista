@@ -9,63 +9,63 @@ export interface GalleryItem {
 export const galleryItems: GalleryItem[] = [
   {
     id: "g-1",
-    imageUrl: "/images/gallery/corte-1.jpg",
+    imageUrl: "/images/gallery/corte-1.webp",
     alt: "Corte de cabelo masculino clássico com risca lateral bem definida",
     category: "cortes",
     title: "Clássico Alinhado"
   },
   {
     id: "g-2",
-    imageUrl: "/images/gallery/corte-2.jpg",
+    imageUrl: "/images/gallery/corte-2.webp",
     alt: "Corte social masculino com volume texturizado para visual executivo",
     category: "cortes",
     title: "Social Executivo"
   },
   {
     id: "g-3",
-    imageUrl: "/images/gallery/corte-3.jpg",
+    imageUrl: "/images/gallery/corte-3.webp",
     alt: "Corte moderno com textura natural e topo desconectado das laterais",
     category: "cortes",
     title: "Textura Moderna"
   },
   {
     id: "g-4",
-    imageUrl: "/images/gallery/corte-4.jpg",
+    imageUrl: "/images/gallery/corte-4.webp",
     alt: "Corte masculino curto e alinhado finalizado na barbearia",
     category: "cortes",
     title: "Curto Alinhado"
   },
   {
     id: "g-6",
-    imageUrl: "/images/gallery/barba-2.jpg",
+    imageUrl: "/images/gallery/barba-2.webp",
     alt: "Barba cheia grisalha aparada e alinhada com técnica de proporção",
     category: "barbas",
     title: "Barba Cheia Alinhada"
   },
   {
     id: "g-8",
-    imageUrl: "/images/gallery/barba-4.jpg",
+    imageUrl: "/images/gallery/barba-4.webp",
     alt: "Bastidor do atendimento de barba na barbearia",
     category: "barbas",
     title: "Bastidor do Atendimento"
   },
   {
     id: "g-9",
-    imageUrl: "/images/transformations/after-1.jpg",
+    imageUrl: "/images/transformations/after-1.webp",
     alt: "Resultado de transformação de visagismo masculino, corte e barba desenhada",
     category: "transformacoes",
     title: "Transformação Completa"
   },
   {
     id: "g-10",
-    imageUrl: "/images/transformations/after-2.jpg",
+    imageUrl: "/images/transformations/after-2.webp",
     alt: "Resultado de corte e barba finalizados com visagismo aplicado",
     category: "transformacoes",
     title: "Alinhamento Casual"
   },
   {
     id: "g-11",
-    imageUrl: "/images/transformations/after-3.jpg",
+    imageUrl: "/images/transformations/after-3.webp",
     alt: "Resultado de renovação completa de corte e barba",
     category: "transformacoes",
     title: "Renovação Completa"

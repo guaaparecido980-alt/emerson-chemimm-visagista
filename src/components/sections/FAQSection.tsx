@@ -15,7 +15,7 @@ export default function FAQSection() {
   };
 
   return (
-    <section id="faq" className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
+    <section id="faq" className="relative py-24 md:py-32 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
       <div className="neon-glow-1 top-[10%] left-[-15%]" />
       
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 relative z-10">

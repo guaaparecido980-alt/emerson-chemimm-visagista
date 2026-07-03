@@ -9,7 +9,7 @@ export default function CTASection() {
   const whatsappUrl = getWhatsappUrl();
 
   return (
-    <section className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
+    <section className="relative py-24 md:py-32 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
       {/* Lights background */}
       <div className="neon-glow-2 top-[10%] right-[-10%]" />
       <div className="neon-glow-1 bottom-[-10%] left-[-10%]" />

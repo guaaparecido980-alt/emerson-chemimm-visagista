@@ -59,7 +59,7 @@ export default function FaceAnalysisDiagram({ pillars }: { pillars: Pillar[] }) 
       {/* Diagrama — visível em telas médias e grandes */}
       <div className="hidden md:block relative mx-auto max-w-4xl">
         <motion.svg
-          viewBox="-170 -20 840 710"
+          viewBox="-210 -20 920 750"
           className="w-full h-auto"
           role="img"
           aria-label="Diagrama ilustrativo de análise facial usada no visagismo"
@@ -231,19 +231,19 @@ export default function FaceAnalysisDiagram({ pillars }: { pillars: Pillar[] }) 
                   }}
                 />
                 <motion.foreignObject
-                  x={node.side === "left" ? node.labelX - 190 : node.side === "right" ? node.labelX : midX - 90}
-                  y={node.side === "bottom" ? node.labelY - 6 : node.labelY - 30}
-                  width={node.side === "top" || node.side === "bottom" ? 180 : 190}
-                  height="80"
+                  x={node.side === "left" ? node.labelX - 240 : node.side === "right" ? node.labelX : midX - 120}
+                  y={node.side === "bottom" ? node.labelY - 6 : node.labelY - 34}
+                  width={240}
+                  height="120"
                   variants={fadeVariants}
                 >
                   <div
-                    className={`text-xs leading-snug ${
+                    className={`leading-snug ${
                       node.side === "left" ? "text-right" : node.side === "right" ? "text-left" : "text-center"
                     }`}
                   >
-                    <p className="font-heading font-bold text-[#f4f7fb] mb-1">{pillars[i].title}</p>
-                    <p className="text-[#a7b0be]">{pillars[i].description}</p>
+                    <p className="font-heading font-bold text-base text-[#f4f7fb] mb-1">{pillars[i].title}</p>
+                    <p className="text-sm text-[#a7b0be]">{pillars[i].description}</p>
                   </div>
                 </motion.foreignObject>
               </motion.g>

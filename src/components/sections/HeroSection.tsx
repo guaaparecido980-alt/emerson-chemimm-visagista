@@ -33,7 +33,7 @@ export default function HeroSection() {
             </AnimatedContainer>
 
             <AnimatedContainer delay={0.2} className="mt-2">
-              <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#f4f7fb] leading-[1.1] max-w-2xl">
+              <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#f4f7fb] leading-[1.05] max-w-2xl">
                 Um corte pensado para o <span className="text-gradient-blue">seu rosto</span>, não copiado de outra pessoa.
               </h1>
             </AnimatedContainer>
@@ -87,7 +87,7 @@ export default function HeroSection() {
               <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-[#1e293b] shadow-2xl bg-gradient-to-tr from-[#05070a] to-[#071b33]">
                 {!imageError ? (
                   <Image
-                    src={withBasePath("/images/emerson-hero.jpg")}
+                    src={withBasePath("/images/emerson-hero.webp")}
                     alt={`${siteConfig.name}, ${siteConfig.role}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"

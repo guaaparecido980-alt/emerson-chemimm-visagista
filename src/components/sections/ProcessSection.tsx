@@ -28,7 +28,7 @@ export default function ProcessSection() {
   ];
 
   return (
-    <section className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
+    <section className="relative py-24 md:py-32 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
       <div className="neon-glow-2 bottom-[-10%] right-[-10%]" />
       
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">

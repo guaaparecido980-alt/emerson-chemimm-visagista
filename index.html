@@ -506,26 +506,45 @@
   .ba-card {
     position: relative; border-radius: 1.5rem; overflow: hidden;
     border: 1px solid rgba(10,132,255,0.15); background: var(--surface);
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s, border-color 0.4s;
+    transition: box-shadow 0.6s, border-color 0.4s;
   }
-  .ba-card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,0.5); border-color: rgba(10,132,255,0.35); }
-  .ba-labels { display: flex; height: 34px; position: relative; z-index: 4; }
-  .ba-label-antes, .ba-label-depois {
-    flex: 1; display: flex; align-items: center; justify-content: center;
-    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase;
+  .ba-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.5); border-color: rgba(10,132,255,0.35); }
+
+  /* Slider antes/depois: input range nativo + clip-path, minimo de JS */
+  .ba-slider { position: relative; overflow: hidden; user-select: none; }
+  .ba-slider img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center center; display: block; pointer-events: none;
   }
-  .ba-label-antes { color: var(--muted); border-bottom: 1px solid var(--line); background: rgba(0,0,0,0.2); }
-  .ba-label-depois { color: var(--accent-soft); border-bottom: 1px solid rgba(10,132,255,0.25); background: rgba(10,132,255,0.06); }
-  .ba-images { display: grid; grid-template-columns: 1fr 1fr; position: relative; }
-  .ba-divider { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; background: linear-gradient(to bottom, rgba(10,132,255,0.5), rgba(10,132,255,0.1) 70%, transparent); z-index: 3; pointer-events: none; }
-  .ba-divider::before {
-    content: '✦'; position: absolute; top: 25%; left: 50%; transform: translate(-50%,-50%);
-    color: var(--accent-soft); font-size: 0.65rem; background: var(--surface);
-    padding: 5px 6px; border-radius: 50%; border: 1px solid rgba(10,132,255,0.3); line-height: 1;
+  .ba-img-before-wrap { position: absolute; inset: 0; overflow: hidden; z-index: 2; }
+  .ba-divider-line {
+    position: absolute; top: 0; bottom: 0; width: 2px; z-index: 3;
+    background: var(--accent-soft); box-shadow: 0 0 14px rgba(10,132,255,0.7);
+    transform: translateX(-50%); pointer-events: none;
   }
-  .ba-images .img-wrap { position: relative; overflow: hidden; width: 100%; }
-  .ba-images img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }
-  .ba-card:hover .ba-images img { transform: scale(1.03); }
+  .ba-handle {
+    position: absolute; top: 50%; width: 40px; height: 40px; z-index: 4;
+    border-radius: 50%; background: var(--accent);
+    transform: translate(-50%,-50%); pointer-events: none;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45), 0 0 0 4px rgba(10,132,255,0.15);
+    color: #fff; font-size: 0.9rem;
+  }
+  .ba-badge {
+    position: absolute; top: 12px; z-index: 4;
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 100px;
+    background: rgba(5,7,10,0.72); backdrop-filter: blur(6px);
+    border: 1px solid rgba(10,132,255,0.3); pointer-events: none;
+  }
+  .ba-badge-antes { left: 12px; color: var(--muted); }
+  .ba-badge-depois { right: 12px; color: var(--accent-soft); }
+  .ba-range {
+    position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5;
+    margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none;
+  }
+  .ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 100%; height: 100%; }
+  .ba-range::-moz-range-thumb { width: 1px; height: 100%; opacity: 0; border: none; }
 
   .transform-copy .eyebrow { margin-bottom: 12px; }
   .transform-copy h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 14px; }
@@ -929,47 +948,49 @@
 <section class="section-elevated" id="transformacoes">
   <div class="container">
     <p class="eyebrow">Transformações</p>
-    <h2 class="section-title">Transformações reais. Homens reais. Resultado visível.</h2>
-    <p class="section-lead">Cada cliente teve uma análise específica focada em seu objetivo pessoal.</p>
+    <h2 class="section-title">Antes e depois de cortes pensados para cada rosto.</h2>
+    <p class="section-lead">Cada transformação mostra como corte, barba e proporção podem mudar a percepção do rosto sem perder naturalidade.</p>
 
     <div class="transform-list">
       <div class="transform-item">
         <div class="ba-card">
-          <div class="ba-labels">
-            <span class="ba-label-antes">Antes</span>
-            <span class="ba-label-depois">Depois</span>
-          </div>
-          <div class="ba-images">
-            <div class="ba-divider"></div>
-            <div class="img-wrap" style="aspect-ratio:1200/978;"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"></div>
-            <div class="img-wrap" style="aspect-ratio:1200/978;"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"></div>
+          <div class="ba-slider" style="aspect-ratio:1200/978;">
+            <img class="ba-img-after" src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada">
+            <div class="ba-img-before-wrap" style="clip-path: inset(0 50% 0 0);">
+              <img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada">
+            </div>
+            <div class="ba-divider-line" style="left:50%;"></div>
+            <div class="ba-handle" style="left:50%;">↔</div>
+            <span class="ba-badge ba-badge-antes">Antes</span>
+            <span class="ba-badge ba-badge-depois">Depois</span>
+            <input type="range" class="ba-range" min="0" max="100" value="50" aria-label="Arraste para comparar antes e depois">
           </div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Redesenho de Barba</p>
           <h3>Barba Cheia Redesenhada</h3>
-          <p><strong style="color:var(--text)">Objetivo:</strong> Alinhar as linhas da barba à estrutura do rosto.</p>
-          <p>Barba volumosa sem contorno definido foi aparada e desenhada com navalha, criando linhas mais retas no maxilar e destacando os traços do rosto.</p>
+          <p>A barba estava cheia, mas sem uma linha que valorizasse o rosto. O ajuste trouxe contorno definido no maxilar, alinhando a barba ao formato do rosto sem perder a naturalidade.</p>
         </div>
       </div>
 
       <div class="transform-item">
         <div class="ba-card">
-          <div class="ba-labels">
-            <span class="ba-label-antes">Antes</span>
-            <span class="ba-label-depois">Depois</span>
-          </div>
-          <div class="ba-images">
-            <div class="ba-divider"></div>
-            <div class="img-wrap" style="aspect-ratio:1000/970;"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"></div>
-            <div class="img-wrap" style="aspect-ratio:1000/970;"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"></div>
+          <div class="ba-slider" style="aspect-ratio:1000/970;">
+            <img class="ba-img-after" src="images/after-3.webp" alt="Depois: Renovação Completa de Visual">
+            <div class="ba-img-before-wrap" style="clip-path: inset(0 50% 0 0);">
+              <img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual">
+            </div>
+            <div class="ba-divider-line" style="left:50%;"></div>
+            <div class="ba-handle" style="left:50%;">↔</div>
+            <span class="ba-badge ba-badge-antes">Antes</span>
+            <span class="ba-badge ba-badge-depois">Depois</span>
+            <input type="range" class="ba-range" min="0" max="100" value="50" aria-label="Arraste para comparar antes e depois">
           </div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Corte + Barba</p>
           <h3>Renovação Completa de Visual</h3>
-          <p><strong style="color:var(--text)">Objetivo:</strong> Visual mais moderno e alinhado ao rosto.</p>
-          <p>Cabelo e barba renovados por completo, trazendo um contorno mais definido e um visual mais atual.</p>
+          <p>Cabelo e barba estavam bem cuidados, mas sem conversar entre si. A renovação trouxe mais contorno ao visual, mantendo tudo simples de manter no dia a dia.</p>
         </div>
       </div>
     </div>
@@ -1239,6 +1260,20 @@ hamburgerBtn.addEventListener('click', () => {
 });
 mobileMenu.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+/* Slider antes/depois (input range nativo + clip-path) */
+document.querySelectorAll('.ba-slider').forEach(slider => {
+  const range = slider.querySelector('.ba-range');
+  const beforeWrap = slider.querySelector('.ba-img-before-wrap');
+  const line = slider.querySelector('.ba-divider-line');
+  const handle = slider.querySelector('.ba-handle');
+  function update(val) {
+    beforeWrap.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+    line.style.left = val + '%';
+    handle.style.left = val + '%';
+  }
+  range.addEventListener('input', () => update(range.value));
 });
 
 /* FAQ accordion */

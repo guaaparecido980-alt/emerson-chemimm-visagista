@@ -12,7 +12,8 @@
 <meta property="og:image" content="images/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="favicon.ico">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -142,23 +143,9 @@
     align-items: center;
     justify-content: space-between;
   }
-  .logo {
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: 1.15rem;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-  }
-  .logo span {
-    display: block;
-    font-family: 'Newsreader', serif;
-    font-style: italic;
-    font-weight: 400;
-    text-transform: none;
-    font-size: 0.72rem;
-    color: var(--accent-soft);
-    letter-spacing: 0;
-  }
+  .logo { display: inline-flex; align-items: center; }
+  .logo img { height: 34px; width: auto; display: block; }
+  footer .logo img { height: 40px; }
   nav.desktop-nav { display: none; }
   @media (min-width: 1024px) {
     nav.desktop-nav { display: flex; gap: 36px; }
@@ -422,11 +409,12 @@
     aspect-ratio: 4 / 5;
     border-radius: 4px;
     overflow: hidden;
+    background: var(--surface);
   }
   .transform-images img {
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: top center;
+    object-position: center center;
   }
   .transform-badge {
     position: absolute;
@@ -622,7 +610,7 @@
 
 <header id="siteHeader">
   <div class="container nav-row">
-    <a href="#inicio" class="logo">EMERSON CHEMIMM<span>Barbeiro Visagista</span></a>
+    <a href="#inicio" class="logo"><img src="images/logo.webp" alt="Emerson Chemimm - Barbeiro Visagista"></a>
     <nav class="desktop-nav">
       <a href="#inicio">Início</a>
       <a href="#sobre">Sobre</a>
@@ -747,8 +735,8 @@
     <div class="transform-list">
       <div class="transform-item">
         <div class="transform-images">
-          <div class="img-wrap"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"><span class="transform-badge">Antes</span></div>
-          <div class="img-wrap"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"><span class="transform-badge badge-after">Depois</span></div>
+          <div class="img-wrap" style="aspect-ratio:1200/978;"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"><span class="transform-badge">Antes</span></div>
+          <div class="img-wrap" style="aspect-ratio:1200/978;"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"><span class="transform-badge badge-after">Depois</span></div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Redesenho de Barba</p>
@@ -760,21 +748,8 @@
 
       <div class="transform-item">
         <div class="transform-images">
-          <div class="img-wrap"><img src="images/before-2.webp" alt="Antes: Renovação de Corte e Barba"><span class="transform-badge">Antes</span></div>
-          <div class="img-wrap"><img src="images/after-2.webp" alt="Depois: Renovação de Corte e Barba"><span class="transform-badge badge-after">Depois</span></div>
-        </div>
-        <div class="transform-copy">
-          <p class="eyebrow">Corte + Barba</p>
-          <h3>Renovação de Corte e Barba</h3>
-          <p><strong style="color:var(--text)">Objetivo:</strong> Visual mais leve e cuidado no dia a dia.</p>
-          <p>Cabelo e barba sem manutenção foram reestruturados na mesma sessão, trazendo mais leveza ao visual e um acabamento muito mais cuidado.</p>
-        </div>
-      </div>
-
-      <div class="transform-item">
-        <div class="transform-images">
-          <div class="img-wrap"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"><span class="transform-badge">Antes</span></div>
-          <div class="img-wrap"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"><span class="transform-badge badge-after">Depois</span></div>
+          <div class="img-wrap" style="aspect-ratio:1000/970;"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"><span class="transform-badge">Antes</span></div>
+          <div class="img-wrap" style="aspect-ratio:1000/970;"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"><span class="transform-badge badge-after">Depois</span></div>
         </div>
         <div class="transform-copy">
           <p class="eyebrow">Corte + Barba</p>
@@ -820,11 +795,11 @@
 
 <!-- FAQ -->
 <section id="faq">
-  <div class="container">
-    <p class="eyebrow">Dúvidas Frequentes</p>
-    <h2 class="section-title">Perguntas Frequentes</h2>
+  <div class="container" style="text-align:center;">
+    <p class="eyebrow" style="justify-content:center;">Dúvidas Frequentes</p>
+    <h2 class="section-title" style="margin-inline:auto;">Perguntas Frequentes</h2>
 
-    <div class="faq-list" id="faqList">
+    <div class="faq-list" id="faqList" style="text-align:left; margin-inline:auto;">
       <div class="faq-item">
         <button class="faq-q"><span>O que é visagismo masculino?</span><span class="plus"></span></button>
         <div class="faq-a"><p>O visagismo masculino é uma técnica de consultoria de imagem que analisa o formato do seu rosto, a estrutura óssea, os traços faciais, sua rotina e seus objetivos profissionais para criar um corte de cabelo e design de barba personalizados, gerando maior harmonia, confiança e alinhamento com quem você é.</p></div>
@@ -883,7 +858,7 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <a href="#inicio" class="logo">EMERSON CHEMIMM<span>Barbeiro Visagista</span></a>
+        <a href="#inicio" class="logo"><img src="images/logo.webp" alt="Emerson Chemimm - Barbeiro Visagista"></a>
         <p style="margin-top:16px; max-width:40ch;">Visagismo masculino personalizado. Cabelo, barba e estilo desenhados sob medida de acordo com as proporções do seu rosto.</p>
       </div>
       <div>

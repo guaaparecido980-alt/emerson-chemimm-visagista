@@ -50,13 +50,13 @@ export default function ProcessSection() {
               delay={0.15 * (idx + 1)}
               className="relative z-10"
             >
-              <PremiumCard className="h-full flex flex-col pt-12 items-start relative">
+              <PremiumCard className="h-full flex flex-col pt-16! items-start relative">
                 {/* Badge de Número */}
                 <div className="absolute top-[-25px] left-8 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#071b33] border border-[#0a84ff]/40 text-lg font-black text-[#0a84ff] shadow-lg shadow-[#0a84ff]/10">
                   {step.number}
                 </div>
 
-                <h3 className="font-heading text-lg font-extrabold text-[#f4f7fb] mt-4 mb-3">
+                <h3 className="font-heading text-lg font-extrabold text-[#f4f7fb] mt-6 mb-3">
                   {step.title}
                 </h3>
                 <p className="text-sm text-[#a7b0be] leading-relaxed">

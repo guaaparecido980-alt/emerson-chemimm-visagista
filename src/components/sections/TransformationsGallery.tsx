@@ -3,7 +3,7 @@
 import React from "react";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import SectionTitle from "@/components/ui/SectionTitle";
-import BeforeAfterSlider from "@/components/ui/BeforeAfterSlider";
+import BeforeAfterCompare from "@/components/ui/BeforeAfterCompare";
 import { transformations } from "@/data/transformations";
 
 export default function TransformationsGallery() {
@@ -28,7 +28,7 @@ export default function TransformationsGallery() {
               yOffset={30}
               className="flex flex-col h-full"
             >
-              <BeforeAfterSlider
+              <BeforeAfterCompare
                 beforeImage={trans.beforeImage}
                 afterImage={trans.afterImage}
                 beforeAlt={`Antes: ${trans.title}`}

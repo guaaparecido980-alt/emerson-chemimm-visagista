@@ -1,0 +1,1190 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emerson Chemimm | Barbeiro Visagista</title>
+<meta name="description" content="Corte masculino, barba e visagismo com atendimento personalizado para homens que querem uma imagem mais alinhada, natural e profissional. Agende com Emerson Chemimm.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Emerson Chemimm | Barbeiro Visagista">
+<meta property="og:description" content="Corte masculino, barba e visagismo com atendimento personalizado para homens que querem uma imagem mais alinhada, natural e profissional.">
+<meta property="og:image" content="images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.ico">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.3.23/dist/lenis.css">
+<script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/split-type"></script>
+
+<style>
+  :root {
+    --bg: #05070A;
+    --bg-elevated: #0D121F;
+    --surface: #12182A;
+    --text: #F4F7FB;
+    --muted: #9AA5B8;
+    --line: #1E293B;
+    --accent: #0A84FF;
+    --accent-soft: #4DB2FF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Newsreader', serif;
+    font-weight: 400;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--bg-elevated) 100%);
+  }
+
+  h1, h2, h3, h4, .display {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-inline: 24px;
+  }
+  @media (min-width: 768px) {
+    .container { padding-inline: 48px; }
+  }
+
+  section {
+    position: relative;
+    padding-block: 60px;
+  }
+  @media (min-width: 768px) {
+    section { padding-block: 96px; }
+  }
+  @media (min-width: 1024px) {
+    section { padding-block: 140px; }
+  }
+
+  .section-elevated { background: var(--bg-elevated); }
+
+  .hairline {
+    border: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--accent-soft);
+    margin-bottom: 20px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  h2.section-title {
+    font-size: clamp(1.9rem, 4.5vw, 3.4rem);
+    font-weight: 600;
+    max-width: 18ch;
+  }
+
+  p.section-lead {
+    font-size: clamp(1rem, 1.5vw, 1.15rem);
+    color: var(--muted);
+    max-width: 52ch;
+    margin-top: 24px;
+  }
+
+  /* ---------- NAV ---------- */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 0;
+    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled {
+    background: rgba(5, 7, 10, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: var(--line);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .logo span {
+    display: block;
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 0.72rem;
+    color: var(--accent-soft);
+    letter-spacing: 0;
+  }
+  nav.desktop-nav { display: none; }
+  @media (min-width: 1024px) {
+    nav.desktop-nav { display: flex; gap: 36px; }
+  }
+  nav.desktop-nav a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s;
+  }
+  nav.desktop-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  nav.desktop-nav a:hover { color: var(--text); }
+  nav.desktop-nav a:hover::after { width: 100%; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Newsreader', serif;
+    font-size: 0.95rem;
+    padding: 13px 28px;
+    border-radius: 100px;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 0 rgba(10,132,255,0);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -8px rgba(10,132,255,0.5);
+    background: var(--accent-soft);
+  }
+  .btn-outline {
+    border: 1px solid var(--line);
+    color: var(--text);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent-soft);
+    transform: translateY(-2px);
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 26px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  @media (min-width: 1024px) { .hamburger { display: none; } }
+  .hamburger span {
+    display: block;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    padding: 24px;
+    transform: translateY(-100%);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .mobile-menu.open { transform: translateY(0); }
+  .mobile-menu a:not(.btn) {
+    font-family: 'Fraunces', serif;
+    font-size: 1.9rem;
+    font-weight: 500;
+  }
+  .mobile-menu a.btn {
+    width: fit-content;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-top: 110px;
+    padding-bottom: 60px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .hero-grid { grid-template-columns: 1.15fr 0.85fr; gap: 64px; }
+  }
+  .hero-visual {
+    order: -1;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  @media (min-width: 1024px) {
+    .hero-visual { order: 2; aspect-ratio: 3 / 5; max-height: 78vh; }
+  }
+  .hero-visual img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .hero-visual::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(5,7,10,0.55), transparent 40%);
+    pointer-events: none;
+  }
+  h1.hero-headline {
+    font-size: clamp(2.4rem, 6.2vw, 4.6rem);
+    font-weight: 600;
+  }
+  h1.hero-headline em {
+    font-style: italic;
+    color: var(--accent-soft);
+    font-weight: 400;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .hero-proof div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* ---------- SOBRE ---------- */
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .sobre-grid { grid-template-columns: 0.8fr 1.2fr; gap: 80px; }
+  }
+  .sobre-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .sobre-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .sobre-body p { color: var(--muted); margin-bottom: 20px; max-width: 56ch; }
+  .sobre-body strong { color: var(--text); font-weight: 600; }
+
+  .info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  @media (min-width: 640px) {
+    .info-row { flex-direction: row; gap: 56px; }
+  }
+  .info-row h4 {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-soft);
+    margin-bottom: 8px;
+  }
+  .info-row p { font-size: 0.95rem; }
+
+  /* ---------- CONCEITO / PILARES ---------- */
+  .pillars {
+    margin-top: 64px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pillar {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-block: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .pillar:last-child { border-bottom: 1px solid var(--line); }
+  @media (min-width: 768px) {
+    .pillar { grid-template-columns: 140px 1fr 1.3fr; gap: 32px; align-items: baseline; }
+  }
+  .pillar-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--accent);
+    opacity: 0.85;
+  }
+  .pillar h3 { font-size: 1.25rem; font-weight: 600; }
+  .pillar p { color: var(--muted); font-size: 0.98rem; }
+
+  /* ---------- ANTES E DEPOIS (cinematic) ---------- */
+  .transform-pin {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    padding-block: 0;
+    display: flex;
+    align-items: center;
+  }
+  .transform-inner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .transform-inner { grid-template-columns: 1fr 1fr; gap: 80px; }
+  }
+  .transform-slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    padding-block: 60px;
+    opacity: 0;
+  }
+  .transform-slide.slide-active { opacity: 1; }
+  @media (min-width: 1024px) {
+    .transform-slide { grid-template-columns: 1fr 1fr; gap: 80px; }
+  }
+  .transform-slide .container { width: 100%; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+  @media (min-width: 1024px) {
+    .transform-slide .container { grid-template-columns: 1fr 1fr; gap: 80px; }
+  }
+  .transform-visual {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    max-height: 62vh;
+    margin-inline: auto;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .transform-visual img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+  .transform-visual .img-after { opacity: 0; }
+  .transform-badge {
+    position: absolute;
+    bottom: 16px; left: 16px;
+    z-index: 2;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 5px 12px;
+    border-radius: 100px;
+    background: rgba(13,18,31,0.85);
+    color: var(--muted);
+    backdrop-filter: blur(4px);
+  }
+  .transform-badge.badge-after {
+    background: var(--accent);
+    color: #fff;
+    opacity: 0;
+  }
+  .transform-copy .eyebrow { margin-bottom: 12px; }
+  .transform-copy h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 16px; }
+  .transform-copy p { color: var(--muted); max-width: 46ch; }
+  .transform-progress {
+    position: absolute;
+    bottom: 32px; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 5;
+  }
+  .transform-progress span {
+    width: 28px; height: 2px;
+    background: var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .transform-progress span i {
+    position: absolute; inset: 0;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    display: block;
+  }
+  .transform-progress span.dot-active i { transform: scaleX(1); }
+
+  .transform-mobile-list { display: flex; flex-direction: column; gap: 48px; }
+  .transform-mobile-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .transform-mobile-pair .img-wrap { position: relative; aspect-ratio: 4/5; border-radius: 4px; overflow: hidden; }
+  .transform-mobile-pair img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .transform-mobile-item h3 { font-size: 1.15rem; margin-bottom: 8px; margin-top: 16px; }
+  .transform-mobile-item p { color: var(--muted); font-size: 0.92rem; }
+
+  /* ---------- DEPOIMENTOS ---------- */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-top: 64px;
+  }
+  @media (min-width: 768px) {
+    .testimonial-grid { grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: center; }
+  }
+  .video-frame {
+    position: relative;
+    aspect-ratio: 9/16;
+    max-width: 320px;
+    margin-inline: auto;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg-elevated);
+  }
+  .video-frame img, .video-frame video { width: 100%; height: 100%; object-fit: cover; }
+  .play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5,7,10,0.25);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .play-btn:hover { background: rgba(5,7,10,0.4); }
+  .play-circle {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 12px 30px -6px rgba(10,132,255,0.5);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .play-btn:hover .play-circle { transform: scale(1.1); }
+
+  .stars { display: flex; gap: 4px; margin-bottom: 20px; color: var(--accent-soft); }
+  blockquote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+    line-height: 1.5;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .avatar-badge {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--accent-soft);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem;
+    color: var(--accent-soft);
+  }
+  .testimonial-author h4 { font-family: 'Newsreader', serif; font-weight: 600; font-size: 0.95rem; }
+  .testimonial-author p { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { margin-top: 56px; max-width: 780px; }
+  .faq-item { border-top: 1px solid var(--line); }
+  .faq-item:last-child { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 24px;
+    background: none;
+    border: none;
+    color: var(--text);
+    text-align: left;
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .faq-q .plus {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    position: relative;
+  }
+  .faq-q .plus::before, .faq-q .plus::after {
+    content: '';
+    position: absolute;
+    background: var(--accent-soft);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .faq-q .plus::before { top: 50%; left: 0; width: 100%; height: 1px; }
+  .faq-q .plus::after { left: 50%; top: 0; height: 100%; width: 1px; }
+  .faq-item.open .faq-q .plus::after { transform: rotate(90deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .faq-a p { padding-bottom: 24px; color: var(--muted); max-width: 62ch; }
+
+  /* ---------- CTA / FOOTER ---------- */
+  .cta-section { text-align: center; }
+  .cta-section h2 { max-width: 20ch; margin-inline: auto; }
+  .cta-section .btn-primary { margin-top: 36px; font-size: 1.05rem; padding: 16px 36px; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 60px 32px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  @media (min-width: 768px) {
+    .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+  }
+  footer p { color: var(--muted); font-size: 0.9rem; }
+  footer h4 {
+    font-family: 'Newsreader', serif; font-style: italic; font-weight: 400;
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent-soft); margin-bottom: 16px;
+  }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  footer a.footer-link { color: var(--muted); font-size: 0.92rem; transition: color 0.3s; }
+  footer a.footer-link:hover { color: var(--text); }
+  .footer-bottom {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  @media (min-width: 768px) {
+    .footer-bottom { flex-direction: row; justify-content: space-between; }
+  }
+
+  .whatsapp-float {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    z-index: 90;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px -6px rgba(0,0,0,0.5);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .whatsapp-float:hover { transform: scale(1.08); }
+
+  .icon { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+  ::selection { background: rgba(10,132,255,0.3); color: #fff; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="container nav-row">
+    <a href="#inicio" class="logo">EMERSON CHEMIMM<span>Barbeiro Visagista</span></a>
+    <nav class="desktop-nav">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#visagismo">Visagismo</a>
+      <a href="#transformacoes">Antes e Depois</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:16px;">
+      <a href="https://wa.me/5541995977587" target="_blank" rel="noopener" class="btn btn-primary" style="display:none;" id="navCta">Agendar</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio">Início</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#visagismo">Visagismo</a>
+  <a href="#transformacoes">Antes e Depois</a>
+  <a href="#depoimentos">Depoimentos</a>
+  <a href="#faq">FAQ</a>
+  <a href="https://wa.me/5541995977587" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:12px; align-self:flex-start;">Agendar pelo WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Especialista em Visagismo Masculino</p>
+      <h1 class="hero-headline">Um corte pensado para o <em>seu rosto</em>, não copiado de outra pessoa.</h1>
+      <p class="section-lead" style="margin-top:28px;">Emerson Chemimm trabalha com visagismo masculino para alinhar corte, barba e imagem de forma natural, respeitando seu rosto, sua rotina e o estilo que você quer transmitir.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/5541995977587?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20avalia%C3%A7%C3%A3o." target="_blank" rel="noopener" class="btn btn-primary">Agendar pelo WhatsApp</a>
+        <a href="#transformacoes" class="btn btn-outline">Ver antes e depois</a>
+      </div>
+      <div class="hero-proof">
+        <div><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Análise do rosto</div>
+        <div><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Corte e barba sob medida</div>
+        <div><svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Resultado natural</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="images/emerson-hero.webp" alt="Emerson Chemimm, barbeiro visagista">
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container sobre-grid">
+    <div class="sobre-visual">
+      <img src="images/emerson-about.webp" alt="Retrato de Emerson Chemimm">
+    </div>
+    <div class="sobre-body">
+      <p class="eyebrow">O Especialista</p>
+      <h2 class="section-title">Por trás do corte, existe leitura de imagem, técnica e experiência.</h2>
+      <div style="margin-top:32px;">
+        <p><strong>Eu sou o Emerson Chemimm</strong>, especialista em visagismo masculino personalizado. Acredito que o cabelo e a barba de um homem não devem seguir modismos passageiros, mas sim contar a sua história e valorizar a sua essência.</p>
+        <p>Meu foco é realizar um atendimento cuidadoso, individual e focado no detalhe. Na minha cadeira, você não recebe apenas um corte comum, mas sim uma consultoria estética completa que busca alinhar a proporção do seu rosto com seus objetivos pessoais e profissionais.</p>
+      </div>
+      <div class="info-row">
+        <div>
+          <h4>Localização</h4>
+          <p>Local de atendimento informado no agendamento</p>
+        </div>
+        <div>
+          <h4>Horário de Atendimento</h4>
+          <p>Segunda a Sexta: 09:00 às 20:00<br>Sábado: 09:00 às 17:00</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISAGISMO -->
+<section class="section-elevated" id="visagismo">
+  <div class="container">
+    <p class="eyebrow">Conceito</p>
+    <h2 class="section-title">Visagismo é quando o corte deixa de ser padrão e passa a ser estratégia de imagem.</h2>
+    <p class="section-lead">Diferente do atendimento comum que repete o mesmo padrão de fade em todo mundo, o visagismo lê o rosto antes de decidir o corte — porque a geometria do seu rosto também comunica confiança e liderança antes de você falar uma palavra.</p>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="pillar-num">01</span>
+        <h3>Análise do formato do rosto</h3>
+        <p>Identificação das linhas dominantes do rosto para criar contornos que reforçam presença.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">02</span>
+        <h3>Proporção facial integrada</h3>
+        <p>Cabelo, barba e sobrancelha vistos como um conjunto — é essa leitura completa que comunica autoridade.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">03</span>
+        <h3>Escolha técnica refinada</h3>
+        <p>Texturização, angulação de fade e marcações geométricas com caimento natural.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">04</span>
+        <h3>Personalidade e estilo de vida</h3>
+        <p>O corte precisa funcionar com sua rotina, não só parecer bom por um dia.</p>
+      </div>
+      <div class="pillar">
+        <span class="pillar-num">05</span>
+        <h3>Objetivo de imagem</h3>
+        <p>Mais sério, mais confiante, mais você — o corte segue a intenção que você quer transmitir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANTES E DEPOIS — desktop cinematic pin, mobile simple list -->
+<section id="transformacoes" style="padding-top:60px;">
+  <div class="container" style="padding-bottom:40px;">
+    <p class="eyebrow">Transformações</p>
+    <h2 class="section-title">Transformações reais. Homens reais. Resultado visível.</h2>
+    <p class="section-lead">Cada cliente teve uma análise específica focada em seu objetivo pessoal. Role para acompanhar a transformação.</p>
+  </div>
+
+  <!-- desktop pinned cinematic sequence -->
+  <div class="transform-pin" id="transformPin">
+    <div class="transform-slide slide-active" data-slide="0">
+      <div class="container">
+        <div class="transform-visual">
+          <img class="img-before" src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada">
+          <img class="img-after" src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada">
+          <span class="transform-badge badge-before">Antes</span>
+          <span class="transform-badge badge-after">Depois</span>
+        </div>
+        <div class="transform-copy">
+          <p class="eyebrow">Redesenho de Barba</p>
+          <h3>Barba Cheia Redesenhada</h3>
+          <p><strong style="color:var(--text)">Objetivo:</strong> Alinhar as linhas da barba à estrutura do rosto.</p>
+          <p style="margin-top:12px;">Barba volumosa sem contorno definido foi aparada e desenhada com navalha, criando linhas mais retas no maxilar e destacando os traços do rosto.</p>
+        </div>
+      </div>
+    </div>
+    <div class="transform-slide" data-slide="1">
+      <div class="container">
+        <div class="transform-visual">
+          <img class="img-before" src="images/before-2.webp" alt="Antes: Renovação de Corte e Barba">
+          <img class="img-after" src="images/after-2.webp" alt="Depois: Renovação de Corte e Barba">
+          <span class="transform-badge badge-before">Antes</span>
+          <span class="transform-badge badge-after">Depois</span>
+        </div>
+        <div class="transform-copy">
+          <p class="eyebrow">Corte + Barba</p>
+          <h3>Renovação de Corte e Barba</h3>
+          <p><strong style="color:var(--text)">Objetivo:</strong> Visual mais leve e cuidado no dia a dia.</p>
+          <p style="margin-top:12px;">Cabelo e barba sem manutenção foram reestruturados na mesma sessão, trazendo mais leveza ao visual e um acabamento muito mais cuidado.</p>
+        </div>
+      </div>
+    </div>
+    <div class="transform-slide" data-slide="2">
+      <div class="container">
+        <div class="transform-visual">
+          <img class="img-before" src="images/before-3.webp" alt="Antes: Renovação Completa de Visual">
+          <img class="img-after" src="images/after-3.webp" alt="Depois: Renovação Completa de Visual">
+          <span class="transform-badge badge-before">Antes</span>
+          <span class="transform-badge badge-after">Depois</span>
+        </div>
+        <div class="transform-copy">
+          <p class="eyebrow">Corte + Barba</p>
+          <h3>Renovação Completa de Visual</h3>
+          <p><strong style="color:var(--text)">Objetivo:</strong> Visual mais moderno e alinhado ao rosto.</p>
+          <p style="margin-top:12px;">Cabelo e barba renovados por completo, trazendo um contorno mais definido e um visual mais atual.</p>
+        </div>
+      </div>
+    </div>
+    <div class="transform-progress" id="transformProgress">
+      <span class="dot-active"><i></i></span>
+      <span><i></i></span>
+      <span><i></i></span>
+    </div>
+  </div>
+
+  <!-- mobile fallback: simple static list, no pin -->
+  <div class="container transform-mobile-list" id="transformMobileList" style="display:none;">
+    <div class="transform-mobile-item">
+      <div class="transform-mobile-pair">
+        <div class="img-wrap"><img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada"></div>
+        <div class="img-wrap"><img src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada"></div>
+      </div>
+      <h3>Barba Cheia Redesenhada</h3>
+      <p>Barba volumosa sem contorno definido foi aparada e desenhada com navalha, criando linhas mais retas no maxilar e destacando os traços do rosto.</p>
+    </div>
+    <div class="transform-mobile-item">
+      <div class="transform-mobile-pair">
+        <div class="img-wrap"><img src="images/before-2.webp" alt="Antes: Renovação de Corte e Barba"></div>
+        <div class="img-wrap"><img src="images/after-2.webp" alt="Depois: Renovação de Corte e Barba"></div>
+      </div>
+      <h3>Renovação de Corte e Barba</h3>
+      <p>Cabelo e barba sem manutenção foram reestruturados na mesma sessão, trazendo mais leveza ao visual e um acabamento muito mais cuidado.</p>
+    </div>
+    <div class="transform-mobile-item">
+      <div class="transform-mobile-pair">
+        <div class="img-wrap"><img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual"></div>
+        <div class="img-wrap"><img src="images/after-3.webp" alt="Depois: Renovação Completa de Visual"></div>
+      </div>
+      <h3>Renovação Completa de Visual</h3>
+      <p>Cabelo e barba renovados por completo, trazendo um contorno mais definido e um visual mais atual.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="section-elevated" id="depoimentos">
+  <div class="container">
+    <p class="eyebrow">Depoimentos</p>
+    <h2 class="section-title">O resultado aparece no espelho. A confiança aparece nos depoimentos.</h2>
+
+    <div class="testimonial-grid">
+      <div class="video-frame">
+        <img id="videoPoster" src="images/depoimento-poster.webp" alt="Depoimento em vídeo de cliente">
+        <button class="play-btn" id="playBtn" aria-label="Reproduzir depoimento em vídeo">
+          <span class="play-circle">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </button>
+      </div>
+      <div>
+        <div class="stars">★★★★★</div>
+        <blockquote>&ldquo;Faço meu cabelo aqui e não é fácil achar uma barbearia boa assim. É muito top, você corta do jeito que quiser. Além de tudo, o Emerson e toda a equipe aqui são muito bons. Barbearia muito boa, recomendo para todo mundo.&rdquo;</blockquote>
+        <div class="testimonial-author">
+          <span class="avatar-badge">EC</span>
+          <div>
+            <h4>Cliente Emerson Chemimm</h4>
+            <p>Relato recebido de cliente</p>
+          </div>
+        </div>
+        <p style="margin-top:24px; font-size:0.85rem;">Depoimento real de cliente, com identidade preservada. Mais relatos em vídeo no <a href="https://www.instagram.com/emersonchemimm/" target="_blank" rel="noopener" style="color:var(--accent-soft); text-decoration:underline;">Instagram</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="eyebrow">Dúvidas Frequentes</p>
+    <h2 class="section-title">Perguntas Frequentes</h2>
+
+    <div class="faq-list" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q"><span>O que é visagismo masculino?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>O visagismo masculino é uma técnica de consultoria de imagem que analisa o formato do seu rosto, a estrutura óssea, os traços faciais, sua rotina e seus objetivos profissionais para criar um corte de cabelo e design de barba personalizados, gerando maior harmonia, confiança e alinhamento com quem você é.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Como saber qual corte combina com meu rosto?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Durante o atendimento, realizamos uma análise geométrica facial (avaliando as proporções de testa, maçãs do rosto e maxilar) e uma conversa sobre seu estilo de vida. Com base nessas técnicas de visagismo, sugerimos e desenhamos o corte ideal para você.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>O atendimento é indicado para quem quer mudar o visual?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Sim, é perfeito. Se você quer mudar, mas tem medo de que o resultado não fique bom, a análise de visagismo garante que a mudança seja feita de forma planejada, segura e que valorize seus traços, minimizando qualquer risco de arrependimento.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Preciso saber o corte que quero antes de chegar?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Não. A maioria dos clientes chega sem saber exatamente o que quer. O meu papel como visagista é justamente orientar você, fazer o diagnóstico e propor a melhor solução visual.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>O visagismo serve para barba também?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Com certeza. A barba tem um papel fundamental na estrutura do terço inferior do rosto. Ela pode ser usada para alongar um rosto redondo, suavizar um maxilar muito angular ou disfarçar imperfeições, sendo desenhada de forma totalmente integrada ao cabelo.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Quanto tempo dura o atendimento?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>O tempo varia conforme o serviço: um corte com visagismo inclui a conversa inicial, a execução e as dicas de finalização, então costuma levar mais do que um corte comum. Sessões de transformação completa levam mais tempo ainda.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Como agendar um horário?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Você pode agendar clicando em qualquer botão de agendamento deste site. Você será direcionado para o WhatsApp, onde combinamos o melhor dia e horário diretamente.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Onde fica o atendimento?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>O local exato é informado no momento do agendamento pelo WhatsApp.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Posso levar referências de corte?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>Sim, referências são muito bem-vindas. Elas nos ajudam a entender o seu gosto pessoal. A partir delas, faremos as adaptações técnicas necessárias para que aquele estilo funcione perfeitamente no formato do seu rosto.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>O resultado fica natural ou muito diferente?</span><span class="plus"></span></button>
+        <div class="faq-a"><p>O foco é sempre a naturalidade e a funcionalidade. Queremos que você consiga arrumar o cabelo facilmente no seu dia a dia. A mudança respeita seus traços naturais para que você se reconheça no espelho, apenas em uma versão muito mais alinhada e confiante.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section section-elevated">
+  <div class="container">
+    <p class="eyebrow" style="justify-content:center;">Próximo Passo</p>
+    <h2 class="section-title">Quer descobrir qual corte combina melhor com você?</h2>
+    <p class="section-lead" style="margin-inline:auto;">Agende um horário e receba uma leitura personalizada de visagismo para sair com um visual mais alinhado ao seu rosto, estilo e momento de vida.</p>
+    <a href="https://wa.me/5541995977587?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener" class="btn btn-primary">Agendar pelo WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#inicio" class="logo">EMERSON CHEMIMM<span>Barbeiro Visagista</span></a>
+        <p style="margin-top:16px; max-width:40ch;">Visagismo masculino personalizado. Cabelo, barba e estilo desenhados sob medida de acordo com as proporções do seu rosto.</p>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#sobre" class="footer-link">Sobre</a></li>
+          <li><a href="#visagismo" class="footer-link">Visagismo</a></li>
+          <li><a href="#transformacoes" class="footer-link">Antes e Depois</a></li>
+          <li><a href="#depoimentos" class="footer-link">Depoimentos</a></li>
+          <li><a href="#faq" class="footer-link">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li><a href="https://wa.me/5541995977587" target="_blank" rel="noopener" class="footer-link">WhatsApp: 41 99597-7587</a></li>
+          <li><a href="https://www.instagram.com/emersonchemimm/" target="_blank" rel="noopener" class="footer-link">Instagram</a></li>
+          <li><span class="footer-link" style="cursor:default;">Local informado no agendamento</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Emerson Chemimm. Todos os direitos reservados.</p>
+      <p>Site desenvolvido por <a href="https://gustavodigital.online/" target="_blank" rel="noopener" style="color:var(--accent-soft);">Gustavo Digital</a></p>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5541995977587" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Agendar pelo WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.44.79 3.07 1.2 4.73 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m0 1.67c2.24 0 4.34.87 5.92 2.45a8.23 8.23 0 0 1 2.42 5.79c0 4.55-3.71 8.26-8.27 8.26a8.3 8.3 0 0 1-4.21-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.27-4.4c.01-4.55 3.72-8.24 8.2-8.24m-.29 3.05c-.83 0-1.13.79-1.44 1.4-.31.61-.98 1.6-1.09 1.71-.11.11-.22.44 0 .82.22.38.87 1.35 1.87 2.35 1.3 1.3 2.32 1.65 2.75 1.8.31.11.6.09.8-.05.2-.14.9-1.05 1.14-1.41.24-.36.48-.29.8-.17.31.12 2.02.95 2.37 1.12.35.17.58.26.66.4.09.14.09.79-.18 1.55-.27.76-1.56 1.44-2.13 1.5-.57.06-1.11.24-3.73-.78-3.14-1.23-5.12-4.44-5.27-4.65-.15-.21-1.24-1.65-1.24-3.15s.78-2.23 1.05-2.53c.27-.3.6-.38.8-.38h.57z"/></svg>
+</a>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const isMobile = window.matchMedia('(max-width: 1023px)').matches || 'ontouchstart' in window && window.innerWidth < 1024;
+
+/* header scroll state */
+const header = document.getElementById('siteHeader');
+const navCta = document.getElementById('navCta');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+if (navCta) navCta.style.display = 'inline-flex';
+
+/* mobile menu */
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburgerBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+  hamburgerBtn.classList.toggle('active');
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-item').forEach(item => {
+  const btn = item.querySelector('.faq-q');
+  const answer = item.querySelector('.faq-a');
+  btn.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(other => {
+      if (other !== item) {
+        other.classList.remove('open');
+        other.querySelector('.faq-a').style.maxHeight = null;
+      }
+    });
+    item.classList.toggle('open', !isOpen);
+    answer.style.maxHeight = !isOpen ? answer.scrollHeight + 'px' : null;
+  });
+});
+
+/* video testimonial: click to play (avoids autoplay/poster edge cases) */
+const playBtn = document.getElementById('playBtn');
+const videoFrame = playBtn.closest('.video-frame');
+playBtn.addEventListener('click', () => {
+  const video = document.createElement('video');
+  video.controls = true;
+  video.autoplay = true;
+  video.playsInline = true;
+  video.style.width = '100%';
+  video.style.height = '100%';
+  video.style.objectFit = 'cover';
+  const source = document.createElement('source');
+  source.src = 'videos/depoimento-cliente.mp4';
+  source.type = 'video/mp4';
+  video.appendChild(source);
+  videoFrame.innerHTML = '';
+  videoFrame.appendChild(video);
+});
+
+/* Lenis smooth scroll (desktop only) */
+if (typeof Lenis !== 'undefined' && !isMobile) {
+  try {
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+    window.__lenis = lenis;
+  } catch (e) {}
+}
+
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+/* Hero kinetic headline */
+if (typeof SplitType !== 'undefined' && typeof gsap !== 'undefined') {
+  try {
+    const heroSplit = new SplitType('.hero-headline', { types: 'words' });
+    gsap.from(heroSplit.words, {
+      opacity: 0, y: 24, duration: 1,
+      stagger: 0.06,
+      ease: 'power3.out'
+    });
+  } catch (e) {}
+}
+
+/* Reveal staggered on sections */
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  document.querySelectorAll('section').forEach(section => {
+    if (section.id === 'transformacoes' || section.classList.contains('cta-section')) return;
+    const items = section.querySelectorAll('.eyebrow, .section-title, .section-lead, .pillar, .sobre-visual, .testimonial-grid > *, .faq-item, .info-row');
+    if (!items.length) return;
+    gsap.from(items, {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      stagger: 0.08,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      }
+    });
+  });
+
+  gsap.from('.cta-section h2, .cta-section .section-lead, .cta-section .btn-primary, .cta-section .eyebrow', {
+    opacity: 0, y: 24, duration: 0.8, stagger: 0.1,
+    scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
+  });
+}
+
+/* Cinematic pin+scrub: Antes e Depois (desktop only) */
+function initTransformPin() {
+  const pinEl = document.getElementById('transformPin');
+  const desktopWrap = pinEl;
+  const mobileList = document.getElementById('transformMobileList');
+
+  if (isMobile || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    desktopWrap.style.display = 'none';
+    mobileList.style.display = 'flex';
+    return;
+  }
+
+  const slides = gsap.utils.toArray('.transform-slide');
+  const dots = gsap.utils.toArray('#transformProgress span');
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: pinEl,
+      start: 'top top',
+      end: '+=2400',
+      pin: true,
+      scrub: 1,
+      anticipatePin: 1
+    }
+  });
+
+  slides.forEach((slide, i) => {
+    const after = slide.querySelector('.img-after');
+    const badgeAfter = slide.querySelector('.badge-after');
+    const badgeBefore = slide.querySelector('.badge-before');
+
+    if (i > 0) {
+      tl.to(slides[i - 1], { opacity: 0, duration: 0.4 }, `slide${i}-in`);
+      tl.to(slide, { opacity: 1, duration: 0.4 }, `slide${i}-in`);
+      tl.set(dots, { }, `slide${i}-in`);
+      tl.call(() => {
+        dots.forEach((d, di) => d.classList.toggle('dot-active', di === i));
+      }, null, `slide${i}-in`);
+    }
+
+    tl.to(after, { opacity: 1, duration: 0.6 }, (i === 0 ? 0 : `slide${i}-in`) + (i === 0 ? '' : '+=0.1'));
+    tl.to(badgeAfter, { opacity: 1, duration: 0.3 }, '<');
+    tl.to(badgeBefore, { opacity: 0.5, duration: 0.3 }, '<');
+
+    tl.to({}, { duration: 0.5 });
+  });
+}
+
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  initTransformPin();
+} else {
+  document.getElementById('transformPin').style.display = 'none';
+  document.getElementById('transformMobileList').style.display = 'flex';
+}
+
+window.addEventListener('resize', () => {
+  if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+});
+</script>
+</body>
+</html>

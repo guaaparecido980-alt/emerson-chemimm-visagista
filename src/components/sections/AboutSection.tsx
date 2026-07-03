@@ -7,6 +7,7 @@ import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import SectionTitle from "@/components/ui/SectionTitle";
 import PremiumCard from "@/components/ui/PremiumCard";
 import { siteConfig } from "@/data/site";
+import { withBasePath } from "@/lib/paths";
 
 export default function AboutSection() {
   const [imageError, setImageError] = useState(false);
@@ -29,7 +30,7 @@ export default function AboutSection() {
                 </div>
                 {!imageError && (
                   <Image
-                    src="/images/emerson-about.jpg"
+                    src={withBasePath("/images/emerson-about.jpg")}
                     alt={`Retrato de ${siteConfig.name}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"

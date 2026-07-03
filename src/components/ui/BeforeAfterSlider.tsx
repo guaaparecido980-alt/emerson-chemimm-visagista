@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { withBasePath } from "@/lib/paths";
 const MoveLeftRightIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +107,7 @@ export default function BeforeAfterSlider({
         {/* AFTER IMAGE (Background) */}
         {!imageErrorAfter ? (
           <Image
-            src={afterImage}
+            src={withBasePath(afterImage)}
             alt={afterAlt}
             fill
             className="object-cover"
@@ -131,7 +132,7 @@ export default function BeforeAfterSlider({
           <div className="absolute inset-y-0 left-0 h-[250px] sm:h-[350px] w-[calc(100vw-32px)] sm:w-[480px] md:w-[600px]">
             {!imageErrorBefore ? (
               <Image
-                src={beforeImage}
+                src={withBasePath(beforeImage)}
                 alt={beforeAlt}
                 fill
                 className="object-cover"

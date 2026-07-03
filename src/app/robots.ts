@@ -1,7 +1,9 @@
 import { MetadataRoute } from "next";
 
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://emersonchemimm.com.br"; // URL final do site (placeholder)
+  const baseUrl = "https://guaaparecido980-alt.github.io/emerson-chemimm-visagista";
 
   return {
     rules: {

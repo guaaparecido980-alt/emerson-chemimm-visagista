@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, Eye, ShieldCheck } from "lucide-react";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import { siteConfig } from "@/data/site";
+import { withBasePath } from "@/lib/paths";
 
 export default function HeroSection() {
   const [imageError, setImageError] = useState(false);
@@ -94,7 +95,7 @@ export default function HeroSection() {
                 </div>
                 {!imageError && (
                   <Image
-                    src="/images/emerson-hero.jpg"
+                    src={withBasePath("/images/emerson-hero.jpg")}
                     alt={`Foto de ${siteConfig.name} atendendo cliente`}
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"

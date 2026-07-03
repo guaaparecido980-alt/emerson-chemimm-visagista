@@ -16,11 +16,11 @@ export const seoConfig = {
   openGraph: {
     type: "website",
     locale: "pt_BR",
-    url: "https://emersonchemimm.com.br", // URL final (placeholder)
+    url: "https://guaaparecido980-alt.github.io/emerson-chemimm-visagista",
     siteName: siteConfig.name,
     images: [
       {
-        url: "https://emersonchemimm.com.br/images/og-image.jpg",
+        url: "https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: `${siteConfig.name} - Barbeiro Visagista`
@@ -31,6 +31,6 @@ export const seoConfig = {
     card: "summary_large_image",
     title: `${siteConfig.name} | ${siteConfig.role}`,
     description: `Corte masculino, barba e visagismo personalizados para homens que querem uma imagem mais alinhada, confiante e profissional.`,
-    images: ["https://emersonchemimm.com.br/images/og-image.jpg"]
+    images: ["https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/images/og-image.jpg"]
   }
 };

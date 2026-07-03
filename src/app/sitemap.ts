@@ -1,8 +1,10 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/data/posts";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://emersonchemimm.com.br"; // URL final do site (placeholder)
+  const baseUrl = "https://guaaparecido980-alt.github.io/emerson-chemimm-visagista";
 
   // Rotas estáticas básicas
   const staticRoutes = [

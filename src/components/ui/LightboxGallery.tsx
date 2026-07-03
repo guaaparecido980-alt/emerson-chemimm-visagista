@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { galleryItems, GalleryItem } from "@/data/gallery";
+import { withBasePath } from "@/lib/paths";
 
 export default function LightboxGallery() {
   const [activeCategory, setActiveCategory] = useState<string>("todos");
@@ -86,7 +87,7 @@ export default function LightboxGallery() {
               </div>
               
               <Image
-                src={item.imageUrl}
+                src={withBasePath(item.imageUrl)}
                 alt={item.alt}
                 fill
                 sizes="(max-width: 768px) 50vw, 33vw"
@@ -144,7 +145,7 @@ export default function LightboxGallery() {
               className="relative max-h-[80vh] max-w-[90vw] aspect-[4/5] h-full w-full overflow-hidden rounded-xl border border-slate-800 shadow-2xl"
             >
               <Image
-                src={filteredItems[selectedImageIndex].imageUrl}
+                src={withBasePath(filteredItems[selectedImageIndex].imageUrl)}
                 alt={filteredItems[selectedImageIndex].alt}
                 fill
                 className="object-contain"

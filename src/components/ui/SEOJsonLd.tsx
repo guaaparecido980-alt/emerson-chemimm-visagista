@@ -4,7 +4,7 @@ import { services } from "@/data/services";
 import { faqs } from "@/data/faqs";
 
 export default function SEOJsonLd() {
-  const websiteUrl = "https://emersonchemimm.com.br"; // Placeholder URL do site
+  const websiteUrl = "https://guaaparecido980-alt.github.io/emerson-chemimm-visagista";
 
   // Schema 1: LocalBusiness / HairSalon
   const localBusinessSchema = {

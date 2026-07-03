@@ -516,8 +516,9 @@
   }
   .ba-card:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.5); border-color: rgba(10,132,255,0.35); }
 
-  /* Slider antes/depois: input range nativo + clip-path, minimo de JS */
-  .ba-slider { position: relative; overflow: hidden; user-select: none; }
+  /* Slider antes/depois: pointer events (mouse+toque unificados) + clip-path */
+  .ba-slider { position: relative; overflow: hidden; user-select: none; cursor: ew-resize; touch-action: none; }
+  .ba-slider:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
   .ba-slider img {
     position: absolute; inset: 0; width: 100%; height: 100%;
     object-fit: cover; object-position: center center; display: block; pointer-events: none;
@@ -545,12 +546,6 @@
   }
   .ba-badge-antes { left: 12px; color: var(--muted); }
   .ba-badge-depois { right: 12px; color: var(--accent-soft); }
-  .ba-range {
-    position: absolute; inset: 0; width: 100%; height: 100%; z-index: 5;
-    margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none;
-  }
-  .ba-range::-webkit-slider-thumb { -webkit-appearance: none; width: 100%; height: 100%; }
-  .ba-range::-moz-range-thumb { width: 1px; height: 100%; opacity: 0; border: none; }
 
   .transform-copy .eyebrow { margin-bottom: 12px; }
   .transform-copy h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); margin-bottom: 14px; }
@@ -960,7 +955,7 @@
     <div class="transform-list">
       <div class="transform-item">
         <div class="ba-card">
-          <div class="ba-slider" style="aspect-ratio:1200/978;">
+          <div class="ba-slider" style="aspect-ratio:1200/978;" role="slider" tabindex="0" aria-label="Arraste para comparar antes e depois" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
             <img class="ba-img-after" src="images/after-1.webp" alt="Depois: Barba Cheia Redesenhada">
             <div class="ba-img-before-wrap" style="clip-path: inset(0 50% 0 0);">
               <img src="images/before-1.webp" alt="Antes: Barba Cheia Redesenhada">
@@ -969,7 +964,6 @@
             <div class="ba-handle" style="left:50%;">↔</div>
             <span class="ba-badge ba-badge-antes">Antes</span>
             <span class="ba-badge ba-badge-depois">Depois</span>
-            <input type="range" class="ba-range" min="0" max="100" value="50" aria-label="Arraste para comparar antes e depois">
           </div>
         </div>
         <div class="transform-copy">
@@ -981,7 +975,7 @@
 
       <div class="transform-item">
         <div class="ba-card">
-          <div class="ba-slider" style="aspect-ratio:1000/970;">
+          <div class="ba-slider" style="aspect-ratio:1000/970;" role="slider" tabindex="0" aria-label="Arraste para comparar antes e depois" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
             <img class="ba-img-after" src="images/after-3.webp" alt="Depois: Renovação Completa de Visual">
             <div class="ba-img-before-wrap" style="clip-path: inset(0 50% 0 0);">
               <img src="images/before-3.webp" alt="Antes: Renovação Completa de Visual">
@@ -990,7 +984,6 @@
             <div class="ba-handle" style="left:50%;">↔</div>
             <span class="ba-badge ba-badge-antes">Antes</span>
             <span class="ba-badge ba-badge-depois">Depois</span>
-            <input type="range" class="ba-range" min="0" max="100" value="50" aria-label="Arraste para comparar antes e depois">
           </div>
         </div>
         <div class="transform-copy">
@@ -1268,18 +1261,42 @@ mobileMenu.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => mobileMenu.classList.remove('open'));
 });
 
-/* Slider antes/depois (input range nativo + clip-path) */
+/* Slider antes/depois: Pointer Events (mouse + toque unificados via ponteiro),
+   evita a inconsistencia de tocar/arrastar um <input type=range> esticado */
 document.querySelectorAll('.ba-slider').forEach(slider => {
-  const range = slider.querySelector('.ba-range');
   const beforeWrap = slider.querySelector('.ba-img-before-wrap');
   const line = slider.querySelector('.ba-divider-line');
   const handle = slider.querySelector('.ba-handle');
-  function update(val) {
-    beforeWrap.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-    line.style.left = val + '%';
-    handle.style.left = val + '%';
+  let dragging = false;
+
+  function setPct(pct) {
+    pct = Math.max(0, Math.min(100, pct));
+    beforeWrap.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+    line.style.left = pct + '%';
+    handle.style.left = pct + '%';
+    slider.setAttribute('aria-valuenow', Math.round(pct));
   }
-  range.addEventListener('input', () => update(range.value));
+  function pctFromClientX(clientX) {
+    const rect = slider.getBoundingClientRect();
+    return ((clientX - rect.left) / rect.width) * 100;
+  }
+
+  slider.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    slider.setPointerCapture(e.pointerId);
+    setPct(pctFromClientX(e.clientX));
+  });
+  slider.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    setPct(pctFromClientX(e.clientX));
+  });
+  slider.addEventListener('pointerup', () => { dragging = false; });
+  slider.addEventListener('pointercancel', () => { dragging = false; });
+  slider.addEventListener('keydown', (e) => {
+    const current = parseFloat(slider.getAttribute('aria-valuenow')) || 50;
+    if (e.key === 'ArrowLeft') { setPct(current - 5); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { setPct(current + 5); e.preventDefault(); }
+  });
 });
 
 /* FAQ accordion */

@@ -1,16 +1,14 @@
 import { MetadataRoute } from "next";
+import { siteUrl } from "@/data/seo";
 
 export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://guaaparecido980-alt.github.io/emerson-chemimm-visagista";
-
   return {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: "/private/", // Exemplo
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }

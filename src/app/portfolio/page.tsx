@@ -5,12 +5,13 @@ import LightboxGallery from "@/components/ui/LightboxGallery";
 import CTASection from "@/components/sections/CTASection";
 import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
+import { siteUrl } from "@/data/seo";
 
 export const metadata: Metadata = {
   title: "Portfólio",
   description: "Veja fotos de cortes de cabelo, barba e transformações reais realizadas pelo barbeiro visagista Emerson Chemimm.",
   alternates: {
-    canonical: "/portfolio",
+    canonical: `${siteUrl}/portfolio`,
   },
 };
 

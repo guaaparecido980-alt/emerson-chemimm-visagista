@@ -2,7 +2,7 @@
 
 @theme {
   --font-sans: var(--font-inter), sans-serif;
-  --font-heading: var(--font-sora), sans-serif;
+  --font-heading: var(--font-fraunces), serif;
   
   --color-primary: #0a84ff;
   --color-primary-dark: #0056b3;
@@ -32,7 +32,7 @@ body {
 }
 
 .text-gradient-neon {
-  background: linear-gradient(90deg, #007bff, #0a84ff, #00f0ff);
+  background: linear-gradient(90deg, #007bff, #0a84ff, #4db2ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -55,14 +55,14 @@ body {
   transform: translateY(-2px);
 }
 
-/* Neon glow background highlights */
+/* Background highlights discretos (editorial, não neon) */
 .neon-glow-1 {
   position: absolute;
   width: 350px;
   height: 350px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(10, 132, 255, 0.15) 0%, rgba(10, 132, 255, 0) 70%);
-  filter: blur(40px);
+  background: radial-gradient(circle, rgba(10, 132, 255, 0.08) 0%, rgba(10, 132, 255, 0) 70%);
+  filter: blur(50px);
   pointer-events: none;
   z-index: 0;
 }
@@ -72,8 +72,8 @@ body {
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 123, 255, 0.08) 0%, rgba(0, 123, 255, 0) 70%);
-  filter: blur(60px);
+  background: radial-gradient(circle, rgba(0, 123, 255, 0.05) 0%, rgba(0, 123, 255, 0) 70%);
+  filter: blur(70px);
   pointer-events: none;
   z-index: 0;
 }

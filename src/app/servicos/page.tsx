@@ -5,12 +5,13 @@ import ServicesSection from "@/components/sections/ServicesSection";
 import CTASection from "@/components/sections/CTASection";
 import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
+import { siteUrl } from "@/data/seo";
 
 export const metadata: Metadata = {
   title: "Serviços",
-  description: "Conheça os serviços oferecidos por Emerson Chemimm, incluindo corte com visagismo, barba personalizada e consultoria de imagem.",
+  description: "Conheça os serviços oferecidos por Emerson Chemimm, incluindo corte com visagismo, barba alinhada ao rosto e transformação de visual.",
   alternates: {
-    canonical: "/servicos",
+    canonical: `${siteUrl}/servicos`,
   },
 };
 

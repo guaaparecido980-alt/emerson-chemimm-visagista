@@ -1,17 +1,15 @@
 "use client";
 
 import React from "react";
-import { Clock, Check, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import SectionTitle from "@/components/ui/SectionTitle";
 import PremiumCard from "@/components/ui/PremiumCard";
 import { services } from "@/data/services";
-import { siteConfig } from "@/data/site";
+import { getWhatsappUrl } from "@/data/site";
 
 export default function ServicesSection() {
-  const whatsappUrl = siteConfig.whatsapp === "[INSERIR_WHATSAPP]"
-    ? "https://wa.me/"
-    : `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  const whatsappUrl = getWhatsappUrl();
 
   return (
     <section id="servicos" className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
@@ -52,13 +50,6 @@ export default function ServicesSection() {
                       </span>
                     )}
                   </div>
-
-                  {service.duration && (
-                    <div className="flex items-center gap-1.5 text-xs text-[#0a84ff] font-semibold mb-4">
-                      <Clock className="h-3.5 w-3.5" />
-                      <span>{service.duration}</span>
-                    </div>
-                  )}
 
                   <p className="text-sm text-[#a7b0be] leading-relaxed mb-6">
                     {service.description}

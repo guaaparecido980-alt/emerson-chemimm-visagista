@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { siteConfig } from "@/data/site";
+import { siteConfig, getWhatsappUrl } from "@/data/site";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,9 +32,7 @@ export default function Header() {
     { name: "FAQ", href: "/#faq" },
   ];
 
-  const whatsappUrl = siteConfig.whatsapp === "[INSERIR_WHATSAPP]"
-    ? "https://wa.me/"
-    : `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  const whatsappUrl = getWhatsappUrl();
 
   return (
     <>

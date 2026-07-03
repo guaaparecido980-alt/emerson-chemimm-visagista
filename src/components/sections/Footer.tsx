@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { MessageSquare, MapPin, Clock, Phone } from "lucide-react";
-import { siteConfig } from "@/data/site";
+import { siteConfig, getWhatsappUrl, hasAddress, hasCity, hasNeighborhood, hasWhatsapp } from "@/data/site";
 
 const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -27,9 +27,8 @@ const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const whatsappUrl = siteConfig.whatsapp === "[INSERIR_WHATSAPP]"
-    ? "https://wa.me/"
-    : `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  const whatsappUrl = getWhatsappUrl();
+  const hasLocationInfo = hasAddress || hasCity;
 
   return (
     <footer className="bg-[#05070a] border-t border-[#1e293b]/40 text-[#a7b0be] pt-16 pb-8 relative z-10">
@@ -132,22 +131,30 @@ export default function Footer() {
               <li className="flex items-start gap-2.5">
                 <MapPin className="h-4.5 w-4.5 text-[#0a84ff] shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  {siteConfig.location.address !== "[INSERIR_ENDERECO]" ? siteConfig.location.address : "Endereço Físico"}
-                  {siteConfig.location.neighborhood !== "[INSERIR_BAIRRO]" && `, ${siteConfig.location.neighborhood}`}
-                  {siteConfig.location.city !== "[INSERIR_CIDADE]" && ` - ${siteConfig.location.city}`}
+                  {hasLocationInfo ? (
+                    <>
+                      {siteConfig.location.address}
+                      {hasNeighborhood && `, ${siteConfig.location.neighborhood}`}
+                      {hasCity && ` - ${siteConfig.location.city}`}
+                    </>
+                  ) : (
+                    "Local de atendimento informado no agendamento"
+                  )}
                 </span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="h-4.5 w-4.5 text-[#0a84ff] shrink-0" />
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#0a84ff] transition-colors duration-200"
-                >
-                  {siteConfig.whatsapp !== "[INSERIR_WHATSAPP]" ? siteConfig.whatsapp : "WhatsApp Pendente"}
-                </a>
-              </li>
+              {hasWhatsapp && (
+                <li className="flex items-center gap-2.5">
+                  <Phone className="h-4.5 w-4.5 text-[#0a84ff] shrink-0" />
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#0a84ff] transition-colors duration-200"
+                  >
+                    {siteConfig.whatsapp}
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -163,7 +170,7 @@ export default function Footer() {
               Política de Privacidade
             </Link>
             <span>
-              Site desenvolvido por <a href="https://gustavodigital.dev" target="_blank" rel="noopener noreferrer" className="hover:text-[#0a84ff] font-semibold text-[#a7b0be]/80">Gustavo Digital</a>
+              Site desenvolvido por <a href="https://gustavodigital.online/" target="_blank" rel="noopener noreferrer" className="hover:text-[#0a84ff] font-semibold text-[#a7b0be]/80">Gustavo Digital</a>
             </span>
           </div>
         </div>

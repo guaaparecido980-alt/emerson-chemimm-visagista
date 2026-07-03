@@ -8,28 +8,28 @@ export default function ProblemSection() {
   const problems = [
     {
       icon: UserMinus,
-      title: "Corte que não valoriza o rosto",
-      description: "Linhas redondas que não marcam suas feições ou proporções que deixam o formato da cabeça estranho. O corte deve alongar, angular ou suavizar seu rosto estrategicamente.",
+      title: "Corte tecnicamente bom, mas sem combinar",
+      description: "Às vezes o corte está bem feito, mas não valoriza o formato do rosto. Um ajuste nas proporções muda completamente como o visual se comunica.",
     },
     {
       icon: AlertTriangle,
       title: "Barba sem proporção",
-      description: "Uma barba desalinhada com a mandíbula pode criar papadas visuais, achatar seu rosto ou deixar o queixo sem a força masculina que ele deveria ter.",
+      description: "Uma barba sem proporção pode pesar a expressão ou esconder linhas do rosto que poderiam ser valorizadas com um desenho mais adequado.",
     },
     {
       icon: Briefcase,
-      title: "Visual desalinhado com a profissão",
-      description: "Seu cabelo e barba comunicam antes de você abrir a boca. Um visual muito juvenil ou muito desleixado pode comprometer sua autoridade em reuniões de negócios.",
+      title: "Visual desalinhado com a rotina",
+      description: "Cabelo e barba comunicam antes de você abrir a boca. Quando o visual não conversa com sua rotina profissional, ele perde força.",
     },
     {
       icon: HelpCircle,
       title: "Dificuldade de explicar o que quer",
-      description: "Você senta na cadeira e diz 'só um pouquinho nas laterais' porque não sabe o que combina com você e não consegue se comunicar com o barbeiro comum.",
+      description: "Você senta na cadeira e diz 'só um pouquinho nas laterais' porque não sabe ao certo o que combina com você — e a conversa não avança muito daí.",
     },
     {
       icon: Sparkles,
-      title: "Medo de mudar e ficar ruim",
-      description: "O medo de arriscar um visual novo e se arrepender faz você usar o mesmo corte de cabelo genérico há 5, 10 ou 15 anos, mesmo insatisfeito.",
+      title: "Medo de mudar e não gostar",
+      description: "O receio de arriscar um visual novo faz muita gente manter o mesmo corte por anos, mesmo sem estar totalmente satisfeito.",
     },
   ];
 

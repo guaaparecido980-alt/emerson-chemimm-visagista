@@ -2,13 +2,10 @@
 
 import React from "react";
 import { MessageSquare } from "lucide-react";
-import { siteConfig } from "@/data/site";
+import { getWhatsappUrl } from "@/data/site";
 
 export default function WhatsAppFloatingButton() {
-  // Se o número de whatsapp for o placeholder, podemos apontar para uma busca ou deixar o link básico
-  const whatsappUrl = siteConfig.whatsapp === "[INSERIR_WHATSAPP]" 
-    ? "https://wa.me/" 
-    : `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  const whatsappUrl = getWhatsappUrl();
 
   return (
     <a

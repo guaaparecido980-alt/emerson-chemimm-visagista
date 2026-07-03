@@ -26,5 +26,14 @@ export const transformations: TransformationItem[] = [
     transformationType: "Corte + Barba",
     objective: "Visual mais leve e cuidado no dia a dia",
     description: "Cabelo e barba sem manutenção foram reestruturados na mesma sessão, trazendo mais leveza ao visual e um acabamento muito mais cuidado."
+  },
+  {
+    id: "trans-3",
+    title: "Renovação Completa de Visual",
+    beforeImage: "/images/transformations/before-3.jpg",
+    afterImage: "/images/transformations/after-3.jpg",
+    transformationType: "Corte + Barba",
+    objective: "Visual mais moderno e alinhado ao rosto",
+    description: "Cabelo e barba renovados por completo, trazendo um contorno mais definido e um visual mais atual."
   }
 ];

@@ -26,15 +26,15 @@ export const faqs: FAQItem[] = [
   },
   {
     question: "Quanto tempo dura o atendimento?",
-    answer: "O corte com visagismo costuma durar cerca de 45 minutos a 1 hora, pois inclui o tempo da consultoria inicial, lavagem premium, execução precisa e dicas de finalização. Sessões de transformação completa podem durar até 2 horas."
+    answer: "O tempo varia conforme o serviço: um corte com visagismo inclui a conversa inicial, a execução e as dicas de finalização, então costuma levar mais do que um corte comum. Sessões de transformação completa levam mais tempo ainda."
   },
   {
     question: "Como agendar um horário?",
-    answer: "Você pode agendar clicando em qualquer botão de agendamento deste site. Você será direcionado para o nosso WhatsApp, onde nossa equipe (ou o próprio sistema de agendamento) ajudará a encontrar o melhor dia e horário."
+    answer: "Você pode agendar clicando em qualquer botão de agendamento deste site. Você será direcionado para o WhatsApp, onde combinamos o melhor dia e horário diretamente."
   },
   {
     question: "Onde fica o atendimento?",
-    answer: "Atendemos no endereço cadastrado no rodapé e na seção de contato. Estamos localizados em uma região de fácil acesso, com estacionamento conveniente para oferecer o máximo de conforto durante a sua visita."
+    answer: "O local exato é informado no momento do agendamento pelo WhatsApp."
   },
   {
     question: "Posso levar referências de corte?",

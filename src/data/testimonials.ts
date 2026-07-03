@@ -11,10 +11,10 @@ export interface TestimonialItem {
 export const testimonials: TestimonialItem[] = [
   {
     id: "depoimento-1",
-    name: "Cliente Verificado",
+    name: "Cliente Emerson Chemimm",
     content: "Faço meu cabelo aqui e não é fácil achar uma barbearia boa assim. É muito top, você corta do jeito que quiser. Além de tudo, o Emerson e toda a equipe aqui são muito bons. Barbearia muito boa, recomendo para todo mundo.",
     rating: 5,
-    service: "Barbearia Clube",
-    initials: "CV"
+    service: "Relato recebido de cliente",
+    initials: "EC"
   }
 ];

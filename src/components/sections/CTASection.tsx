@@ -3,12 +3,10 @@
 import React from "react";
 import { MessageSquare, ArrowRight } from "lucide-react";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
-import { siteConfig } from "@/data/site";
+import { siteConfig, getWhatsappUrl } from "@/data/site";
 
 export default function CTASection() {
-  const whatsappUrl = siteConfig.whatsapp === "[INSERIR_WHATSAPP]"
-    ? "https://wa.me/"
-    : `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  const whatsappUrl = getWhatsappUrl();
 
   return (
     <section className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">

@@ -6,11 +6,12 @@ import { MapPin, Calendar, Compass, GraduationCap } from "lucide-react";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import SectionTitle from "@/components/ui/SectionTitle";
 import PremiumCard from "@/components/ui/PremiumCard";
-import { siteConfig } from "@/data/site";
+import { siteConfig, hasAddress, hasCity, hasNeighborhood } from "@/data/site";
 import { withBasePath } from "@/lib/paths";
 
 export default function AboutSection() {
   const [imageError, setImageError] = useState(false);
+  const hasLocationInfo = hasAddress || hasCity;
 
   return (
     <section id="sobre" className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
@@ -23,20 +24,22 @@ export default function AboutSection() {
           <div className="lg:col-span-5 relative w-full flex justify-center lg:order-2">
             <AnimatedContainer delay={0.2} yOffset={30} className="w-full max-w-[400px]">
               <div className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden border border-[#1e293b] shadow-2xl bg-gradient-to-tr from-[#05070a] to-[#071b33]">
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                  <span className="text-xs uppercase tracking-widest text-[#0a84ff] font-semibold mb-2">Sobre</span>
-                  <span className="text-2xl font-bold font-heading text-[#f4f7fb] mb-1">{siteConfig.name}</span>
-                  <span className="text-xs text-[#a7b0be]">Foco no atendimento / Detalhe técnico</span>
-                </div>
-                {!imageError && (
+                {!imageError ? (
                   <Image
                     src={withBasePath("/images/emerson-about.jpg")}
-                    alt={`Retrato de ${siteConfig.name}`}
+                    alt={`Retrato de ${siteConfig.name}, ${siteConfig.role}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover transition-opacity duration-300 opacity-80 hover:opacity-100"
+                    loading="lazy"
+                    className="object-cover"
                     onError={() => setImageError(true)}
                   />
+                ) : (
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+                    <span className="text-xs uppercase tracking-widest text-[#0a84ff] font-semibold mb-2">Sobre</span>
+                    <span className="text-2xl font-bold font-heading text-[#f4f7fb] mb-1">{siteConfig.name}</span>
+                    <span className="text-xs text-[#a7b0be]">Imagem em atualização</span>
+                  </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#05070a] via-transparent to-transparent pointer-events-none" />
               </div>
@@ -69,7 +72,7 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-[#f4f7fb] mb-1">Método Personalizado</h4>
-                  <p className="text-xs text-[#a7b0be]">Cada cliente recebe uma recomendação baseada em sua geometria facial única.</p>
+                  <p className="text-xs text-[#a7b0be]">Cada recomendação parte do formato do seu rosto, da sua rotina e do que você quer transmitir.</p>
                 </div>
               </PremiumCard>
 
@@ -78,8 +81,8 @@ export default function AboutSection() {
                   <GraduationCap className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#f4f7fb] mb-1">Especialização Técnica</h4>
-                  <p className="text-xs text-[#a7b0be]">Domínio de técnicas de corte e modelagem facial masculina avançadas.</p>
+                  <h4 className="text-sm font-bold text-[#f4f7fb] mb-1">Corte e Barba Integrados</h4>
+                  <p className="text-xs text-[#a7b0be]">Cabelo e barba pensados juntos, para o visual final fazer sentido como um todo.</p>
                 </div>
               </PremiumCard>
             </AnimatedContainer>
@@ -91,9 +94,15 @@ export default function AboutSection() {
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-[#a7b0be] mb-1">Localização</h4>
                   <p className="text-sm text-[#f4f7fb] font-medium leading-normal">
-                    {siteConfig.location.address !== "[INSERIR_ENDERECO]" ? siteConfig.location.address : "Endereço físico a ser preenchido"}
-                    {siteConfig.location.neighborhood !== "[INSERIR_BAIRRO]" && `, ${siteConfig.location.neighborhood}`}
-                    {siteConfig.location.city !== "[INSERIR_CIDADE]" && ` - ${siteConfig.location.city}`}
+                    {hasLocationInfo ? (
+                      <>
+                        {siteConfig.location.address}
+                        {hasNeighborhood && `, ${siteConfig.location.neighborhood}`}
+                        {hasCity && ` - ${siteConfig.location.city}`}
+                      </>
+                    ) : (
+                      "Local de atendimento informado no agendamento"
+                    )}
                   </p>
                 </div>
               </div>

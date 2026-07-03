@@ -3,8 +3,6 @@ export interface ServiceItem {
   name: string;
   description: string;
   targetAudience: string;
-  duration?: string;
-  price?: string; // Opcional
   highlight?: boolean;
 }
 
@@ -12,45 +10,33 @@ export const services: ServiceItem[] = [
   {
     id: "corte-visagismo",
     name: "Corte Masculino com Visagismo",
-    description: "Análise prévia do formato do rosto e feições para definição do corte ideal. Inclui lavagem premium, corte técnico e estilização final personalizada.",
+    description: "Antes de cortar, observo o formato do rosto, o caimento do cabelo e a rotina do cliente para definir o corte que faz mais sentido.",
     targetAudience: "Homens que buscam um corte sob medida para valorizar seus traços naturais e estilo de vida.",
-    duration: "45 min",
     highlight: true
   },
   {
     id: "barba-personalizada",
-    name: "Barba Personalizada",
-    description: "Alinhamento e desenho da barba respeitando as proporções do rosto (visagismo de barba). Feito com toalha quente, óleos essenciais e acabamento na navalha.",
-    targetAudience: "Homens com barba que desejam alinhar a simetria facial e manter os fios saudáveis e desenhados.",
-    duration: "30 min"
+    name: "Barba Alinhada ao Rosto",
+    description: "Alinhamento e desenho da barba respeitando as proporções do rosto, com acabamento na navalha.",
+    targetAudience: "Homens com barba que desejam mais simetria e um contorno bem definido.",
   },
   {
     id: "corte-barba",
-    name: "Corte + Barba Premium",
-    description: "A experiência completa de transformação e manutenção. Alinhamento integrado de cabelo e barba com técnicas avançadas de visagismo.",
-    targetAudience: "Homens que querem uma renovação total e harmonia completa em sua imagem pessoal.",
-    duration: "1h 15min",
+    name: "Corte + Barba",
+    description: "Cabelo e barba alinhados na mesma sessão, pensados como um visual único.",
+    targetAudience: "Quem quer renovar cabelo e barba de uma vez, com resultado coeso.",
     highlight: true
   },
   {
-    id: "consultoria-imagem",
-    name: "Consultoria de Imagem Masculina",
-    description: "Análise profunda de proporção facial, psicologia das formas e estilo de vida. Definição do plano de imagem e recomendação de corte, barba e cuidados.",
-    targetAudience: "Profissionais, empresários e homens em transição de carreira que precisam projetar autoridade e confiança.",
-    duration: "1h"
-  },
-  {
     id: "transformacao-completa",
-    name: "Transformação Completa",
-    description: "Sessão de consultoria + execução imediata do novo corte de cabelo e design de barba recomendados. Inclui fotos profissionais de antes e depois.",
-    targetAudience: "Quem deseja uma mudança de visual significativa e orientada por um especialista.",
-    duration: "2h"
+    name: "Transformação de Visual",
+    description: "Sessão de diagnóstico seguida da execução do novo corte e barba recomendados.",
+    targetAudience: "Quem deseja uma mudança de visual mais significativa, orientada por um especialista.",
   },
   {
     id: "manutencao-estilo",
-    name: "Manutenção de Estilo",
-    description: "Serviço rápido focado no acabamento do corte (laterais, pezinho) ou contorno da barba, mantendo o visual alinhado entre os cortes completos.",
-    targetAudience: "Clientes frequentes que gostam de manter o visual sempre impecável.",
-    duration: "20 min"
+    name: "Manutenção de Corte e Barba",
+    description: "Acabamento rápido nas laterais, pezinho ou contorno da barba, mantendo o visual alinhado entre os cortes completos.",
+    targetAudience: "Clientes frequentes que gostam de manter o visual sempre em dia.",
   }
 ];

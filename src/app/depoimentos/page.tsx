@@ -5,12 +5,13 @@ import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
+import { siteUrl } from "@/data/seo";
 
 export const metadata: Metadata = {
   title: "Depoimentos de Clientes",
   description: "Leia o feedback de clientes sobre o atendimento, consultoria de visagismo e serviços de barba e cabelo com Emerson Chemimm.",
   alternates: {
-    canonical: "/depoimentos",
+    canonical: `${siteUrl}/depoimentos`,
   },
 };
 

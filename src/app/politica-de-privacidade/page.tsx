@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
+import { siteUrl } from "@/data/seo";
 
 export const metadata: Metadata = {
   title: "Política de Privacidade",
   description: "Política de privacidade do site de Emerson Chemimm - Barbeiro Visagista.",
   alternates: {
-    canonical: "/politica-de-privacidade",
+    canonical: `${siteUrl}/politica-de-privacidade`,
   },
 };
 

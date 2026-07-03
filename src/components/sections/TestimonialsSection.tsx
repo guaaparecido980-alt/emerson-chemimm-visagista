@@ -7,12 +7,13 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import PremiumCard from "@/components/ui/PremiumCard";
 import { testimonials } from "@/data/testimonials";
 import { siteConfig } from "@/data/site";
+import { withBasePath } from "@/lib/paths";
 
 export default function TestimonialsSection() {
   return (
     <section id="depoimentos" className="relative py-20 md:py-28 bg-[#05070a] overflow-hidden border-t border-[#1e293b]/30">
       <div className="neon-glow-1 bottom-[10%] right-[-10%]" />
-      
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedContainer delay={0.1}>
           <SectionTitle
@@ -22,11 +23,28 @@ export default function TestimonialsSection() {
           />
         </AnimatedContainer>
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-md md:max-w-none mx-auto">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <AnimatedContainer delay={0.1} className="h-full flex">
+            <PremiumCard className="w-full flex flex-col p-3">
+              <div className="relative mx-auto aspect-[9/16] w-full max-h-[420px] overflow-hidden rounded-xl bg-slate-900">
+                <video
+                  controls
+                  playsInline
+                  preload="none"
+                  poster={withBasePath("/images/depoimento-poster.jpg")}
+                  className="h-full w-full object-cover"
+                >
+                  <source src={withBasePath("/videos/depoimento-cliente.mp4")} type="video/mp4" />
+                </video>
+              </div>
+              <p className="mt-3 text-center text-xs text-[#a7b0be]">Depoimento em vídeo de cliente</p>
+            </PremiumCard>
+          </AnimatedContainer>
+
           {testimonials.map((test, idx) => (
             <AnimatedContainer
               key={test.id}
-              delay={0.1 * (idx + 1)}
+              delay={0.1 * (idx + 2)}
               className="h-full flex"
             >
               <PremiumCard className="w-full flex flex-col justify-between p-6">

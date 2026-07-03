@@ -31,6 +31,8 @@ export default function TransformationsGallery() {
               <BeforeAfterSlider
                 beforeImage={trans.beforeImage}
                 afterImage={trans.afterImage}
+                beforeAlt={`Antes: ${trans.title}`}
+                afterAlt={`Depois: ${trans.title}`}
                 title={trans.title}
                 subtitle={`${trans.transformationType} • ${trans.objective}`}
               />

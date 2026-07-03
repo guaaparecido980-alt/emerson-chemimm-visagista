@@ -18,7 +18,7 @@ export default function ProcessSection() {
     {
       number: "03",
       title: "Execução Técnica",
-      description: "Corte, barba e contornos executados com o mais alto padrão técnico. Atenção rigorosa à simetria facial, caimento do fio e técnicas de navalha com toalha quente e aromaterapia.",
+      description: "Corte, barba e contornos executados com atenção à simetria facial, ao caimento do fio e ao acabamento na navalha.",
     },
     {
       number: "04",

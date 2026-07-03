@@ -4,22 +4,37 @@ export const siteConfig = {
   instagram: "https://www.instagram.com/emersonchemimm/",
   whatsapp: "5541995977587",
   whatsappUrl: "https://wa.me/5541995977587",
-  googleBusinessProfile: "[INSERIR_LINK]",
-  googleMaps: "[INSERIR_LINK]",
-  
-  // Localização
+  googleBusinessProfile: "",
+  googleMaps: "",
+
+  // Localização (deixe em branco até confirmar os dados reais)
   location: {
-    city: "[INSERIR_CIDADE]", // Ex: "Curitiba"
-    neighborhood: "[INSERIR_BAIRRO]", // Ex: "Batel"
-    address: "[INSERIR_ENDERECO]", // Ex: "Alameda Dom Pedro II, 123"
-    zipCode: "[INSERIR_CEP]",
+    city: "",
+    neighborhood: "",
+    address: "",
+    zipCode: "",
     latitude: 0,
     longitude: 0
   },
-  
+
   // Horários
   openingHours: [
     { days: "Segunda a Sexta", hours: "09:00 às 20:00" },
     { days: "Sábado", hours: "09:00 às 17:00" }
   ]
 };
+
+export const hasCity = siteConfig.location.city.trim().length > 0;
+export const hasNeighborhood = siteConfig.location.neighborhood.trim().length > 0;
+export const hasAddress = siteConfig.location.address.trim().length > 0;
+export const hasZipCode = siteConfig.location.zipCode.trim().length > 0;
+export const hasCoordinates = siteConfig.location.latitude !== 0 && siteConfig.location.longitude !== 0;
+export const hasGoogleBusinessProfile = siteConfig.googleBusinessProfile.trim().length > 0;
+export const hasGoogleMaps = siteConfig.googleMaps.trim().length > 0;
+export const hasWhatsapp = siteConfig.whatsapp.trim().length > 0;
+
+export function getWhatsappUrl(message?: string): string {
+  if (!hasWhatsapp) return "https://wa.me/";
+  const base = `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}

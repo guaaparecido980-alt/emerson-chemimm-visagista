@@ -7,12 +7,13 @@ import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import PremiumCard from "@/components/ui/PremiumCard";
 import { blogPosts } from "@/data/posts";
+import { siteUrl } from "@/data/seo";
 
 export const metadata: Metadata = {
   title: "Blog - Dicas de Visagismo Masculino",
   description: "Aprenda sobre visagismo masculino, como escolher o corte de cabelo ideal para o seu formato de rosto, cuidados com a barba e muito mais.",
   alternates: {
-    canonical: "/blog",
+    canonical: `${siteUrl}/blog`,
   },
 };
 

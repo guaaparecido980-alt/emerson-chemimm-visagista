@@ -1,16 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "./globals.css";
-import { seoConfig } from "@/data/seo";
+import { seoConfig, siteUrl } from "@/data/seo";
 import { siteConfig } from "@/data/site";
 import WhatsAppFloatingButton from "@/components/ui/WhatsAppFloatingButton";
 import SEOJsonLd from "@/components/ui/SEOJsonLd";
 
-const sora = Sora({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-sora",
+  variable: "--font-fraunces",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: "variable",
+  axes: ["opsz", "SOFT", "WONK"],
+  style: ["normal", "italic"],
 });
 
 const inter = Inter({
@@ -29,9 +31,9 @@ export const metadata: Metadata = {
   keywords: seoConfig.keywords,
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
-  metadataBase: new URL(seoConfig.openGraph.url),
+  metadataBase: new URL(`${siteUrl}/`),
   alternates: {
-    canonical: "/",
+    canonical: siteUrl,
   },
   openGraph: {
     type: "website",
@@ -69,7 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${sora.variable} ${inter.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#05070a] text-[#f4f7fb] font-sans selection:bg-[#0a84ff]/30 selection:text-white">
         <SEOJsonLd />

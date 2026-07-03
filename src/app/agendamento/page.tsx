@@ -5,20 +5,19 @@ import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import PremiumCard from "@/components/ui/PremiumCard";
-import { siteConfig } from "@/data/site";
+import { siteConfig, getWhatsappUrl } from "@/data/site";
+import { siteUrl } from "@/data/seo";
 
 export const metadata: Metadata = {
   title: "Agendamento de Horário",
   description: "Reserve sua sessão de corte, barba ou consultoria de imagem com o barbeiro visagista Emerson Chemimm via WhatsApp.",
   alternates: {
-    canonical: "/agendamento",
+    canonical: `${siteUrl}/agendamento`,
   },
 };
 
 export default function AgendamentoPage() {
-  const whatsappUrl = siteConfig.whatsapp === "[INSERIR_WHATSAPP]"
-    ? "https://wa.me/"
-    : `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  const whatsappUrl = getWhatsappUrl("Olá, gostaria de agendar um horário para avaliação de visagismo.");
 
   return (
     <>
@@ -51,11 +50,11 @@ export default function AgendamentoPage() {
                     Agendar via WhatsApp
                   </h2>
                   <p className="text-sm text-[#a7b0be] leading-relaxed mb-6">
-                    Fale diretamente conosco. Nossa equipe ajudará a encontrar o melhor horário e tirará suas dúvidas sobre qual serviço escolher.
+                    Fale diretamente comigo pelo WhatsApp. Combinamos o melhor horário e eu tiro suas dúvidas sobre qual serviço faz mais sentido.
                   </p>
                 </div>
                 <a
-                  href={`${whatsappUrl}?text=Olá,%20gostaria%20de%20agendar%20um%20horário%20para%20avaliação%20de%20visagismo.`}
+                  href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full text-center rounded-xl bg-[#0a84ff] py-4 text-base font-bold text-white hover:bg-[#007bff] transition-colors duration-200"

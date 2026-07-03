@@ -36,13 +36,6 @@ export const galleryItems: GalleryItem[] = [
     title: "Curto Alinhado"
   },
   {
-    id: "g-5",
-    imageUrl: "/images/gallery/barba-1.jpg",
-    alt: "Barba curta desenhada com linhas limpas e proporção facial",
-    category: "barbas",
-    title: "Beard Design Slim"
-  },
-  {
     id: "g-6",
     imageUrl: "/images/gallery/barba-2.jpg",
     alt: "Barba cheia grisalha aparada e alinhada com técnica de proporção",
@@ -50,18 +43,11 @@ export const galleryItems: GalleryItem[] = [
     title: "Barba Cheia Alinhada"
   },
   {
-    id: "g-7",
-    imageUrl: "/images/gallery/barba-3.jpg",
-    alt: "Barba cheia bem aparada com acabamento uniforme",
-    category: "barbas",
-    title: "Barba Cheia Uniforme"
-  },
-  {
     id: "g-8",
     imageUrl: "/images/gallery/barba-4.jpg",
-    alt: "Bastidor do atendimento de barba com toalha quente na barbearia",
+    alt: "Bastidor do atendimento de barba na barbearia",
     category: "barbas",
-    title: "Ritual da Toalha Quente"
+    title: "Bastidor do Atendimento"
   },
   {
     id: "g-9",
@@ -76,5 +62,12 @@ export const galleryItems: GalleryItem[] = [
     alt: "Resultado de corte e barba finalizados com visagismo aplicado",
     category: "transformacoes",
     title: "Alinhamento Casual"
+  },
+  {
+    id: "g-11",
+    imageUrl: "/images/transformations/after-3.jpg",
+    alt: "Resultado de renovação completa de corte e barba",
+    category: "transformacoes",
+    title: "Renovação Completa"
   }
 ];

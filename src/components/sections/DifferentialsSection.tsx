@@ -28,8 +28,8 @@ export default function DifferentialsSection() {
     },
     {
       icon: Award,
-      title: "Acabamento Premium",
-      description: "Uso de ferramentas profissionais de alta precisão e produtos de marcas renomadas do mercado masculino.",
+      title: "Acabamento Cuidadoso",
+      description: "Ferramentas profissionais e atenção aos detalhes do início ao fim do atendimento.",
     },
     {
       icon: Sparkles,
@@ -38,8 +38,8 @@ export default function DifferentialsSection() {
     },
     {
       icon: Coffee,
-      title: "Experiência de Atendimento",
-      description: "Ambiente reservado, café de alta qualidade e toalhas quentes aromáticas para o seu total relaxamento.",
+      title: "Atendimento com Calma",
+      description: "Cada sessão tem tempo reservado para conversa e diagnóstico, sem pressa entre um cliente e outro.",
     },
   ];
 

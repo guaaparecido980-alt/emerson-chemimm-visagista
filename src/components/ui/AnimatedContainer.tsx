@@ -20,10 +20,14 @@ export default function AnimatedContainer({
 }: AnimatedContainerProps) {
   const shouldReduceMotion = useReducedMotion();
 
+  if (shouldReduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   const variants = {
     hidden: {
       opacity: 0,
-      y: shouldReduceMotion ? 0 : yOffset,
+      y: yOffset,
     },
     visible: {
       opacity: 1,

@@ -30,6 +30,8 @@ export default function FAQSection() {
         <div className="mt-8 space-y-4">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
+            const buttonId = `faq-question-${idx}`;
+            const panelId = `faq-answer-${idx}`;
 
             return (
               <AnimatedContainer
@@ -38,24 +40,31 @@ export default function FAQSection() {
                 className="w-full"
               >
                 <div className="overflow-hidden rounded-xl border border-[#1e293b] bg-[#0d121f]/50 backdrop-blur-sm transition-all duration-300">
-                  <button
-                    onClick={() => toggleAccordion(idx)}
-                    className="flex w-full items-center justify-between p-5 text-left font-heading text-base font-bold text-[#f4f7fb] hover:bg-[#071b33]/40 focus:outline-none transition-colors duration-200"
-                    aria-expanded={isOpen}
-                  >
-                    <span>{faq.question}</span>
-                    <span className="ml-4 shrink-0 rounded-full border border-slate-700 p-1 text-[#0a84ff]">
-                      {isOpen ? (
-                        <Minus className="h-4 w-4" />
-                      ) : (
-                        <Plus className="h-4 w-4" />
-                      )}
-                    </span>
-                  </button>
+                  <h3>
+                    <button
+                      id={buttonId}
+                      onClick={() => toggleAccordion(idx)}
+                      className="flex w-full items-center justify-between p-5 text-left font-heading text-base font-bold text-[#f4f7fb] hover:bg-[#071b33]/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#0a84ff] transition-colors duration-200"
+                      aria-expanded={isOpen}
+                      aria-controls={panelId}
+                    >
+                      <span>{faq.question}</span>
+                      <span className="ml-4 shrink-0 rounded-full border border-slate-700 p-1 text-[#0a84ff]">
+                        {isOpen ? (
+                          <Minus className="h-4 w-4" />
+                        ) : (
+                          <Plus className="h-4 w-4" />
+                        )}
+                      </span>
+                    </button>
+                  </h3>
 
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
+                        id={panelId}
+                        role="region"
+                        aria-labelledby={buttonId}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}

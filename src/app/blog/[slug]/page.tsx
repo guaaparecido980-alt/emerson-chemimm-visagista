@@ -8,7 +8,8 @@ import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
 import PremiumCard from "@/components/ui/PremiumCard";
 import { blogPosts } from "@/data/posts";
-import { siteConfig } from "@/data/site";
+import { getWhatsappUrl } from "@/data/site";
+import { siteUrl } from "@/data/seo";
 
 interface PostPageProps {
   params: Promise<{ slug: string }>;
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
     title: post.title,
     description: post.excerpt,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      canonical: `${siteUrl}/blog/${post.slug}`,
     },
   };
 }
@@ -47,9 +48,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
     notFound();
   }
 
-  const whatsappUrl = siteConfig.whatsapp === "[INSERIR_WHATSAPP]"
-    ? "https://wa.me/"
-    : `https://wa.me/${siteConfig.whatsapp.replace(/\D/g, "")}`;
+  const whatsappUrl = getWhatsappUrl();
 
   return (
     <>

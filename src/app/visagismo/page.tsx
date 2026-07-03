@@ -6,12 +6,13 @@ import ProcessSection from "@/components/sections/ProcessSection";
 import CTASection from "@/components/sections/CTASection";
 import Footer from "@/components/sections/Footer";
 import AnimatedContainer from "@/components/ui/AnimatedContainer";
+import { siteUrl } from "@/data/seo";
 
 export const metadata: Metadata = {
   title: "Visagismo Masculino",
   description: "Entenda o conceito de visagismo masculino e como ele ajuda na escolha do corte de cabelo e barba ideal para o seu rosto.",
   alternates: {
-    canonical: "/visagismo",
+    canonical: `${siteUrl}/visagismo`,
   },
 };
 

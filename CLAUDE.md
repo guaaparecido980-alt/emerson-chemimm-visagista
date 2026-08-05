@@ -5,8 +5,31 @@ Este arquivo contém as diretrizes e referências rápidas para o desenvolviment
 ## Resumo do Projeto
 Site institucional premium e otimizado para Emerson Chemimm, Barbeiro Visagista. O objetivo é estabelecer autoridade e capturar leads para agendamento no WhatsApp.
 
-Publicado como export estático no GitHub Pages:
-https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/
+Domínio oficial: **https://emersonvisagista.com.br**
+(URL antiga do GitHub Pages, ainda ativa como redirecionamento: https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/)
+
+## ⚠️ ATENÇÃO: qual código está realmente no ar
+
+O site publicado é a **página única em `static-site/index.html`** (HTML + CSS + GSAP/Lenis, sem build).
+É esse arquivo que deve ser editado para qualquer mudança no site real.
+
+A pasta `src/` contém um projeto **Next.js legado que NÃO está publicado** — foi substituído
+pela versão em `static-site/`. O `sitemap.ts`, o `robots.ts` e as páginas em `src/app/`
+nunca chegaram a ir ao ar. Não edite `src/` esperando ver o resultado no site.
+
+### Arquivos de SEO/infra em `static-site/`
+- `CNAME` — domínio customizado do GitHub Pages (`emersonvisagista.com.br`). **Não apagar.**
+- `.nojekyll` — impede o Jekyll de ignorar arquivos iniciados com `_`.
+- `robots.txt` — libera indexação e aponta o sitemap.
+- `sitemap.xml` — atualizar a `<lastmod>` quando o conteúdo mudar de verdade.
+- `politica-de-privacidade.html` — política LGPD + cookies (linkada no rodapé e no aviso de cookies).
+
+### Analytics
+Uma única tag no `<head>` do `index.html`: **Google Tag Manager**, com Consent Mode v2
+(tudo negado por padrão até o visitante aceitar no aviso de cookies).
+A constante `GTM_ID` no topo do script guarda o ID do contêiner — enquanto for `GTM-XXXXXXX`,
+nada é carregado. O **GA4 é configurado dentro do GTM**, não no HTML.
+Eventos já disparados no `dataLayer`: `clique_whatsapp` e `consentimento_cookies`.
 
 ## Identidade Visual (Premium Dark & Blue)
 - **Fundo**: Preto Profundo (`#05070A`)
@@ -30,19 +53,23 @@ https://guaaparecido980-alt.github.io/emerson-chemimm-visagista/
 - **Linting**: `npm run lint`
 
 ## Como fazer o Deploy no GitHub Pages
-1. Rodar o build com o basePath correto (comando acima). Isso gera a pasta `out/`.
-2. Publicar o conteúdo de `out/` no branch `gh-pages`:
-   ```
-   cd out
-   git init
-   git checkout -b gh-pages
-   git add -A
-   git commit -m "Deploy"
-   git remote add origin https://github.com/guaaparecido980-alt/emerson-chemimm-visagista.git
-   git push -f origin gh-pages
-   ```
-3. O GitHub Pages já está habilitado apontando para o branch `gh-pages` (source: `/`). Não precisa reconfigurar.
-4. Lembre de commitar e dar push também no `master` com o código-fonte (o `out/` não é versionado no master, está no `.gitignore`).
+O deploy é a publicação do conteúdo de `static-site/` na raiz do branch `gh-pages`.
+Não há build — é HTML estático.
+
+```bash
+# 1. Commitar o código-fonte no master
+git add -A && git commit -m "Descrição da mudança" && git push origin master
+
+# 2. Publicar static-site/ na raiz do gh-pages
+git push -f origin `git subtree split --prefix static-site master`:gh-pages
+```
+
+O GitHub Pages já está habilitado apontando para o branch `gh-pages` (source: `/`).
+Não precisa reconfigurar.
+
+**Importante:** o `CNAME` e o `.nojekyll` precisam estar dentro de `static-site/` para irem
+junto no deploy. Se o domínio customizado "sumir" das configurações do GitHub Pages depois de
+um deploy, é porque o `CNAME` não subiu.
 
 ## Onde Editar Conteúdos
 - **Dados institucionais, WhatsApp, endereço/localização**: `src/data/site.ts`

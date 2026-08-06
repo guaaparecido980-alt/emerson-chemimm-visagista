@@ -41,6 +41,20 @@ para chegar ao GA4 e `dataLayer.push` para o GTM. Um `dataLayer.push` sozinho **
 vira evento no GA4 quando o GA4 está via `gtag.js`; se mexer nesse handler, mantenha a
 linha do `gtag`.
 
+## Marca
+Em 6 de agosto de 2026 o Emerson trocou a logo por uma versão **dourada**:
+- `static-site/images/logo.webp` — assinatura horizontal (proporção ~4,4:1)
+- `static-site/apple-touch-icon.png` e `favicon.ico` — monograma "EM"
+
+Os originais vieram em PNG com fundo preto chapado. A transparência foi extraída
+por **luminância** (alfa proporcional ao brilho), e não por limiar de cor — recorte
+por limiar comeria o degradê dourado e o relevo das letras.
+
+⚠️ **A logo é dourada, mas todo o resto do site é azul** (`#0A84FF` em botões,
+links e destaques). Foi decisão do cliente. Se um dia for unificar, o caminho é
+puxar o azul para um tom mais quente ou adotar o dourado como cor de destaque —
+não trocar a logo de volta.
+
 ## Identidade Visual (Premium Dark & Blue)
 - **Fundo**: Preto Profundo (`#05070A`)
 - **Accent**: Azul Premium (`#0A84FF`)

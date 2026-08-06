@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pré-entrevista de Visagismo | Emerson Chemimm</title>
+
+<!-- Pagina privada: so entra quem recebe o link. -->
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow">
+<!-- Nao esta no sitemap.xml e nao e linkada em nenhum lugar do site.
+     Tambem NAO foi colocada no robots.txt de proposito: aquele arquivo e
+     publico, e um "Disallow: /formulario" anunciaria o caminho para quem
+     abrisse o robots.txt. A meta noindex resolve sem expor. -->
+
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Newsreader:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #05070A;
+    --bg-elevated: #0D121F;
+    --surface: #12182A;
+    --text: #F4F7FB;
+    --muted: #9AA5B8;
+    --faint: #6E7B8D;
+    --line: #1E293B;
+    --accent: #0A84FF;
+    --accent-soft: #4DB2FF;
+    --ok: #46D69C;
+    --alerta: #E5B45C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Newsreader', serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 40px;
+  }
+
+  .wrap { max-width: 700px; margin: 0 auto; padding: 0 22px; }
+  @media (min-width: 768px) { .wrap { padding: 0 40px; } }
+
+  /* ---------- Topo fixo ---------- */
+  .topo {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(5, 7, 10, 0.94);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 15px 0 0;
+  }
+  .topo-linha { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .topo img { height: 28px; width: auto; display: block; }
+  .passo-label {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--faint);
+    font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .barra { height: 2px; background: var(--line); margin-top: 15px; }
+  .barra-fill {
+    height: 100%; width: 0%; background: var(--accent);
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* ---------- Blocos ---------- */
+  .bloco { display: none; padding: 44px 0 0; }
+  .bloco.ativo { display: block; animation: entra 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+  @keyframes entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  .eyebrow {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--accent-soft); margin-bottom: 13px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif; font-weight: 600;
+    font-size: clamp(1.85rem, 6vw, 2.8rem); line-height: 1.08;
+    letter-spacing: -0.02em; margin-bottom: 18px; text-wrap: balance;
+  }
+  .lead { color: var(--muted); font-size: 1.02rem; max-width: 56ch; }
+  .lead + .lead { margin-top: 14px; }
+
+  h2.bloco-titulo {
+    font-family: 'Fraunces', serif; font-weight: 600;
+    font-size: clamp(1.32rem, 4vw, 1.72rem); letter-spacing: -0.012em;
+    margin-bottom: 6px; text-wrap: balance;
+  }
+  .bloco-sub { color: var(--faint); font-size: 0.92rem; margin-bottom: 36px; }
+
+  /* ---------- Campos ---------- */
+  .campo { margin-bottom: 34px; }
+  .campo label, .campo legend {
+    display: block; font-size: 1.02rem; font-weight: 500;
+    color: var(--text); margin-bottom: 6px; line-height: 1.45;
+  }
+  .num {
+    color: var(--accent-soft); font-variant-numeric: tabular-nums;
+    margin-right: 8px; font-weight: 600;
+  }
+  .ajuda { display: block; color: var(--faint); font-size: 0.86rem; margin-bottom: 12px; line-height: 1.55; }
+  .opcional { color: var(--faint); font-size: 0.78rem; font-weight: 400; }
+
+  input[type="text"], textarea {
+    width: 100%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 13px 15px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  textarea { min-height: 100px; }
+  input[type="text"]:focus, textarea:focus {
+    outline: none; border-color: var(--accent); background: var(--surface);
+  }
+  input::placeholder, textarea::placeholder { color: #4A5568; }
+  .erro-campo { border-color: #E5484D !important; }
+
+  fieldset { border: none; }
+
+  .opcoes { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+  .opcao {
+    display: flex; align-items: flex-start; gap: 12px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 13px 15px;
+    cursor: pointer;
+    transition: border-color 0.25s, background 0.25s;
+  }
+  .opcao:hover { border-color: var(--faint); }
+  .opcao input { accent-color: var(--accent); margin-top: 5px; flex-shrink: 0; width: 16px; height: 16px; }
+  .opcao:has(input:checked) { border-color: var(--accent); background: rgba(10, 132, 255, 0.07); }
+  .opcao input:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+  .opcao span { font-size: 0.97rem; }
+  .opcao span i { display: block; font-style: normal; color: var(--faint); font-size: 0.83rem; margin-top: 2px; line-height: 1.5; }
+
+  .condicional { margin-top: 12px; display: none; }
+  .condicional.visivel { display: block; }
+
+  .contador { text-align: right; font-size: 0.75rem; color: var(--faint); margin-top: 5px; font-variant-numeric: tabular-nums; }
+
+  /* ---------- Navegação ---------- */
+  .navegacao { display: flex; gap: 12px; padding: 6px 0 48px; }
+  .btn {
+    flex: 1; padding: 15px 24px; border-radius: 999px;
+    font-family: inherit; font-size: 0.96rem; font-weight: 600;
+    cursor: pointer; border: 1px solid transparent;
+    transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.2s;
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    text-decoration: none;
+  }
+  .btn:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+  .btn-primario { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primario:hover { background: var(--accent-soft); border-color: var(--accent-soft); transform: translateY(-1px); }
+  .btn-secundario { background: transparent; color: var(--muted); border-color: var(--line); }
+  .btn-secundario:hover { color: var(--text); border-color: var(--muted); }
+  .btn-voltar { flex: 0 0 auto; padding-inline: 24px; }
+  .btn-whats { background: #25D366; border-color: #25D366; color: #04250F; font-size: 1rem; }
+  .btn-whats:hover { background: #2DE477; border-color: #2DE477; transform: translateY(-1px); }
+
+  /* ---------- Avisos ---------- */
+  .aviso {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 9px 9px 0;
+    padding: 15px 17px;
+    margin: 26px 0;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .aviso strong { color: var(--text); font-weight: 600; }
+  .aviso.atencao { border-left-color: var(--alerta); }
+  .aviso.oculto { display: none; }
+
+  .erro-msg { color: #FF8A8D; font-size: 0.88rem; margin-top: 8px; display: none; }
+  .erro-msg.visivel { display: block; }
+
+  /* ---------- Revisão ---------- */
+  .revisao {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+    max-height: 320px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+  .revisao b { color: var(--text); font-weight: 600; }
+
+  .acoes-finais { display: flex; flex-direction: column; gap: 11px; margin-top: 22px; }
+  .acoes-finais .btn { flex: none; }
+
+  .salvo { font-size: 0.79rem; color: var(--faint); text-align: center; margin-top: 14px; min-height: 1.2em; }
+  .salvo.ok { color: var(--ok); }
+
+  .link-texto {
+    background: none; border: none; color: var(--accent-soft);
+    font-family: inherit; font-size: inherit; cursor: pointer; padding: 0;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+
+  .rodape {
+    margin-top: 56px; padding-top: 26px;
+    border-top: 1px solid var(--line);
+    color: var(--faint); font-size: 0.82rem; text-align: center;
+  }
+  .rodape a { color: var(--accent-soft); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- Versão para PDF / impressão ----------
+     O visitante usa "Salvar como PDF" no menu de impressao do proprio
+     navegador. Funciona em iPhone, Android e desktop sem biblioteca externa. */
+  #impressao { display: none; }
+  @media print {
+    body { background: #fff; color: #111; padding: 0; }
+    body > *:not(#impressao) { display: none !important; }
+    #impressao {
+      display: block;
+      font-family: Georgia, 'Times New Roman', serif;
+      max-width: 100%;
+      padding: 0;
+    }
+    #impressao h1 { font-size: 20pt; margin-bottom: 4pt; color: #111; }
+    #impressao .cab { font-size: 10pt; color: #555; margin-bottom: 18pt; border-bottom: 1px solid #ccc; padding-bottom: 10pt; }
+    #impressao .item { margin-bottom: 13pt; page-break-inside: avoid; }
+    #impressao .p { font-weight: bold; font-size: 10.5pt; color: #111; margin-bottom: 2pt; }
+    #impressao .r { font-size: 11pt; color: #222; white-space: pre-wrap; }
+    @page { margin: 18mm; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="wrap">
+    <div class="topo-linha">
+      <img src="../images/logo.webp" alt="Emerson Chemimm - Barbeiro Visagista">
+      <span class="passo-label" id="passoLabel">Início</span>
+    </div>
+    <div class="barra"><div class="barra-fill" id="barraFill"></div></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ETAPA 0 — ABERTURA -->
+  <section class="bloco ativo" id="bloco0" aria-labelledby="tituloAbertura">
+    <p class="eyebrow">Pré-entrevista</p>
+    <h1 id="tituloAbertura">Antes da tesoura, a conversa.</h1>
+    <p class="lead">
+      Visagismo não é só estética. É fazer a sua imagem comunicar quem você é —
+      e para isso eu preciso te conhecer antes de você sentar na cadeira.
+    </p>
+    <p class="lead">
+      São 17 perguntas em 6 etapas curtas, de 10 a 15 minutos. Não existe resposta
+      certa: quanto mais honesto, melhor o resultado no dia. O que você escreve
+      fica entre você e o Emerson.
+    </p>
+    <div class="aviso">
+      Pode parar no meio e voltar depois — <strong>as respostas ficam salvas neste
+      aparelho</strong> até você enviar.
+    </div>
+    <div class="navegacao">
+      <button type="button" class="btn btn-primario" data-ir="1">Começar</button>
+    </div>
+  </section>
+
+  <form id="formulario" novalidate>
+
+  <!-- ETAPA 1 -->
+  <section class="bloco" id="bloco1" aria-labelledby="t1">
+    <h2 class="bloco-titulo" id="t1">Para começar</h2>
+    <p class="bloco-sub">Quem é você e o que te trouxe até aqui.</p>
+
+    <div class="campo">
+      <label for="q_nome"><span class="num">01</span>Seu nome completo</label>
+      <input type="text" id="q_nome" name="q_nome" autocomplete="name" placeholder="Como você se chama">
+      <p class="erro-msg" id="erro_nome">Preciso do seu nome para saber de quem são as respostas.</p>
+    </div>
+
+    <div class="campo">
+      <label for="q2"><span class="num">02</span>Qual foi a primeira coisa que você pensou quando decidiu marcar seu horário?</label>
+      <span class="ajuda">O pensamento cru, do jeito que passou pela cabeça.</span>
+      <textarea id="q2" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="campo">
+      <label for="q3"><span class="num">03</span>Tem algum evento, prazo ou mudança chegando que motivou esse agendamento?</label>
+      <span class="ajuda">Casamento, entrevista, viagem, começo em um trabalho novo, fotos, um recomeço. Ou nada específico — o que também é uma resposta.</span>
+      <textarea id="q3" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="navegacao">
+      <button type="button" class="btn btn-secundario btn-voltar" data-ir="0">Voltar</button>
+      <button type="button" class="btn btn-primario" data-ir="2">Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 2 -->
+  <section class="bloco" id="bloco2" aria-labelledby="t2">
+    <h2 class="bloco-titulo" id="t2">A direção</h2>
+    <p class="bloco-sub">Para onde a sua imagem deve apontar.</p>
+
+    <div class="campo">
+      <label for="q4"><span class="num">04</span>Alguém comentou algo que te incentivou a procurar um visagista? <span class="opcional">(opcional)</span></label>
+      <span class="ajuda">Um elogio, uma crítica, uma observação que ficou na cabeça.</span>
+      <textarea id="q4" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="campo">
+      <fieldset>
+        <legend><span class="num">05</span>Qual área da sua vida devemos focar?</legend>
+        <span class="ajuda">Escolha a que mais pesa hoje.</span>
+        <div class="opcoes">
+          <label class="opcao"><input type="radio" name="q5" value="Pessoal"><span>Pessoal<i>Como você se sente e se enxerga no dia a dia</i></span></label>
+          <label class="opcao"><input type="radio" name="q5" value="Social"><span>Social<i>Como você aparece entre amigos, família, relacionamentos</i></span></label>
+          <label class="opcao"><input type="radio" name="q5" value="Profissional"><span>Profissional<i>Como você é lido no trabalho, em reuniões, com clientes</i></span></label>
+          <label class="opcao"><input type="radio" name="q5" value="Midiático"><span>Midiático<i>Aparições em vídeo, fotos, redes sociais, palco, câmera</i></span></label>
+          <label class="opcao"><input type="radio" name="q5" value="Outro"><span>Outro<i>Conta abaixo</i></span></label>
+        </div>
+      </fieldset>
+      <div class="condicional" id="cond_q5">
+        <input type="text" id="q5_texto" maxlength="200" placeholder="Qual?">
+      </div>
+    </div>
+
+    <div class="navegacao">
+      <button type="button" class="btn btn-secundario btn-voltar" data-ir="1">Voltar</button>
+      <button type="button" class="btn btn-primario" data-ir="3">Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 3 -->
+  <section class="bloco" id="bloco3" aria-labelledby="t3">
+    <h2 class="bloco-titulo" id="t3">Seu histórico</h2>
+    <p class="bloco-sub">O que já foi tentado ajuda a não repetir erro.</p>
+
+    <div class="campo">
+      <fieldset>
+        <legend><span class="num">06</span>Já fez ou pensou em alguma mudança radical?</legend>
+        <div class="opcoes">
+          <label class="opcao"><input type="radio" name="q6" value="Sim"><span>Sim</span></label>
+          <label class="opcao"><input type="radio" name="q6" value="Não"><span>Não</span></label>
+        </div>
+      </fieldset>
+      <div class="condicional" id="cond_q6">
+        <textarea id="q6_texto" maxlength="600" placeholder="O que você pensou em fazer? Chegou a fazer?"></textarea>
+        <div class="contador"><span>0</span>/600</div>
+      </div>
+    </div>
+
+    <div class="campo">
+      <fieldset>
+        <legend><span class="num">07</span>Já se arrependeu de algum procedimento no cabelo ou na barba?</legend>
+        <div class="opcoes">
+          <label class="opcao"><input type="radio" name="q7" value="Sim"><span>Sim</span></label>
+          <label class="opcao"><input type="radio" name="q7" value="Não"><span>Não</span></label>
+        </div>
+      </fieldset>
+      <div class="condicional" id="cond_q7">
+        <textarea id="q7_texto" maxlength="600" placeholder="O que foi, e por que se arrependeu?"></textarea>
+        <div class="contador"><span>0</span>/600</div>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="q8"><span class="num">08</span>Em que área você trabalha?</label>
+      <span class="ajuda">O que você faz no dia a dia, e como é o ambiente.</span>
+      <textarea id="q8" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="navegacao">
+      <button type="button" class="btn btn-secundario btn-voltar" data-ir="2">Voltar</button>
+      <button type="button" class="btn btn-primario" data-ir="4">Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 4 -->
+  <section class="bloco" id="bloco4" aria-labelledby="t4">
+    <h2 class="bloco-titulo" id="t4">Onde você quer chegar</h2>
+    <p class="bloco-sub">A imagem tem que servir a quem você está virando, não só a quem você é hoje.</p>
+
+    <div class="campo">
+      <label for="q9"><span class="num">09</span>Quais são seus maiores objetivos <strong>pessoais</strong>?</label>
+      <textarea id="q9" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="campo">
+      <label for="q10"><span class="num">10</span>E os <strong>profissionais</strong>? Que cargo ou posição você gostaria de ocupar um dia?</label>
+      <textarea id="q10" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="campo">
+      <label for="q11"><span class="num">11</span>Imagine o momento de maior sucesso da sua vida. Como você está vestido?</label>
+      <span class="ajuda">Descreve a cena: onde você está, com quem, com que roupa.</span>
+      <textarea id="q11" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="campo">
+      <label for="q12"><span class="num">12</span>E nessa mesma cena — como está seu cabelo e sua barba?</label>
+      <textarea id="q12" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="navegacao">
+      <button type="button" class="btn btn-secundario btn-voltar" data-ir="3">Voltar</button>
+      <button type="button" class="btn btn-primario" data-ir="5">Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 5 -->
+  <section class="bloco" id="bloco5" aria-labelledby="t5">
+    <h2 class="bloco-titulo" id="t5">O que incomoda</h2>
+    <p class="bloco-sub">A parte mais delicada, e a mais útil. Responda só o que se sentir à vontade.</p>
+
+    <div class="campo">
+      <label for="q13"><span class="num">13</span>Tem alguma parte do seu rosto que te incomoda? <span class="opcional">(opcional)</span></label>
+      <span class="ajuda">Testa, queixo, orelhas, formato — o que for. Não é para julgar: é para trabalhar as proporções a seu favor.</span>
+      <textarea id="q13" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="campo">
+      <label for="q14"><span class="num">14</span>E no cabelo ou na barba, tem algo que te incomoda?</label>
+      <span class="ajuda">Falhas, redemoinho, volume, entradas, textura, velocidade de crescimento.</span>
+      <textarea id="q14" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="campo">
+      <label for="q15"><span class="num">15</span>Já te chamaram de algo que você não gosta, ou te atribuíram uma característica que não é você? <span class="opcional">(opcional)</span></label>
+      <span class="ajuda">Apelidos, rótulos, "cara de", "parece que você é". Isso costuma revelar o que a sua imagem comunica sem você querer — e é justamente o que dá para corrigir.</span>
+      <textarea id="q15" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="navegacao">
+      <button type="button" class="btn btn-secundario btn-voltar" data-ir="4">Voltar</button>
+      <button type="button" class="btn btn-primario" data-ir="6">Continuar</button>
+    </div>
+  </section>
+
+  <!-- ETAPA 6 -->
+  <section class="bloco" id="bloco6" aria-labelledby="t6">
+    <h2 class="bloco-titulo" id="t6">Sua rotina e sua mensagem</h2>
+    <p class="bloco-sub">Um corte que não cabe na sua semana não dura.</p>
+
+    <div class="campo">
+      <label for="q16"><span class="num">16</span>Como é sua rotina semanal?</label>
+      <span class="ajuda">Trabalho, casa, lazer, esporte, igreja, faculdade, festa — todos os ambientes por onde você circula. E quanto tempo você realmente tem de manhã para arrumar o cabelo.</span>
+      <textarea id="q16" maxlength="900" style="min-height:130px;"></textarea>
+      <div class="contador"><span>0</span>/900</div>
+    </div>
+
+    <div class="campo">
+      <label for="q17"><span class="num">17</span>O que você quer transmitir com a sua imagem?</label>
+      <span class="ajuda">Se alguém te olhasse pela primeira vez, o que você gostaria que essa pessoa pensasse?</span>
+      <textarea id="q17" maxlength="600"></textarea>
+      <div class="contador"><span>0</span>/600</div>
+    </div>
+
+    <div class="navegacao">
+      <button type="button" class="btn btn-secundario btn-voltar" data-ir="5">Voltar</button>
+      <button type="button" class="btn btn-primario" data-ir="7">Revisar e enviar</button>
+    </div>
+  </section>
+
+  </form>
+
+  <!-- ETAPA 7 — REVISÃO E ENVIO -->
+  <section class="bloco" id="bloco7" aria-labelledby="t7">
+    <h2 class="bloco-titulo" id="t7">Confira antes de enviar</h2>
+    <p class="bloco-sub">Dá para voltar e ajustar qualquer resposta.</p>
+
+    <div class="revisao" id="revisao" tabindex="0" role="region" aria-label="Suas respostas"></div>
+    <div class="contador" id="tamanhoMsg"></div>
+
+    <div class="aviso atencao oculto" id="avisoTamanho">
+      <strong>Suas respostas ficaram longas.</strong> O WhatsApp pode cortar o final
+      da mensagem. O caminho seguro é <strong>Copiar respostas</strong> e colar na
+      conversa, ou usar o PDF.
+    </div>
+
+    <div class="acoes-finais">
+      <button type="button" class="btn btn-whats" id="btnWhats">Enviar pelo WhatsApp</button>
+      <button type="button" class="btn btn-secundario" id="btnCopiar">Copiar respostas</button>
+      <button type="button" class="btn btn-secundario" id="btnPdf">Baixar em PDF</button>
+      <button type="button" class="btn btn-secundario" data-ir="6">Voltar e ajustar</button>
+    </div>
+
+    <p class="salvo" id="statusFinal" role="status" aria-live="polite"></p>
+
+    <div class="aviso" style="margin-top:34px;">
+      Enviou? Você pode
+      <button type="button" id="btnLimpar" class="link-texto">apagar as respostas deste aparelho</button>.
+    </div>
+  </section>
+
+  <p class="salvo" id="statusSalvo" role="status" aria-live="polite"></p>
+
+  <footer class="rodape">
+    Emerson Chemimm — Barbeiro Visagista ·
+    <a href="../politica-de-privacidade.html">Política de privacidade</a>
+  </footer>
+
+</main>
+
+<!-- Preenchido na hora de gerar o PDF -->
+<div id="impressao" aria-hidden="true"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var WHATS = '5541995977587';
+  var CHAVE = 'ec-preentrevista';
+  var ULTIMO = 7;                 // indice da etapa de revisao
+  var ETAPAS_FORM = 6;            // etapas de perguntas, para o rotulo
+  var LIMITE_SEGURO = 5500;       // caracteres ja codificados na URL do WhatsApp
+
+  var blocos = [];
+  for (var i = 0; i <= ULTIMO; i++) blocos.push(document.getElementById('bloco' + i));
+
+  var barraFill = document.getElementById('barraFill');
+  var passoLabel = document.getElementById('passoLabel');
+  var statusSalvo = document.getElementById('statusSalvo');
+  var statusFinal = document.getElementById('statusFinal');
+  var atual = 0;
+
+  /* Ordem do envio. Radios entram pelo name; textos, pelo id. */
+  var PERGUNTAS = [
+    ['q2',  'Primeira coisa que pensou ao decidir agendar'],
+    ['q3',  'Evento ou mudança que motivou'],
+    ['q4',  'Comentário que incentivou a procurar um visagista'],
+    ['q5',  'Área de foco'],
+    ['q6',  'Já pensou em mudança radical'],
+    ['q7',  'Arrependimento com cabelo ou barba'],
+    ['q8',  'Área em que trabalha'],
+    ['q9',  'Objetivos pessoais'],
+    ['q10', 'Objetivos profissionais e cargo desejado'],
+    ['q11', 'Como se veste no auge'],
+    ['q12', 'Cabelo e barba nesse cenário'],
+    ['q13', 'O que incomoda no rosto'],
+    ['q14', 'O que incomoda no cabelo ou na barba'],
+    ['q15', 'Apelidos ou rótulos que não combinam'],
+    ['q16', 'Rotina semanal'],
+    ['q17', 'O que quer transmitir com a imagem']
+  ];
+
+  var CONDICIONAIS = { q5: 'Outro', q6: 'Sim', q7: 'Sim' };
+
+  function valorDe(id) {
+    var el = document.getElementById(id);
+    if (el) return el.value.trim();
+    var marcado = document.querySelector('input[name="' + id + '"]:checked');
+    if (!marcado) return '';
+    var extra = document.getElementById(id + '_texto');
+    var complemento = (extra && extra.value.trim()) ? ' — ' + extra.value.trim() : '';
+    return marcado.value + complemento;
+  }
+
+  /* ---------- Navegação ---------- */
+  function mostrar(n) {
+    blocos[atual].classList.remove('ativo');
+    atual = n;
+    blocos[atual].classList.add('ativo');
+
+    barraFill.style.width = ((n / ULTIMO) * 100) + '%';
+    if (n === 0) passoLabel.textContent = 'Início';
+    else if (n === ULTIMO) passoLabel.textContent = 'Revisão';
+    else passoLabel.textContent = 'Etapa ' + n + ' de ' + ETAPAS_FORM;
+
+    if (n === ULTIMO) montarRevisao();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  document.addEventListener('click', function (e) {
+    var alvo = e.target.closest ? e.target.closest('[data-ir]') : null;
+    if (!alvo) return;
+    var destino = parseInt(alvo.getAttribute('data-ir'), 10);
+
+    // Sair da etapa 1 exige o nome: sem ele o Emerson nao sabe de quem sao as respostas.
+    if (atual === 1 && destino > 1) {
+      var campo = document.getElementById('q_nome');
+      var erro = document.getElementById('erro_nome');
+      if (!campo.value.trim()) {
+        campo.classList.add('erro-campo');
+        erro.classList.add('visivel');
+        campo.focus();
+        return;
+      }
+      campo.classList.remove('erro-campo');
+      erro.classList.remove('visivel');
+    }
+    mostrar(destino);
+  });
+
+  /* ---------- Campos condicionais ---------- */
+  function atualizarCondicionais() {
+    Object.keys(CONDICIONAIS).forEach(function (nome) {
+      var alvo = document.getElementById('cond_' + nome);
+      if (!alvo) return;
+      var marcado = document.querySelector('input[name="' + nome + '"]:checked');
+      alvo.classList.toggle('visivel', !!marcado && marcado.value === CONDICIONAIS[nome]);
+    });
+  }
+  document.addEventListener('change', function (e) {
+    if (e.target.type === 'radio') { atualizarCondicionais(); salvar(); }
+  });
+
+  /* ---------- Contadores ---------- */
+  function atualizarContadores() {
+    document.querySelectorAll('textarea[maxlength]').forEach(function (ta) {
+      var box = ta.parentNode.querySelector('.contador span');
+      if (box) box.textContent = ta.value.length;
+    });
+  }
+  document.addEventListener('input', function (e) {
+    if (e.target.tagName === 'TEXTAREA') {
+      var box = e.target.parentNode.querySelector('.contador span');
+      if (box) box.textContent = e.target.value.length;
+    }
+    salvar();
+  });
+
+  /* ---------- Rascunho local ---------- */
+  var timer;
+  function salvar() {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      var dados = { q_nome: valorDe('q_nome') };
+      PERGUNTAS.forEach(function (p) { dados[p[0]] = valorDe(p[0]); });
+      ['q5_texto', 'q6_texto', 'q7_texto'].forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) dados[id] = el.value;
+      });
+      try {
+        localStorage.setItem(CHAVE, JSON.stringify(dados));
+        statusSalvo.textContent = 'Rascunho salvo neste aparelho';
+        statusSalvo.classList.add('ok');
+        setTimeout(function () { statusSalvo.textContent = ''; statusSalvo.classList.remove('ok'); }, 2000);
+      } catch (e) {}
+    }, 700);
+  }
+
+  function restaurar() {
+    var bruto = null;
+    try { bruto = localStorage.getItem(CHAVE); } catch (e) { return; }
+    if (!bruto) return;
+    var dados;
+    try { dados = JSON.parse(bruto); } catch (e) { return; }
+
+    Object.keys(dados).forEach(function (chave) {
+      var valor = dados[chave];
+      if (!valor) return;
+      var el = document.getElementById(chave);
+      if (el && 'value' in el) { el.value = valor; return; }
+      var radios = document.querySelectorAll('input[name="' + chave + '"]');
+      if (radios.length) {
+        var base = String(valor).split(' — ')[0];
+        radios.forEach(function (r) { if (r.value === base) r.checked = true; });
+      }
+    });
+    atualizarCondicionais();
+    atualizarContadores();
+  }
+
+  /* ---------- Montagem da mensagem ---------- */
+  function respostas() {
+    var lista = [];
+    PERGUNTAS.forEach(function (p, i) {
+      var r = valorDe(p[0]);
+      if (r) lista.push({ n: i + 1, pergunta: p[1], resposta: r });
+    });
+    return lista;
+  }
+
+  function montarTexto() {
+    var linhas = ['*PRÉ-ENTREVISTA DE VISAGISMO*', ''];
+    linhas.push('*Nome:* ' + (valorDe('q_nome') || '(não informado)'));
+    linhas.push('');
+    respostas().forEach(function (item) {
+      linhas.push('*' + item.n + '. ' + item.pergunta + '*');
+      linhas.push(item.resposta);
+      linhas.push('');
+    });
+    return linhas.join('\n').trim();
+  }
+
+  function escapar(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function montarRevisao() {
+    var texto = montarTexto();
+    document.getElementById('revisao').innerHTML =
+      escapar(texto).replace(/\*([^*\n]+)\*/g, '<b>$1</b>');
+
+    var respondidas = respostas().length;
+    document.getElementById('tamanhoMsg').textContent =
+      respondidas + ' de ' + PERGUNTAS.length + ' perguntas respondidas';
+
+    var grande = encodeURIComponent(texto).length > LIMITE_SEGURO;
+    document.getElementById('avisoTamanho').classList.toggle('oculto', !grande);
+  }
+
+  /* ---------- Ações finais ---------- */
+  document.getElementById('btnWhats').addEventListener('click', function () {
+    var url = 'https://wa.me/' + WHATS + '?text=' + encodeURIComponent(montarTexto());
+    window.open(url, '_blank', 'noopener');
+    statusFinal.textContent = 'Abrindo o WhatsApp… se não abrir, use Copiar respostas.';
+    statusFinal.classList.add('ok');
+  });
+
+  document.getElementById('btnCopiar').addEventListener('click', function () {
+    var texto = montarTexto();
+    function avisar(ok) {
+      statusFinal.textContent = ok
+        ? 'Copiado. Agora é só colar na conversa do WhatsApp.'
+        : 'Não consegui copiar — selecione o texto acima e copie manualmente.';
+      statusFinal.classList.toggle('ok', ok);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(texto).then(function () { avisar(true); }, function () { avisar(false); });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = texto;
+      ta.style.cssText = 'position:fixed;opacity:0;';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      avisar(ok);
+    }
+  });
+
+  document.getElementById('btnPdf').addEventListener('click', function () {
+    var nome = valorDe('q_nome') || 'Sem nome';
+    var data = new Date().toLocaleDateString('pt-BR');
+    var html = '<h1>Pré-entrevista de Visagismo</h1>' +
+               '<div class="cab">' + escapar(nome) + ' · ' + data + ' · Emerson Chemimm, Barbeiro Visagista</div>';
+    respostas().forEach(function (item) {
+      html += '<div class="item"><div class="p">' + item.n + '. ' + escapar(item.pergunta) + '</div>' +
+              '<div class="r">' + escapar(item.resposta) + '</div></div>';
+    });
+    document.getElementById('impressao').innerHTML = html;
+
+    var tituloOriginal = document.title;
+    document.title = 'Pre-entrevista - ' + nome;  // vira o nome do arquivo PDF
+    window.print();
+    setTimeout(function () { document.title = tituloOriginal; }, 800);
+
+    statusFinal.textContent = 'Na janela que abriu, escolha "Salvar como PDF".';
+    statusFinal.classList.add('ok');
+  });
+
+  document.getElementById('btnLimpar').addEventListener('click', function () {
+    try { localStorage.removeItem(CHAVE); } catch (e) {}
+    document.getElementById('formulario').reset();
+    document.getElementById('q_nome').value = '';
+    atualizarCondicionais();
+    atualizarContadores();
+    montarRevisao();
+    statusFinal.textContent = 'Respostas apagadas deste aparelho.';
+    statusFinal.classList.remove('ok');
+  });
+
+  restaurar();
+  mostrar(0);
+})();
+</script>
+
+</body>
+</html>

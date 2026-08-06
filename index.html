@@ -23,14 +23,21 @@
 </script>
 
 <!-- ==========================================================================
-     GOOGLE TAG MANAGER + MODO DE CONSENTIMENTO (LGPD)
-     Contêiner: GTM-P5P6H8HQ  ·  painel em tagmanager.google.com
-     O GA4 (G-Y82QCMP0DF) é configurado DENTRO do GTM, não neste arquivo —
-     colar o GA4 aqui também faria cada visita contar duas vezes.
-     Nada dispara antes do visitante aceitar no aviso de cookies.
+     GOOGLE ANALYTICS 4 + TAG MANAGER + MODO DE CONSENTIMENTO (LGPD)
+
+     GA4  G-Y82QCMP0DF  — instalado direto aqui (gtag.js), logo abaixo.
+     GTM  GTM-P5P6H8HQ  — fica para pixels e tags futuras.
+
+     >>> NAO crie uma tag do GA4 dentro do GTM. <<<
+     O GA4 ja esta neste arquivo. Ter os dois faz cada visita contar duas
+     vezes e infla todos os numeros do relatorio.
+
+     A ordem aqui importa: o consentimento e definido como negado ANTES de
+     qualquer biblioteca carregar. Nada rastreia antes do visitante aceitar.
      ========================================================================== -->
 <script>
   var GTM_ID = 'GTM-P5P6H8HQ';
+  var GA4_ID = 'G-Y82QCMP0DF';
 
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
@@ -72,6 +79,13 @@
     j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
     f.parentNode.insertBefore(j, f);
   })(window, document, 'script', 'dataLayer', GTM_ID);
+</script>
+
+<!-- GA4: a biblioteca so carrega depois que o consentimento acima foi definido -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y82QCMP0DF"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', GA4_ID, { anonymize_ip: true });
 </script>
 
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -1385,16 +1399,25 @@
   }
 })();
 
-/* Cliques em WhatsApp viram evento no dataLayer — vire conversão no GA4 pelo GTM. */
+/* Cliques em WhatsApp = agendamento iniciado.
+   Manda pelos dois caminhos de propósito:
+   - gtag('event')  -> chega no GA4, que e onde a conversao e contada
+   - dataLayer.push -> fica disponivel para tags futuras no GTM
+   Um dataLayer.push sozinho NAO vira evento no GA4 quando o GA4 esta
+   instalado via gtag.js. Sem a linha do gtag, o evento se perderia. */
 document.addEventListener('click', function (e) {
   var link = e.target.closest ? e.target.closest('a[href*="wa.me"]') : null;
   if (!link) return;
+
+  var secao = (link.closest('section') && link.closest('section').id) || 'geral';
+  var origem = link.className || 'link';
+
+  if (typeof gtag === 'function') {
+    gtag('event', 'clique_whatsapp', { secao: secao, origem_clique: origem });
+  }
+
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
-    event: 'clique_whatsapp',
-    origem_clique: link.className || 'link',
-    secao: (link.closest('section') && link.closest('section').id) || 'geral'
-  });
+  window.dataLayer.push({ event: 'clique_whatsapp', origem_clique: origem, secao: secao });
 });
 </script>
 

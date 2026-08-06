@@ -50,17 +50,35 @@ Os originais vieram em PNG com fundo preto chapado. A transparência foi extraí
 por **luminância** (alfa proporcional ao brilho), e não por limiar de cor — recorte
 por limiar comeria o degradê dourado e o relevo das letras.
 
-⚠️ **A logo é dourada, mas todo o resto do site é azul** (`#0A84FF` em botões,
-links e destaques). Foi decisão do cliente. Se um dia for unificar, o caminho é
-puxar o azul para um tom mais quente ou adotar o dourado como cor de destaque —
-não trocar a logo de volta.
+No mesmo dia o site inteiro migrou do azul para o dourado, para acompanhar a logo.
 
-## Identidade Visual (Premium Dark & Blue)
-- **Fundo**: Preto Profundo (`#05070A`)
-- **Accent**: Azul Premium (`#0A84FF`)
-- **Secundário**: Azul Escuro (`#071B33`)
-- **Tipografia**: Títulos: `Fraunces` (serifada, variável, editorial) / Textos: `Inter`
-- **Estética**: Visual sofisticado, editorial, alto contraste, luzes discretas (evitar neon exagerado).
+## Identidade Visual (Dark & Gold)
+| Token | Valor | Uso |
+|---|---|---|
+| `--bg` | `#05070A` | fundo |
+| `--bg-elevated` | `#0D121F` | cartões, campos |
+| `--surface` | `#12182A` | superfície elevada |
+| `--line` | `#1E293B` | bordas |
+| `--text` | `#F4F7FB` | texto |
+| `--muted` | `#9AA5B8` | texto secundário |
+| **`--accent`** | **`#C4976B`** | dourado — a mediana exata da logo |
+| **`--accent-soft`** | **`#E3BE8C`** | realce, links, hover |
+| **`--accent-ink`** | **`#0B0A07`** | **texto que fica SOBRE o dourado** |
+
+⚠️ **Nunca use texto branco sobre o dourado.** Dá 2,6:1 de contraste e reprova em
+qualquer critério de legibilidade. Todo texto sobre fundo dourado — botões, o
+cursor do comparador antes/depois, o ícone de play — usa `var(--accent-ink)`.
+Como referência: dourado sobre o fundo escuro dá 7,7:1 e tinta sobre dourado, 7,5:1.
+
+Os cinzas continuam **puxados para o azul-marinho** de propósito: a própria logo
+combina dourado com um azul ardósia (`#374F65`), então os neutros frios são parte
+da identidade, não sobra do tema antigo.
+
+No formulário, a cor de alerta é laranja queimado (`#E2703A`) e não âmbar: âmbar
+ficaria perto demais do dourado e o aviso perderia a distinção.
+
+- **Tipografia**: Títulos `Fraunces` (serifada, editorial) / Textos `Newsreader`
+- **Estética**: sofisticado, editorial, alto contraste, luzes discretas (sem neon).
 
 ## Estrutura de Pastas
 ```

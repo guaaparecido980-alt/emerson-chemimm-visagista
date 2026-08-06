@@ -29,8 +29,11 @@
     --text: #F4F7FB;
     --muted: #9AA5B8;
     --line: #1E293B;
-    --accent: #0A84FF;
-    --accent-soft: #4DB2FF;
+    --accent: #C4976B;
+    --accent-soft: #E3BE8C;
+    /* Texto que fica SOBRE o dourado. Branco daria 2,6:1 de contraste e
+       reprovaria: sobre dourado o texto tem que ser escuro. */
+    --accent-ink: #0B0A07;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { overflow-x: hidden; }
@@ -87,7 +90,7 @@
   .btn-consent {
     display: inline-flex; align-items: center; justify-content: center;
     margin-top: 18px; padding: 13px 26px;
-    background: var(--accent); color: #fff;
+    background: var(--accent); color: var(--accent-ink);
     border: none; border-radius: 999px; cursor: pointer;
     font-family: inherit; font-size: 0.82rem; font-weight: 600;
     letter-spacing: 0.06em; text-transform: uppercase;

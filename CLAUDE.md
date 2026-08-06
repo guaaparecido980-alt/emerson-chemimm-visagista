@@ -25,11 +25,21 @@ nunca chegaram a ir ao ar. Não edite `src/` esperando ver o resultado no site.
 - `politica-de-privacidade.html` — política LGPD + cookies (linkada no rodapé e no aviso de cookies).
 
 ### Analytics
-Uma única tag no `<head>` do `index.html`: **Google Tag Manager**, com Consent Mode v2
-(tudo negado por padrão até o visitante aceitar no aviso de cookies).
-A constante `GTM_ID` no topo do script guarda o ID do contêiner — enquanto for `GTM-XXXXXXX`,
-nada é carregado. O **GA4 é configurado dentro do GTM**, não no HTML.
-Eventos já disparados no `dataLayer`: `clique_whatsapp` e `consentimento_cookies`.
+No `<head>` do `index.html`, nesta ordem obrigatória:
+
+1. **Consent Mode v2** — tudo negado por padrão até o visitante aceitar no aviso de cookies.
+   Precisa vir **antes** de qualquer biblioteca carregar.
+2. **GTM** `GTM-P5P6H8HQ` — reservado para pixels e tags futuras.
+3. **GA4** `G-Y82QCMP0DF` — instalado direto via `gtag.js`.
+
+⚠️ **Nunca criar uma tag do GA4 dentro do GTM.** O GA4 já está no HTML; ter os dois
+faz cada visita contar duas vezes.
+
+**Eventos:** `clique_whatsapp` (agendamento iniciado) e `consentimento_cookies`.
+O `clique_whatsapp` é disparado pelos dois caminhos de propósito — `gtag('event', ...)`
+para chegar ao GA4 e `dataLayer.push` para o GTM. Um `dataLayer.push` sozinho **não**
+vira evento no GA4 quando o GA4 está via `gtag.js`; se mexer nesse handler, mantenha a
+linha do `gtag`.
 
 ## Identidade Visual (Premium Dark & Blue)
 - **Fundo**: Preto Profundo (`#05070A`)

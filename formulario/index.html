@@ -29,6 +29,11 @@
     --muted: #9AA5B8;
     --faint: #6E7B8D;
     --line: #1E293B;
+    /* Fundo dos campos: precisa destacar do fundo da pagina, senao o campo
+       some e a pessoa nao percebe onde escrever. */
+    --campo: #151D2E;
+    --campo-foco: #1B2540;
+    --campo-borda: #2B3A55;
     --accent: #0A84FF;
     --accent-soft: #4DB2FF;
     --ok: #46D69C;
@@ -103,29 +108,38 @@
   }
   .num {
     color: var(--accent-soft); font-variant-numeric: tabular-nums;
-    margin-right: 8px; font-weight: 600;
+    font-weight: 600;
   }
+  .num::after { content: ' — '; color: var(--faint); font-weight: 400; }
   .ajuda { display: block; color: var(--faint); font-size: 0.86rem; margin-bottom: 12px; line-height: 1.55; }
   .opcional { color: var(--faint); font-size: 0.78rem; font-weight: 400; }
 
   input[type="text"], textarea {
     width: 100%;
-    background: var(--bg-elevated);
-    border: 1px solid var(--line);
+    background: var(--campo);
+    border: 1px solid var(--campo-borda);
     border-radius: 10px;
-    padding: 13px 15px;
+    padding: 12px 15px;
     color: var(--text);
     font-family: inherit;
     font-size: 1rem;
     line-height: 1.6;
-    resize: vertical;
-    transition: border-color 0.25s, background 0.25s;
+    resize: none;
+    transition: border-color 0.2s, background 0.2s;
   }
-  textarea { min-height: 100px; }
+  /* Comeca baixinho e cresce sozinho conforme a pessoa escreve, em vez de
+     abrir uma caixa enorme e vazia que intimida. */
+  textarea {
+    min-height: 62px;
+    height: 62px;
+    overflow-y: hidden;
+  }
   input[type="text"]:focus, textarea:focus {
-    outline: none; border-color: var(--accent); background: var(--surface);
+    outline: none;
+    border-color: var(--accent);
+    background: var(--campo-foco);
   }
-  input::placeholder, textarea::placeholder { color: #4A5568; }
+  input::placeholder, textarea::placeholder { color: #5A6B85; }
   .erro-campo { border-color: #E5484D !important; }
 
   fieldset { border: none; }
@@ -133,14 +147,14 @@
   .opcoes { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
   .opcao {
     display: flex; align-items: flex-start; gap: 12px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--line);
+    background: var(--campo);
+    border: 1px solid var(--campo-borda);
     border-radius: 10px;
     padding: 13px 15px;
     cursor: pointer;
     transition: border-color 0.25s, background 0.25s;
   }
-  .opcao:hover { border-color: var(--faint); }
+  .opcao:hover { border-color: var(--faint); background: var(--campo-foco); }
   .opcao input { accent-color: var(--accent); margin-top: 5px; flex-shrink: 0; width: 16px; height: 16px; }
   .opcao:has(input:checked) { border-color: var(--accent); background: rgba(10, 132, 255, 0.07); }
   .opcao input:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
@@ -477,7 +491,7 @@
     <div class="campo">
       <label for="q16"><span class="num">16</span>Como é sua rotina semanal?</label>
       <span class="ajuda">Trabalho, casa, lazer, esporte, igreja, faculdade, festa — todos os ambientes por onde você circula. E quanto tempo você realmente tem de manhã para arrumar o cabelo.</span>
-      <textarea id="q16" maxlength="900" style="min-height:130px;"></textarea>
+      <textarea id="q16" maxlength="900"></textarea>
       <div class="contador"><span>0</span>/900</div>
     </div>
 
@@ -594,6 +608,11 @@
     atual = n;
     blocos[atual].classList.add('ativo');
 
+    // scrollHeight vale 0 enquanto o bloco esta escondido, entao as caixas so
+    // podem ser medidas depois que a etapa aparece. Sem isso, texto restaurado
+    // de um rascunho ficaria cortado dentro de uma caixa de uma linha.
+    blocos[atual].querySelectorAll('textarea').forEach(ajustarAltura);
+
     barraFill.style.width = ((n / ULTIMO) * 100) + '%';
     if (n === 0) passoLabel.textContent = 'Início';
     else if (n === ULTIMO) passoLabel.textContent = 'Revisão';
@@ -637,17 +656,28 @@
     if (e.target.type === 'radio') { atualizarCondicionais(); salvar(); }
   });
 
+  /* ---------- Altura automatica ----------
+     A caixa comeca com uma linha e cresce junto com o texto. Evita o campo
+     gigante e vazio, que faz a pergunta parecer mais trabalhosa do que e. */
+  var ALTURA_MIN = 62;
+  function ajustarAltura(ta) {
+    ta.style.height = 'auto';
+    ta.style.height = Math.max(ALTURA_MIN, ta.scrollHeight) + 'px';
+  }
+
   /* ---------- Contadores ---------- */
   function atualizarContadores() {
     document.querySelectorAll('textarea[maxlength]').forEach(function (ta) {
       var box = ta.parentNode.querySelector('.contador span');
       if (box) box.textContent = ta.value.length;
+      ajustarAltura(ta);
     });
   }
   document.addEventListener('input', function (e) {
     if (e.target.tagName === 'TEXTAREA') {
       var box = e.target.parentNode.querySelector('.contador span');
       if (box) box.textContent = e.target.value.length;
+      ajustarAltura(e.target);
     }
     salvar();
   });

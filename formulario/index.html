@@ -101,7 +101,9 @@
   .bloco-sub { color: var(--faint); font-size: 0.92rem; margin-bottom: 36px; }
 
   /* ---------- Campos ---------- */
-  .campo { margin-bottom: 34px; }
+  /* O cabecalho e sticky. Sem esta margem, rolar ate um campo (ao mostrar erro,
+     por exemplo) deixaria o campo escondido atras dele. */
+  .campo { margin-bottom: 34px; scroll-margin-top: 96px; }
   .campo label, .campo legend {
     display: block; font-size: 1.02rem; font-weight: 500;
     color: var(--text); margin-bottom: 6px; line-height: 1.45;
@@ -201,7 +203,7 @@
   .aviso.atencao { border-left-color: var(--alerta); }
   .aviso.oculto { display: none; }
 
-  .erro-msg { color: #FF8A8D; font-size: 0.88rem; margin-top: 8px; display: none; }
+  .erro-msg { color: #FF8A8D; font-size: 0.88rem; margin-top: 8px; display: none; scroll-margin-top: 96px; }
   .erro-msg.visivel { display: block; }
 
   /* ---------- Revisão ---------- */
@@ -292,11 +294,24 @@
       certa: quanto mais honesto, melhor o resultado no dia. O que você escreve
       fica entre você e o Emerson.
     </p>
-    <div class="aviso">
+    <div class="aviso" id="avisoNovo">
       Pode parar no meio e voltar depois — <strong>as respostas ficam salvas neste
       aparelho</strong> até você enviar.
     </div>
-    <div class="navegacao">
+
+    <!-- Aparece so quando existe rascunho, para a pessoa nao achar que perdeu tudo -->
+    <div class="aviso oculto" id="avisoRascunho">
+      <p style="margin-bottom:14px;">
+        <strong>Você já tinha começado.</strong>
+        <span id="resumoRascunho"></span>
+      </p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button type="button" class="btn btn-primario" id="btnContinuar" style="flex:1 1 180px;">Continuar de onde parei</button>
+        <button type="button" class="btn btn-secundario" id="btnZerar" style="flex:1 1 140px;">Começar do zero</button>
+      </div>
+    </div>
+
+    <div class="navegacao" id="navAbertura">
       <button type="button" class="btn btn-primario" data-ir="1">Começar</button>
     </div>
   </section>
@@ -317,14 +332,14 @@
     <div class="campo">
       <label for="q2"><span class="num">02</span>Qual foi a primeira coisa que você pensou quando decidiu marcar seu horário?</label>
       <span class="ajuda">O pensamento cru, do jeito que passou pela cabeça.</span>
-      <textarea id="q2" maxlength="600"></textarea>
+      <textarea id="q2" maxlength="600" placeholder="Ex.: cansei de sair da barbearia com o mesmo corte de sempre, sem ninguém me perguntar nada."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
     <div class="campo">
       <label for="q3"><span class="num">03</span>Tem algum evento, prazo ou mudança chegando que motivou esse agendamento?</label>
       <span class="ajuda">Casamento, entrevista, viagem, começo em um trabalho novo, fotos, um recomeço. Ou nada específico — o que também é uma resposta.</span>
-      <textarea id="q3" maxlength="600"></textarea>
+      <textarea id="q3" maxlength="600" placeholder="Ex.: vou casar em novembro. Ou: comecei num emprego novo. Ou: nada específico, só quero mudar."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
@@ -342,7 +357,7 @@
     <div class="campo">
       <label for="q4"><span class="num">04</span>Alguém comentou algo que te incentivou a procurar um visagista? <span class="opcional">(opcional)</span></label>
       <span class="ajuda">Um elogio, uma crítica, uma observação que ficou na cabeça.</span>
-      <textarea id="q4" maxlength="600"></textarea>
+      <textarea id="q4" maxlength="600" placeholder="Ex.: um amigo comentou que meu cabelo não combina com o formato do meu rosto."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
@@ -405,7 +420,7 @@
     <div class="campo">
       <label for="q8"><span class="num">08</span>Em que área você trabalha?</label>
       <span class="ajuda">O que você faz no dia a dia, e como é o ambiente.</span>
-      <textarea id="q8" maxlength="600"></textarea>
+      <textarea id="q8" maxlength="600" placeholder="Ex.: sou dentista, atendo o dia inteiro de jaleco e falo com muita gente de perto."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
@@ -422,26 +437,26 @@
 
     <div class="campo">
       <label for="q9"><span class="num">09</span>Quais são seus maiores objetivos <strong>pessoais</strong>?</label>
-      <textarea id="q9" maxlength="600"></textarea>
+      <textarea id="q9" maxlength="600" placeholder="Ex.: sair do aluguel, cuidar melhor da saúde, me sentir mais seguro nas conversas."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
     <div class="campo">
       <label for="q10"><span class="num">10</span>E os <strong>profissionais</strong>? Que cargo ou posição você gostaria de ocupar um dia?</label>
-      <textarea id="q10" maxlength="600"></textarea>
+      <textarea id="q10" maxlength="600" placeholder="Ex.: quero liderar a equipe em dois anos e começar a apresentar para clientes."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
     <div class="campo">
       <label for="q11"><span class="num">11</span>Imagine o momento de maior sucesso da sua vida. Como você está vestido?</label>
       <span class="ajuda">Descreve a cena: onde você está, com quem, com que roupa.</span>
-      <textarea id="q11" maxlength="600"></textarea>
+      <textarea id="q11" maxlength="600" placeholder="Ex.: de terno escuro, subindo num palco para receber um prêmio, com a família na plateia."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
     <div class="campo">
       <label for="q12"><span class="num">12</span>E nessa mesma cena — como está seu cabelo e sua barba?</label>
-      <textarea id="q12" maxlength="600"></textarea>
+      <textarea id="q12" maxlength="600" placeholder="Ex.: cabelo mais curto nas laterais, com volume em cima, e barba bem alinhada."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
@@ -459,21 +474,21 @@
     <div class="campo">
       <label for="q13"><span class="num">13</span>Tem alguma parte do seu rosto que te incomoda? <span class="opcional">(opcional)</span></label>
       <span class="ajuda">Testa, queixo, orelhas, formato — o que for. Não é para julgar: é para trabalhar as proporções a seu favor.</span>
-      <textarea id="q13" maxlength="600"></textarea>
+      <textarea id="q13" maxlength="600" placeholder="Ex.: acho minha testa grande demais e meu queixo meio fugido."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
     <div class="campo">
       <label for="q14"><span class="num">14</span>E no cabelo ou na barba, tem algo que te incomoda?</label>
       <span class="ajuda">Falhas, redemoinho, volume, entradas, textura, velocidade de crescimento.</span>
-      <textarea id="q14" maxlength="600"></textarea>
+      <textarea id="q14" maxlength="600" placeholder="Ex.: tenho uma falha no lado direito da barba e um redemoinho na frente que não abaixa."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
     <div class="campo">
       <label for="q15"><span class="num">15</span>Já te chamaram de algo que você não gosta, ou te atribuíram uma característica que não é você? <span class="opcional">(opcional)</span></label>
       <span class="ajuda">Apelidos, rótulos, "cara de", "parece que você é". Isso costuma revelar o que a sua imagem comunica sem você querer — e é justamente o que dá para corrigir.</span>
-      <textarea id="q15" maxlength="600"></textarea>
+      <textarea id="q15" maxlength="600" placeholder="Ex.: sempre me acham bem mais velho do que eu sou. Ou: já me chamaram de &quot;cara fechado&quot;."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
@@ -491,14 +506,14 @@
     <div class="campo">
       <label for="q16"><span class="num">16</span>Como é sua rotina semanal?</label>
       <span class="ajuda">Trabalho, casa, lazer, esporte, igreja, faculdade, festa — todos os ambientes por onde você circula. E quanto tempo você realmente tem de manhã para arrumar o cabelo.</span>
-      <textarea id="q16" maxlength="900"></textarea>
+      <textarea id="q16" maxlength="900" placeholder="Ex.: segunda a sexta no escritório, academia terça e quinta de manhã, sábado almoço em família, sai à noite de vez em quando. De manhã tenho uns 5 minutos para arrumar o cabelo."></textarea>
       <div class="contador"><span>0</span>/900</div>
     </div>
 
     <div class="campo">
       <label for="q17"><span class="num">17</span>O que você quer transmitir com a sua imagem?</label>
       <span class="ajuda">Se alguém te olhasse pela primeira vez, o que você gostaria que essa pessoa pensasse?</span>
-      <textarea id="q17" maxlength="600"></textarea>
+      <textarea id="q17" maxlength="600" placeholder="Ex.: quero passar seriedade sem parecer inacessível — alguém em quem dá para confiar."></textarea>
       <div class="contador"><span>0</span>/600</div>
     </div>
 
@@ -525,7 +540,9 @@
     </div>
 
     <div class="acoes-finais">
-      <button type="button" class="btn btn-whats" id="btnWhats">Enviar pelo WhatsApp</button>
+      <!-- Link de verdade, e nao window.open: bloqueador de pop-up nao intercepta
+           clique em link. O href e montado em montarRevisao(). -->
+      <a class="btn btn-whats" id="btnWhats" href="#" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
       <button type="button" class="btn btn-secundario" id="btnCopiar">Copiar respostas</button>
       <button type="button" class="btn btn-secundario" id="btnPdf">Baixar em PDF</button>
       <button type="button" class="btn btn-secundario" data-ir="6">Voltar e ajustar</button>
@@ -534,8 +551,12 @@
     <p class="salvo" id="statusFinal" role="status" aria-live="polite"></p>
 
     <div class="aviso" style="margin-top:34px;">
-      Enviou? Você pode
-      <button type="button" id="btnLimpar" class="link-texto">apagar as respostas deste aparelho</button>.
+      <p style="margin-bottom:14px;">
+        Terminou? Você pode limpar tudo e preencher de novo. Isso também
+        <strong>apaga as respostas deste aparelho</strong> — útil se o celular
+        não for só seu.
+      </p>
+      <button type="button" class="btn btn-secundario" id="btnRecomecar" style="flex:none;width:100%;">Recomeçar do zero</button>
     </div>
   </section>
 
@@ -619,6 +640,13 @@
     else passoLabel.textContent = 'Etapa ' + n + ' de ' + ETAPAS_FORM;
 
     if (n === ULTIMO) montarRevisao();
+
+    // Cada etapa vira um item no historico, para o botao voltar do navegador
+    // recuar uma etapa em vez de abandonar o formulario.
+    if (!navegandoPeloHistorico) {
+      try { history.pushState({ etapa: n }, ''); } catch (e) {}
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -687,7 +715,7 @@
   function salvar() {
     clearTimeout(timer);
     timer = setTimeout(function () {
-      var dados = { q_nome: valorDe('q_nome') };
+      var dados = { q_nome: valorDe('q_nome'), _etapa: atual };
       PERGUNTAS.forEach(function (p) { dados[p[0]] = valorDe(p[0]); });
       ['q5_texto', 'q6_texto', 'q7_texto'].forEach(function (id) {
         var el = document.getElementById(id);
@@ -702,16 +730,21 @@
     }, 700);
   }
 
+  var etapaSalva = 0;
+
   function restaurar() {
     var bruto = null;
-    try { bruto = localStorage.getItem(CHAVE); } catch (e) { return; }
-    if (!bruto) return;
+    try { bruto = localStorage.getItem(CHAVE); } catch (e) { return false; }
+    if (!bruto) return false;
     var dados;
-    try { dados = JSON.parse(bruto); } catch (e) { return; }
+    try { dados = JSON.parse(bruto); } catch (e) { return false; }
 
+    var preenchidos = 0;
     Object.keys(dados).forEach(function (chave) {
       var valor = dados[chave];
+      if (chave === '_etapa') { etapaSalva = parseInt(valor, 10) || 0; return; }
       if (!valor) return;
+      preenchidos++;
       var el = document.getElementById(chave);
       if (el && 'value' in el) { el.value = valor; return; }
       var radios = document.querySelectorAll('input[name="' + chave + '"]');
@@ -720,6 +753,17 @@
         radios.forEach(function (r) { if (r.value === base) r.checked = true; });
       }
     });
+    atualizarCondicionais();
+    atualizarContadores();
+    return preenchidos > 0;
+  }
+
+  function apagarTudo() {
+    try { localStorage.removeItem(CHAVE); } catch (e) {}
+    document.getElementById('formulario').reset();
+    document.getElementById('q_nome').value = '';
+    document.querySelectorAll('textarea').forEach(function (ta) { ta.value = ''; });
+    etapaSalva = 0;
     atualizarCondicionais();
     atualizarContadores();
   }
@@ -761,13 +805,27 @@
 
     var grande = encodeURIComponent(texto).length > LIMITE_SEGURO;
     document.getElementById('avisoTamanho').classList.toggle('oculto', !grande);
+
+    // O botao do WhatsApp e um link: o endereco precisa estar pronto ANTES do
+    // clique. Assim o navegador trata como navegacao normal e nenhum bloqueador
+    // de pop-up atrapalha.
+    document.getElementById('btnWhats').href =
+      'https://wa.me/' + WHATS + '?text=' + encodeURIComponent(texto);
   }
 
   /* ---------- Ações finais ---------- */
-  document.getElementById('btnWhats').addEventListener('click', function () {
-    var url = 'https://wa.me/' + WHATS + '?text=' + encodeURIComponent(montarTexto());
-    window.open(url, '_blank', 'noopener');
-    statusFinal.textContent = 'Abrindo o WhatsApp… se não abrir, use Copiar respostas.';
+  var btnWhats = document.getElementById('btnWhats');
+
+  btnWhats.addEventListener('click', function (e) {
+    // Poucas respostas costuma ser clique sem querer, nao intencao de enviar.
+    if (respostas().length < 3) {
+      var segue = window.confirm(
+        'Você respondeu apenas ' + respostas().length + ' de ' + PERGUNTAS.length +
+        ' perguntas.\n\nQuanto mais o Emerson souber, melhor o atendimento. Quer enviar assim mesmo?'
+      );
+      if (!segue) { e.preventDefault(); mostrar(1); return; }
+    }
+    statusFinal.textContent = 'Abrindo o WhatsApp… é só apertar enviar na conversa.';
     statusFinal.classList.add('ok');
   });
 
@@ -814,19 +872,68 @@
     statusFinal.classList.add('ok');
   });
 
-  document.getElementById('btnLimpar').addEventListener('click', function () {
-    try { localStorage.removeItem(CHAVE); } catch (e) {}
-    document.getElementById('formulario').reset();
-    document.getElementById('q_nome').value = '';
-    atualizarCondicionais();
-    atualizarContadores();
-    montarRevisao();
-    statusFinal.textContent = 'Respostas apagadas deste aparelho.';
-    statusFinal.classList.remove('ok');
+  /* Recomecar apaga tudo sem volta, entao pergunta antes. */
+  document.getElementById('btnRecomecar').addEventListener('click', function () {
+    var temCoisa = respostas().length > 0 || valorDe('q_nome');
+    if (temCoisa && !window.confirm('Isso apaga todas as suas respostas deste aparelho e não tem como desfazer.\n\nTem certeza?')) return;
+    apagarTudo();
+    esconderAvisoRascunho();
+    statusFinal.textContent = '';
+    mostrar(0);
   });
 
-  restaurar();
+  /* ---------- Rascunho encontrado ao voltar ---------- */
+  function esconderAvisoRascunho() {
+    document.getElementById('avisoRascunho').classList.add('oculto');
+    document.getElementById('avisoNovo').classList.remove('oculto');
+    document.getElementById('navAbertura').style.display = '';
+  }
+
+  function mostrarAvisoRascunho() {
+    var quantas = respostas().length;
+    document.getElementById('resumoRascunho').textContent =
+      quantas > 0
+        ? 'Já tem ' + quantas + ' de ' + PERGUNTAS.length + ' perguntas respondidas neste aparelho.'
+        : 'Suas respostas ficaram salvas neste aparelho.';
+    document.getElementById('avisoRascunho').classList.remove('oculto');
+    document.getElementById('avisoNovo').classList.add('oculto');
+    document.getElementById('navAbertura').style.display = 'none';
+  }
+
+  document.getElementById('btnContinuar').addEventListener('click', function () {
+    esconderAvisoRascunho();
+    mostrar(Math.min(Math.max(etapaSalva, 1), ULTIMO));
+  });
+
+  document.getElementById('btnZerar').addEventListener('click', function () {
+    if (!window.confirm('Isso apaga o que você já tinha escrito. Tem certeza?')) return;
+    apagarTudo();
+    esconderAvisoRascunho();
+    mostrar(1);
+  });
+
+  /* ---------- Botão voltar do navegador ----------
+     No celular, voltar e o reflexo natural para corrigir a etapa anterior. Sem
+     isto, o navegador sairia do site inteiro no meio do preenchimento. */
+  var navegandoPeloHistorico = false;
+  window.addEventListener('popstate', function (evento) {
+    var destino = (evento.state && typeof evento.state.etapa === 'number') ? evento.state.etapa : 0;
+    navegandoPeloHistorico = true;
+    mostrar(destino);
+    navegandoPeloHistorico = false;
+  });
+
+  /* ---------- Início ---------- */
+  var temRascunho = restaurar();
+
+  // A primeira exibicao nao pode empilhar historico, senao o primeiro toque em
+  // "voltar" so recarregaria a etapa 0 em vez de sair da pagina.
+  navegandoPeloHistorico = true;
   mostrar(0);
+  navegandoPeloHistorico = false;
+  try { history.replaceState({ etapa: 0 }, ''); } catch (e) {}
+
+  if (temRascunho) mostrarAvisoRascunho();
 })();
 </script>
 

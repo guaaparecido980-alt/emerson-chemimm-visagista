@@ -293,9 +293,12 @@
     justify-content: space-between;
   }
   .logo { display: inline-flex; align-items: center; }
-  .logo img { height: 40px; width: auto; display: block; background: none; }
-  @media (min-width: 768px) { .logo img { height: 48px; } }
-  footer .logo img { height: 48px; }
+  /* A marca e larga (proporcao ~4,4:1). No celular o cabecalho tem logo + botao
+     Agendar + menu na mesma linha, entao a altura fica menor de proposito para a
+     largura nao estourar. Se trocar a logo, refaca essa conta. */
+  .logo img { height: 32px; width: auto; display: block; background: none; }
+  @media (min-width: 768px) { .logo img { height: 42px; } }
+  footer .logo img { height: 46px; }
   nav.desktop-nav { display: none; }
   @media (min-width: 1024px) {
     nav.desktop-nav { display: flex; gap: 32px; }

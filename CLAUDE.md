@@ -49,18 +49,31 @@ linha do `gtag`.
 - **Estética**: Visual sofisticado, editorial, alto contraste, luzes discretas (evitar neon exagerado).
 
 ## Estrutura de Pastas
-- `src/app/`: Rotas, layouts e metadados.
-- `src/components/`:
-  - `sections/`: Seções específicas da landing page.
-  - `ui/`: Componentes genéricos de UI (botões, cards, sliders, lightbox).
-- `src/data/`: Arquivos TS contendo os dados estáticos editáveis.
-- `src/lib/paths.ts`: Helper `withBasePath()` para caminhos de imagem locais (necessário por causa do `basePath` do GitHub Pages).
+```
+static-site/            <- ISTO vai para o ar
+  index.html            página única do site
+  politica-de-privacidade.html
+  formulario/index.html formulário privado de pré-entrevista
+  CNAME .nojekyll robots.txt sitemap.xml
+  images/  videos/
+google-meu-negocio/     material do Perfil da Empresa (não publicado)
+src/                    Next.js LEGADO, não publicado — ver aviso no topo
+out/  .next/            resíduo de build do Next, no .gitignore
+```
 
 ## Comandos Úteis
-- **Dev Server**: `npm run dev`
-- **Build do Projeto (local, sem basePath)**: `npm run build`
-- **Build para GitHub Pages (com basePath)**: `NEXT_PUBLIC_BASE_PATH=/emerson-chemimm-visagista npm run build`
-- **Linting**: `npm run lint`
+Não há build nem dev server: é HTML estático. Para ver localmente, basta abrir
+`static-site/index.html` no navegador, ou servir a pasta:
+
+```bash
+npx serve static-site        # ou: python -m http.server -d static-site
+```
+
+Servir por HTTP é melhor que abrir o arquivo direto — `file://` quebra caminhos
+absolutos e a área de transferência do formulário.
+
+Os comandos `npm run dev` / `build` / `lint` pertencem ao projeto Next legado em
+`src/` e **não afetam o site publicado**.
 
 ## Como fazer o Deploy no GitHub Pages
 O deploy é a publicação do conteúdo de `static-site/` na raiz do branch `gh-pages`.
@@ -82,40 +95,78 @@ junto no deploy. Se o domínio customizado "sumir" das configurações do GitHub
 um deploy, é porque o `CNAME` não subiu.
 
 ## Onde Editar Conteúdos
-- **Dados institucionais, WhatsApp, endereço/localização**: `src/data/site.ts`
-- **Serviços**: `src/data/services.ts`
-- **Depoimentos (texto)**: `src/data/testimonials.ts`
-- **Depoimento em vídeo**: `public/videos/depoimento-cliente.mp4` + poster em `public/images/depoimento-poster.jpg`, renderizado em `TestimonialsSection.tsx`
-- **Antes e Depois**: `src/data/transformations.ts` (imagens em `public/images/transformations/`)
-- **Perguntas Frequentes (FAQ)**: `src/data/faqs.ts`
-- **Galeria do Portfólio**: `src/data/gallery.ts` (imagens em `public/images/gallery/`)
-- **Foto do Emerson (hero)**: `public/images/emerson-hero.jpg`
-- **Foto do Emerson (seção Sobre)**: `public/images/emerson-about.jpg`
-- **Configurações Globais de SEO**: `src/data/seo.ts` (título, descrição, keywords, Open Graph — usa `siteUrl` como fonte única da URL do site)
+Tudo do site público vive em **`static-site/index.html`** — um arquivo único, sem build.
+Use busca por texto para achar a seção.
+
+| O quê | Onde |
+|---|---|
+| Textos, serviços, depoimentos, FAQ, Antes/Depois | seções correspondentes do `index.html` |
+| Endereço, telefone, horários | aparecem em **5 lugares** — veja a regra abaixo |
+| Imagens | `static-site/images/` |
+| Vídeo do depoimento | `static-site/videos/depoimento-cliente.mp4`, carregado sob demanda por JS |
+| SEO (title, description, Open Graph, JSON-LD) | `<head>` do `index.html` |
+| Política de privacidade | `static-site/politica-de-privacidade.html` |
+| Formulário de pré-entrevista | `static-site/formulario/index.html` |
+| Material do Perfil da Empresa (logo, capa, descrição, foto) | `google-meu-negocio/` (não vai para o ar) |
+
+### ⚠️ Endereço aparece em 5 lugares
+Ao mudar, altere **todos**, senão o Google vê divergência e derruba a confiança:
+1. JSON-LD no `<head>` (`streetAddress` + `postalCode`)
+2. Seção Localização
+3. Embed do mapa
+4. Resposta do FAQ "onde fica"
+5. vCard da função `salvarContato()` (o "Salvar Contato no Celular")
+
+Endereço correto: **Rua Jacarezinho, 21 — Mercês, Curitiba/PR, CEP 80710-150**
+(Barbearia Clube). O site já teve `Av. Cândido Hartmann, 1580`, que é o endereço de
+um supermercado — errado.
+
+O bloco `geo` do JSON-LD foi **removido de propósito**: as coordenadas antigas apontavam
+para o estacionamento do supermercado, e é melhor omitir do que declarar errado.
+Repor com o valor certo quando o Perfil da Empresa estiver verificado, junto com
+`sameAs` e `hasMap` apontando para o perfil.
+
+## Formulário de pré-entrevista (privado)
+`static-site/formulario/index.html`, publicado em `/formulario`. Link enviado a dedo
+pelo Emerson, **não é linkado em lugar nenhum do site**.
+
+- `noindex, nofollow` no `<head>`; fora do `sitemap.xml`
+- **Não colocar no `robots.txt`**: aquele arquivo é público e um `Disallow` anunciaria
+  o caminho para qualquer um
+- 6 etapas, 17 perguntas, rascunho em `localStorage` (chave `ec-preentrevista`)
+- Não existe servidor: o envio monta uma mensagem e o cliente escolhe WhatsApp,
+  copiar, ou PDF (via `window.print()`, sem biblioteca externa)
+- O botão do WhatsApp é um `<a>` com `href` montado antes do clique, **não**
+  `window.open` — bloqueador de pop-up cancelaria em silêncio
+- Testes de simulação em jsdom foram usados no desenvolvimento; se mexer bastante,
+  vale refazer
 
 ## Onde Editar Estilos
-- Tokens de tema (cores, fontes): `@theme` no `src/app/globals.css`.
-- Fonte de título: `src/app/layout.tsx` (import do `next/font/google`).
-- Estilos Globais / glow: `src/app/globals.css`.
+Bloco `<style>` único no `<head>` do `index.html` (tokens em `:root`).
+O formulário e a política de privacidade têm o próprio `<style>`, com os mesmos tokens.
 
-## Dados que ainda faltam confirmar (NÃO estão preenchidos de propósito)
-Em `src/data/site.ts`, os campos abaixo estão vazios (`""`) até que os dados reais sejam confirmados:
-- `location.city`, `location.neighborhood`, `location.address`, `location.zipCode`
-- `location.latitude` / `longitude`
-- `googleBusinessProfile`, `googleMaps`
-
-Enquanto esses campos estiverem vazios, o site **automaticamente** esconde ou troca esses blocos por uma versão elegante (ex: "Local de atendimento informado no agendamento"), em vez de mostrar texto quebrado. Isso é feito pelos helpers `hasCity`, `hasAddress`, `hasNeighborhood`, `hasZipCode`, `hasCoordinates`, `hasGoogleBusinessProfile` exportados de `src/data/site.ts` — use-os em qualquer componente novo que dependa desses dados.
+## Armadilhas já corrigidas — não repetir
+- **Bibliotecas de animação ficam no fim do `<body>`, sem `defer`.** No `<head>` elas
+  travam a renderização. Com `defer` o código de animação, que roda durante o parse e
+  checa `typeof gsap !== 'undefined'`, encontraria `undefined` e as animações parariam
+  **sem erro no console**. Foi o que quebrou o mobile no commit revertido `16e2ff8`.
+- **Barra de urgência (z-index 101) e header (100) ficam acima do menu mobile (99).**
+  Qualquer painel em tela cheia precisa reservar o espaço deles via `--altura-topo`,
+  medida em `positionHeader()`. Idem `scroll-margin-top` em campos de formulário.
+- **`justify-content: center` corta os dois extremos quando o conteúdo estoura a tela**,
+  e o topo cortado fica inalcançável no scroll. Em listas verticais que podem crescer,
+  use margem automática no primeiro e último filho.
+- **`scrollHeight` vale 0 em elemento escondido.** Alturas automáticas precisam ser
+  recalculadas no momento em que o bloco aparece.
 
 ## Regra de Ouro: Nunca Mostrar Placeholder
-**Nunca** deixe strings como `"[INSERIR_X]"`, `"Endereço Pendente"`, `"Substituir por foto real"` visíveis no site renderizado. Se um dado não existir:
-1. Esconda o bloco inteiro (condicional), ou
-2. Troque por uma frase institucional elegante que não dependa do dado faltante.
-
-Nunca exiba a string vazia/placeholder diretamente. Use os helpers `has*` de `site.ts` para decidir.
+**Nunca** deixe strings como `"[INSERIR_X]"`, `"Endereço Pendente"` visíveis no site.
+Se um dado não existir, esconda o bloco inteiro ou troque por uma frase institucional
+que não dependa dele.
 
 ## Outras Regras de Ouro
-- **Acessibilidade**: `aria-label` em links/botões sem texto explícito, `aria-expanded`/`aria-controls` em accordions, `role="slider"` + navegação por teclado no comparador antes/depois, foco visível (`focus-visible`).
-- **Copy Humana**: Sem termos clichês, sem "cara de IA", sem promessas não confirmadas (aromaterapia, estacionamento, lavagem premium, anos de experiência, etc. — só inclua se for real).
-- **Não Inventar Dados**: Sem números fictícios de clientes atendidos, avaliações, certificações, preços ou duração de serviço não confirmados.
-- **Imagens**: Sempre `next/image` com `fill` + container de aspect-ratio fixo (evita layout shift). `priority` **somente** na foto do hero — todo o resto é lazy por padrão. Caminhos de imagens locais devem passar por `withBasePath()` de `src/lib/paths.ts` (necessário por causa do `basePath` do GitHub Pages) — sem isso a imagem quebra quando publicada.
-- **Fallback de imagem**: nunca deixe texto de placeholder atrás de uma imagem semi-transparente. O padrão correto é: mostra a imagem OU o fallback, nunca os dois empilhados.
+- **Acessibilidade**: `aria-label` em links/botões sem texto, `aria-expanded`/`aria-controls` em accordions, `role="slider"` + teclado no comparador antes/depois, foco visível (`focus-visible`).
+- **Copy Humana**: sem clichê, sem "cara de IA", sem promessa não confirmada.
+- **Não Inventar Dados**: nada de número fictício de clientes, avaliações, certificações, preços ou duração de serviço.
+- **Imagens**: container com proporção fixa para evitar layout shift; só a foto do hero carrega com prioridade.
+- **Fallback de imagem**: mostra a imagem OU o fallback, nunca os dois empilhados.

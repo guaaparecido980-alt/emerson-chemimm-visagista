@@ -83,7 +83,11 @@ ficaria perto demais do dourado e o aviso perderia a distinção.
 ## Estrutura de Pastas
 ```
 static-site/            <- ISTO vai para o ar
-  index.html            página única do site
+  index.html            home (página longa, com GSAP/Lenis)
+  sobre/index.html                 /sobre/  — quem é o Emerson (Person)
+  visagismo-masculino/index.html   /visagismo-masculino/ — formatos de rosto, barba
+  tipos-de-cabelo/index.html       /tipos-de-cabelo/ — liso, ondulado, cacheado, crespo
+  assets/paginas.css  assets/paginas.js   estilo e JS SÓ das 3 páginas internas
   politica-de-privacidade.html
   formulario/index.html formulário privado de pré-entrevista
   CNAME .nojekyll robots.txt sitemap.xml
@@ -127,11 +131,14 @@ junto no deploy. Se o domínio customizado "sumir" das configurações do GitHub
 um deploy, é porque o `CNAME` não subiu.
 
 ## Onde Editar Conteúdos
-Tudo do site público vive em **`static-site/index.html`** — um arquivo único, sem build.
-Use busca por texto para achar a seção.
+A home vive em **`static-site/index.html`** — um arquivo único, sem build. As páginas
+internas ficam em pastas próprias (ver Estrutura). Use busca por texto para achar a seção.
 
 | O quê | Onde |
 |---|---|
+| Quem é o Emerson, método, ficha "Em resumo" | `static-site/sobre/index.html` |
+| Formatos de rosto, papel da barba | `static-site/visagismo-masculino/index.html` |
+| Liso, ondulado, cacheado, crespo | `static-site/tipos-de-cabelo/index.html` |
 | Textos, serviços, depoimentos, FAQ, Antes/Depois | seções correspondentes do `index.html` |
 | Endereço, telefone, horários | aparecem em **5 lugares** — veja a regra abaixo |
 | Imagens | `static-site/images/` |
@@ -141,13 +148,21 @@ Use busca por texto para achar a seção.
 | Formulário de pré-entrevista | `static-site/formulario/index.html` |
 | Material do Perfil da Empresa (logo, capa, descrição, foto) | `google-meu-negocio/` (não vai para o ar) |
 
-### ⚠️ Endereço aparece em 5 lugares
+### ⚠️ Endereço aparece em 8 lugares
 Ao mudar, altere **todos**, senão o Google vê divergência e derruba a confiança:
-1. JSON-LD no `<head>` (`streetAddress` + `postalCode`)
+1. JSON-LD no `<head>` do `index.html` (`streetAddress` + `postalCode`)
 2. Seção Localização
 3. Embed do mapa
-4. Resposta do FAQ "onde fica"
+4. Resposta do FAQ "onde fica" — **no HTML e no FAQPage do JSON-LD**
 5. vCard da função `salvarContato()` (o "Salvar Contato no Celular")
+6. `sobre/index.html` — JSON-LD (`HairSalon.address`)
+7. `sobre/index.html` — ficha "Em resumo"
+8. `sobre/index.html` — seção "Onde fica o atendimento?"
+
+Os **horários** seguem a mesma lógica: home (Sobre, Localização, JSON-LD) e `sobre/`
+(ficha, seção "onde fica", JSON-LD).
+
+Busca rápida para conferir: `grep -rn "Jacarezinho" static-site`
 
 Endereço correto: **Rua Jacarezinho, 21 — Mercês, Curitiba/PR, CEP 80710-150**
 (Barbearia Clube). O site já teve `Av. Cândido Hartmann, 1580`, que é o endereço de
@@ -157,6 +172,28 @@ O bloco `geo` do JSON-LD foi **removido de propósito**: as coordenadas antigas 
 para o estacionamento do supermercado, e é melhor omitir do que declarar errado.
 Repor com o valor certo quando o Perfil da Empresa estiver verificado, junto com
 `sameAs` e `hasMap` apontando para o perfil.
+
+## SEO e dados estruturados (páginas de conteúdo)
+Em 10 de setembro de 2026 o site ganhou 3 páginas internas para responder buscas
+específicas ("barbeiro para cabelo cacheado em Curitiba", "visagismo masculino",
+"quem é Emerson Chemimm") — inclusive quando quem pergunta é uma IA.
+
+- **H1 da home** = "Emerson Chemimm · Barbeiro visagista em Curitiba", com estilo de
+  eyebrow. A frase grande ("Um corte pensado para o seu rosto…") é um `<p class="hero-headline">`.
+  O `SplitType` anima `.hero-headline` — se mudar a classe, a animação some sem erro.
+- **Entidade única:** os `@id` `https://emersonvisagista.com.br/#barbeiro` (HairSalon) e
+  `#emerson` (Person) se repetem em todas as páginas. **Não mude os @id.**
+- `name` do HairSalon = **"Emerson Chemimm"**, para bater com o Perfil da Empresa.
+- **FAQPage no JSON-LD repete as perguntas visíveis** (home, visagismo e tipos de cabelo).
+  Editou uma pergunta ou resposta? Edite nos dois lugares.
+- Páginas internas: sem GSAP/Lenis, FAQ em `<details>` (funciona sem JS e o texto já está
+  no HTML). O bloco de Consent Mode + GTM + GA4 é **copiado inline** no `<head>` de cada
+  uma — precisa rodar antes de qualquer biblioteca. O aviso de cookies e o `clique_whatsapp`
+  vêm do `assets/paginas.js` (mesma chave `ec-consent` da home).
+- Página nova? Entra no `sitemap.xml`, no rodapé das páginas e no bloco "Saiba mais" da home.
+- Nada de uma página por palavra-chave ("corte cacheado", "corte crespo"…): páginas quase
+  iguais viram *doorway pages* e o Google penaliza. Por isso os 4 tipos de cabelo ficam
+  numa página só, com âncoras (`/tipos-de-cabelo/#cacheado`).
 
 ## Formulário de pré-entrevista (privado)
 `static-site/formulario/index.html`, publicado em `/formulario`. Link enviado a dedo

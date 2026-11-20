@@ -90,6 +90,8 @@ static-site/            <- ISTO vai para o ar
   assets/paginas.css  assets/paginas.js   estilo e JS SÓ das 3 páginas internas
   politica-de-privacidade.html
   formulario/index.html formulário privado de pré-entrevista
+  dossie/                          /dossie/ — sistema PRIVADO do dossiê de visagismo (noindex, fora do sitemap)
+  teste-de-perfil-comportamental-em-arquetipos/   teste público de perfil (Rei, Guerreiro, Mago, Amante)
   CNAME .nojekyll robots.txt sitemap.xml
   images/  videos/
 google-meu-negocio/     material do Perfil da Empresa (não publicado)
@@ -239,3 +241,16 @@ que não dependa dele.
 - **Não Inventar Dados**: nada de número fictício de clientes, avaliações, certificações, preços ou duração de serviço.
 - **Imagens**: container com proporção fixa para evitar layout shift; só a foto do hero carrega com prioridade.
 - **Fallback de imagem**: mostra a imagem OU o fallback, nunca os dois empilhados.
+
+## Dossiê e teste de perfil (desde 20/11/2026)
+Os dois vieram do site do Wagner Alves (repo `consutoria-visagismo`) e foram adaptados para a marca
+do Emerson: páginas em azul-marinho + dourado, Fraunces/Newsreader, fotos e contatos dele.
+
+- **`/dossie/`** — ferramenta privada (noindex, fora do sitemap, não linkada). O Emerson preenche a
+  ficha, escolhe as fotos e gera o PDF em formato de celular. A ficha em andamento fica no aparelho.
+  Ao mudar qualquer arquivo, suba juntos `<meta name="dossie-versao">` e os `?v=` do `index.html`:
+  quem estiver com a página antiga aberta recarrega sozinho.
+- **`/teste-de-perfil-comportamental-em-arquetipos/`** — teste público, no sitemap. O lead chega no
+  WhatsApp do Emerson. Contato de privacidade/termos = WhatsApp (o site não publica e-mail).
+  Testes do motor: `node static-site/teste-de-perfil-comportamental-em-arquetipos/tests/engine.test.js`.
+- Ainda **sem** o bloco Consent Mode + GTM + GA4 nas duas: entram quando quiserem medir o teste.

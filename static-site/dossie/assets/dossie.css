@@ -1,0 +1,392 @@
+/* =============================================================================
+   DOSSIÊ DE VISAGISMO — FOLHA DE ESTILO DAS PÁGINAS
+   -----------------------------------------------------------------------------
+   Estas regras valem para o documento que o cliente recebe. A interface do
+   sistema fica em `app.css`.
+
+   A página tem 1080 x 1920 px fixos, em pé, e é apenas reduzida por
+   `transform: scale()` na pré-visualização. É isso que faz o PDF sair
+   idêntico à tela.
+
+   TAMANHO DO TEXTO — pensado para a tela do celular. Numa tela de ~390 px, a
+   página de 1080 px aparece a 36% do tamanho: um corpo de 34 px chega ao olho
+   como ~12 px, o mesmo de um aplicativo. Nada de texto abaixo de 22 px aqui.
+
+   `--k` é o fator de encaixe: se um texto longo (proposta, observação) não
+   couber, app.js reduz esse fator um pouco, só naquela página, em vez de
+   deixar o texto ser cortado no pé da página.
+
+   Evitados de propósito, porque o html2canvas desenha errado no PDF:
+   `column-count` (embaralhava as palavras da proposta), `::first-letter`,
+   `object-fit` sem recorte prévio, `backdrop-filter`, `mix-blend-mode`.
+============================================================================= */
+
+:root {
+  --tinta:      #F4F7FB;
+  --grafite:    #12182A;
+  --grafite-2:  #1E293B;
+  --ouro:       #C4976B;
+  --ouro-claro: #E3BE8C;
+  --bege:       #F4F7FB;
+  --papel:      #05070A;
+  --papel-2:    #0D121F;
+  --texto:      #DCE2EB;
+  --texto-2:    #9AA5B8;
+  --texto-3:    #76829A;
+  --linha:      #1E293B;
+
+  --serif: "Fraunces", "Times New Roman", serif;
+  --sans:  "Newsreader", Georgia, serif;
+}
+
+/* ===========================================================================
+   PÁGINA
+=========================================================================== */
+.pg {
+  --k: 1;
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+  overflow: hidden;
+  background: var(--papel);
+  color: var(--texto);
+  font-family: var(--sans);
+  font-size: calc(34px * var(--k));
+  line-height: 1.55;
+  font-weight: 400;
+  box-sizing: border-box;
+  padding: 124px 90px 176px;
+  display: block;
+}
+.pg *, .pg *::before, .pg *::after { box-sizing: border-box; }
+.pg__miolo { position: relative; height: 100%; overflow: hidden; }
+
+/* Os resets abaixo usam :where() de propósito: especificidade ZERO. Sem isso,
+   `.pg p { margin }` venceria de `.capa__cliente { margin }` e todo espaçamento
+   de componente seria silenciosamente achatado. */
+:where(.pg) :where(p) { margin: 0 0 calc(22px * var(--k)); }
+:where(.pg) :where(p:last-child) { margin-bottom: 0; }
+:where(.pg) :where(h1, h2, h3) { margin: 0; font-weight: 400; }
+
+.pg::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 12% 6%, rgba(196,151,107,.07), transparent 42%),
+    radial-gradient(circle at 92% 96%, rgba(196,151,107,.05), transparent 45%);
+  pointer-events: none;
+}
+
+.pg__rodape {
+  position: absolute;
+  left: 90px; right: 90px; bottom: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 20px; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--texto-3);
+  border-top: 1px solid var(--linha);
+  padding-top: 24px;
+}
+.pg__num { font-family: var(--serif); font-size: 30px; letter-spacing: .06em; color: var(--ouro); }
+
+/* ===========================================================================
+   CABEÇALHO DE SEÇÃO
+=========================================================================== */
+.sec { margin-bottom: 56px; }
+.sec__kicker {
+  display: block;
+  font-size: 22px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ouro); font-weight: 600; margin-bottom: 20px;
+}
+.sec__titulo {
+  font-family: var(--serif);
+  font-size: 86px; line-height: 1.04; letter-spacing: -.012em;
+  color: var(--tinta);
+}
+.sec__regua {
+  display: block; width: 110px; height: 3px; margin-top: 34px;
+  background: linear-gradient(90deg, var(--ouro), rgba(196,151,107,0));
+}
+
+.rotulo {
+  display: block;
+  font-size: 21px; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--ouro); font-weight: 600; margin-bottom: 12px;
+}
+.corpo { font-size: calc(34px * var(--k)); line-height: 1.56; color: var(--texto); }
+.corpo--menor { font-size: calc(31px * var(--k)); }
+.corpo--nota { color: var(--texto-2); font-size: calc(30px * var(--k)); margin-top: calc(30px * var(--k)); }
+.corpo--manuscrito {
+  margin-top: calc(30px * var(--k)); padding-left: 28px;
+  border-left: 3px solid var(--ouro);
+  font-style: italic; color: var(--texto-2); font-size: calc(30px * var(--k));
+}
+.bloco { margin-top: calc(38px * var(--k)); }
+.bloco p { font-size: calc(30px * var(--k)); line-height: 1.52; color: var(--texto-2); }
+.bloco--nota { background: var(--papel-2); padding: 28px 32px; }
+
+/* ===========================================================================
+   FOTOS
+=========================================================================== */
+.foto { margin: 0; position: relative; overflow: hidden; background: var(--papel-2); }
+.foto img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.foto figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 50px 26px 20px;
+  background: linear-gradient(rgba(5,7,10,0), rgba(5,7,10,.82));
+  color: var(--bege);
+  font-size: 19px; letter-spacing: .22em; text-transform: uppercase;
+}
+.foto--vazia { border: 2px dashed var(--linha); background: transparent; }
+.foto__placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--texto-3); font-size: 22px; letter-spacing: .2em; text-transform: uppercase;
+  text-align: center; padding: 20px;
+}
+
+/* ===========================================================================
+   CAPA
+=========================================================================== */
+.pg--capa { background: #05070A; color: var(--bege); padding: 0; }
+.pg--capa::before { display: none; }
+.pg--capa .pg__miolo { height: 100%; }
+.capa__retrato { position: absolute; left: 0; top: 0; width: 1080px; height: 1260px; overflow: hidden; }
+.capa__retrato img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; display: block; }
+.capa__veu {
+  position: absolute; left: 0; right: 0; top: 760px; height: 520px;
+  background: linear-gradient(rgba(5,7,10,0) 0%, rgba(5,7,10,.72) 55%, #05070A 100%);
+}
+.capa__texto { position: absolute; left: 90px; right: 90px; top: 1130px; }
+.capa__kicker {
+  display: block; font-family: var(--serif); font-style: italic;
+  font-size: 58px; color: var(--ouro-claro); margin-bottom: 4px;
+}
+.capa__titulo {
+  font-family: var(--serif); font-weight: 700;
+  font-size: 140px; line-height: .96; letter-spacing: .03em;
+  color: #F4F7FB;
+}
+.capa__regua {
+  display: block; width: 190px; height: 2px; margin: 44px 0 44px;
+  background: linear-gradient(90deg, var(--ouro-claro), rgba(196,151,107,0));
+}
+.capa__cliente { font-family: var(--serif); font-size: 74px; line-height: 1.1; color: #F4F7FB; margin: 0 0 12px; }
+.capa__profissao {
+  font-size: 26px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--ouro-claro); margin: 0 0 16px;
+}
+.capa__data { font-size: 28px; letter-spacing: .1em; color: rgba(244,247,251,.66); margin: 0; }
+.capa__assinatura {
+  position: absolute; left: 90px; right: 90px; bottom: 70px;
+  font-size: 20px; letter-spacing: .32em; text-transform: uppercase;
+  color: rgba(244,247,251,.55);
+  border-top: 1px solid rgba(227,190,140,.25); padding-top: 26px;
+}
+
+/* ===========================================================================
+   SUMÁRIO
+=========================================================================== */
+.sum { list-style: none; margin: 0; padding: 0; }
+.sum__item {
+  display: flex; gap: 34px; align-items: flex-start;
+  padding: 18px 0; border-bottom: 1px solid var(--linha);
+}
+.sum__item:last-child { border-bottom: 0; }
+.sum__n { font-family: var(--serif); font-size: 44px; color: var(--ouro); line-height: 1; min-width: 70px; padding-top: 4px; }
+.sum__item h3 { font-family: var(--serif); font-size: 42px; line-height: 1.15; color: var(--tinta); margin-bottom: 6px; }
+.sum__item p { font-size: 27px; color: var(--texto-2); line-height: 1.42; margin: 0; }
+.sum__nota {
+  margin-top: 40px; font-family: var(--serif); font-style: italic; font-size: 32px; line-height: 1.45;
+  color: var(--texto-2);
+}
+
+/* ===========================================================================
+   01 · PERFIL
+=========================================================================== */
+.pg--perfil .sec__titulo { font-size: 120px; }
+.perfil__cartao {
+  background: var(--grafite); color: var(--bege);
+  padding: 48px 50px 40px; margin-bottom: 56px; position: relative;
+}
+.perfil__cartao::after {
+  content: ""; position: absolute; inset: 14px;
+  border: 1px solid rgba(227,190,140,.22); pointer-events: none;
+}
+.perfil__cartao .emblema { position: absolute; right: 56px; top: 44px; width: 120px; height: 120px; color: var(--ouro-claro); }
+.emblema svg { width: 100%; height: 100%; }
+.perfil__cartao-texto { padding-right: 170px; }
+.perfil__temperamento {
+  display: block; font-size: 21px; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--ouro-claro); margin-bottom: 14px;
+}
+.perfil__essencia { display: block; font-family: var(--serif); font-style: italic; font-size: 48px; line-height: 1.2; color: #F4F7FB; }
+.chaves {
+  list-style: none; margin: 38px 0 0; padding: 30px 0 0; border-top: 1px solid rgba(227,190,140,.25);
+  display: flex; justify-content: space-between; gap: 16px;
+}
+.chaves li { font-family: var(--serif); font-size: 36px; color: #F4F7FB; }
+
+/* ===========================================================================
+   02 · DIREÇÃO DE IMAGEM
+=========================================================================== */
+.direcao__linhas { background: var(--grafite); padding: 30px 40px; margin-bottom: 52px; height: 340px; }
+.direcao__linhas svg { width: 100%; height: 100%; display: block; }
+.direcao__linha strong {
+  display: block; font-family: var(--serif); font-weight: 400;
+  font-size: 58px; line-height: 1.12; color: var(--tinta); margin-bottom: 20px;
+}
+.direcao__linha p { font-size: calc(32px * var(--k)); color: var(--texto-2); line-height: 1.52; }
+.direcao__objetivo { background: var(--papel-2); padding: 44px 48px; margin-top: 54px; border-left: 4px solid var(--ouro); }
+.destaque { font-family: var(--serif); font-style: italic; font-size: 46px; line-height: 1.32; color: var(--tinta); }
+
+.execucao .bloco { margin-top: 0; padding: 32px 0; border-bottom: 1px solid var(--linha); }
+.execucao .bloco:first-child { padding-top: 0; }
+.execucao .bloco:last-child { border-bottom: 0; }
+.execucao .bloco p { font-size: calc(31px * var(--k)); color: var(--texto); }
+.bloco--evitar .rotulo { color: #E2703A; }
+
+/* ===========================================================================
+   03 · ANÁLISE FACIAL
+=========================================================================== */
+.rosto__nome { font-family: var(--serif); font-style: italic; font-size: 60px; line-height: 1.1; color: var(--tinta); margin: -18px 0 36px; }
+/* modelo 3D + linhas: a imagem e o SVG ocupam a mesma caixa, na mesma
+   proporção (1000 x 896), então cada linha cai no ponto medido */
+.rosto3d { position: relative; width: 100%; height: 806px; background: #0D121F; overflow: hidden; }
+.rosto3d__img, .rosto3d__linhas { position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: block; }
+.rosto__legenda { margin: 16px 0 34px; font-size: 21px; letter-spacing: .08em; color: var(--texto-3); }
+.pg--rosto .bloco, .pg--rosto2 .bloco { margin-top: calc(34px * var(--k)); }
+.pg--rosto2 .foto--faixa { height: 640px; }
+/* foto escolhida pelo Emerson no lugar do antigo desenho do formato */
+.foto--formato { height: 806px; }
+
+/* ===========================================================================
+   04 · ESTRUTURA DO FIO
+=========================================================================== */
+.cabelo__tipo { font-family: var(--serif); font-size: 64px; color: var(--tinta); margin: -16px 0 34px; display: flex; align-items: center; gap: 24px; }
+.cabelo__grupo {
+  font-family: var(--sans); font-size: 20px; letter-spacing: .26em;
+  text-transform: uppercase; color: var(--ouro);
+  border: 2px solid var(--ouro); padding: 8px 20px; border-radius: 999px;
+}
+.foto--faixa { height: 580px; margin-bottom: 44px; }
+/* no tipo de cabelo o texto é mais longo: a foto cede espaço para não passar do rodapé */
+.pg--cabelo .foto--faixa { height: 520px; margin-bottom: 36px; }
+.foto--faixa img { object-position: 50% 28%; }
+
+/* ===========================================================================
+   05 · PROJETO TÉCNICO
+=========================================================================== */
+.diagrama { background: var(--papel-2); padding: 10px; display: flex; align-items: center; justify-content: center; }
+.diagrama svg { width: 100%; height: 100%; display: block; }
+.diagrama--alto { height: 880px; }
+.projeto__par { display: flex; flex-direction: column; gap: 22px; }
+.projeto__par .diagrama { height: 640px; }
+.pg--com-tecnicas .projeto__par .diagrama { height: 460px; }
+/* fotos escolhidas pelo Emerson no lugar dos antigos desenhos de medidas */
+.foto--projeto-alto { height: 1000px; }
+.projeto__obs { margin-top: 40px; padding-top: 30px; border-top: 1px solid var(--linha); }
+.projeto__par .foto--projeto { height: 640px; }
+.pg--com-tecnicas .projeto__par .foto--projeto { height: 460px; }
+.pg--com-tecnicas .projeto__tecnicas { margin-top: 30px; }
+/* desenhos de medidas sobre o 3D: fundo grafite da própria imagem, sem moldura clara */
+.diagrama--3d { background: #0D121F; padding: 0; }
+.diagrama--3d .rosto3d { width: auto; height: 100%; max-width: 100%; aspect-ratio: 1000 / 896; }
+
+.cotas {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px;
+  margin-top: 40px; padding: 30px 0; border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha);
+}
+.cota { text-align: center; }
+.cota__nome { display: block; font-size: 19px; letter-spacing: .2em; text-transform: uppercase; color: var(--texto-3); margin-bottom: 12px; }
+.cota__valor { display: block; font-family: var(--serif); font-weight: 400; font-size: 58px; color: var(--tinta); line-height: 1; }
+.cota__valor em { font-family: var(--sans); font-style: normal; font-size: 22px; color: var(--texto-3); margin-left: 6px; }
+.projeto__nota { margin-top: 34px; font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--texto-2); }
+.projeto__tecnicas { margin-top: 36px; }
+.tecnicas { list-style: none; margin: 0; padding: 0; }
+.tecnicas li { font-size: 28px; color: var(--texto); padding: 8px 0 8px 36px; position: relative; }
+.tecnicas li::before { content: ""; position: absolute; left: 0; top: 29px; width: 18px; height: 2px; background: var(--ouro); }
+
+/* ===========================================================================
+   06 · PROPOSTA
+=========================================================================== */
+.proposta__aspas { display: block; font-family: var(--serif); font-size: 200px; line-height: .6; color: var(--ouro); height: 90px; margin-top: 10px; }
+.proposta__corpo { font-size: calc(35px * var(--k)); line-height: 1.62; color: var(--texto); }
+.proposta__corpo p { margin: 0 0 calc(28px * var(--k)); }
+.proposta__obs { margin-top: calc(48px * var(--k)); border-top: 1px solid var(--linha); padding-top: calc(34px * var(--k)); }
+
+/* ===========================================================================
+   07 · REFERÊNCIAS VISUAIS
+=========================================================================== */
+.ref__grade { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.ref__grade .foto { height: 470px; }
+.ref__grade .ref__grande { grid-column: 1 / -1; height: 580px; }
+.ref__nota { margin-top: 36px; font-family: var(--serif); font-style: italic; font-size: calc(30px * var(--k)); line-height: 1.45; color: var(--texto-2); }
+
+/* ===========================================================================
+   08 · ANTES E DEPOIS — uma foto sobre a outra
+=========================================================================== */
+.pg--ad { padding: 0; background: #05070A; }
+.pg--ad::before { display: none; }
+.ad__lado { position: relative; height: 957px; overflow: hidden; background: var(--grafite); }
+.ad__lado + .ad__lado { margin-top: 6px; }
+.ad__lado .foto { height: 100%; background: var(--grafite); }
+.ad__lado .foto--vazia { border-color: rgba(227,190,140,.3); }
+.ad__lado .foto__placeholder { color: rgba(244,247,251,.45); }
+.foto--cheia img { object-position: 50% 30%; }
+.ad__tag {
+  position: absolute; left: 50px; top: 50px;
+  font-size: 24px; letter-spacing: .34em; font-weight: 600;
+  color: var(--bege); background: rgba(5,7,10,.72);
+  border: 1px solid rgba(227,190,140,.45);
+  padding: 16px 30px;
+}
+.ad__tag--depois { background: rgba(196,151,107,.94); border-color: var(--ouro-claro); color: #0B0A07; }
+.ad__tarja {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 90px 50px 44px;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+  background: linear-gradient(rgba(5,7,10,0), rgba(5,7,10,.92) 60%);
+  font-size: 20px; letter-spacing: .26em; text-transform: uppercase;
+}
+.ad__titulo { color: var(--bege); }
+.ad__num { font-family: var(--serif); font-size: 30px; letter-spacing: .06em; color: var(--ouro-claro); }
+
+/* ===========================================================================
+   09 · MANUTENÇÃO
+=========================================================================== */
+.rotina { list-style: none; margin: 0; padding: 0; }
+.rotina li { display: flex; gap: 30px; align-items: flex-start; padding: calc(26px * var(--k)) 0; border-bottom: 1px solid var(--linha); }
+.rotina li:last-child { border-bottom: 0; }
+.rot__n { font-family: var(--serif); font-size: 40px; color: var(--ouro); min-width: 62px; line-height: 1.1; }
+.rotina p { font-size: calc(32px * var(--k)); color: var(--texto); line-height: 1.5; margin: 0; }
+.man__produtos { margin-top: 44px; }
+.produtos { list-style: none; margin: 0; padding: 0; }
+.produtos li { padding: 16px 0; border-bottom: 1px solid var(--linha); }
+.produtos li:last-child { border-bottom: 0; }
+.produtos strong { display: block; font-family: var(--serif); font-weight: 400; font-size: 38px; color: var(--tinta); }
+.produtos span { font-size: 28px; color: var(--texto-2); }
+.man__retorno { margin-top: 48px; background: var(--papel-2); padding: 40px 44px; border-top: 4px solid var(--ouro); }
+.man__retorno p { font-family: var(--serif); font-style: italic; font-size: 40px; line-height: 1.34; color: var(--tinta); }
+
+/* ===========================================================================
+   CONTRACAPA
+=========================================================================== */
+.pg--final { padding: 0; background: #05070A; color: var(--bege); }
+.pg--final::before { display: none; }
+.final__fundo { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; object-position: 50% 20%; display: block; }
+.final__veu {
+  position: absolute; inset: 0;
+  background: linear-gradient(rgba(5,7,10,0) 0%, rgba(5,7,10,0) 38%, rgba(5,7,10,.78) 56%, rgba(5,7,10,.97) 74%);
+}
+.final__texto { position: absolute; left: 90px; right: 90px; bottom: 110px; }
+.final__marca { font-family: var(--serif); font-weight: 400; font-size: 84px; letter-spacing: .3em; color: #F4F7FB; margin-bottom: 60px; }
+.final__frase { display: flex; flex-direction: column; gap: 12px; margin-bottom: 56px; }
+.final__frase span { font-size: 34px; font-weight: 500; letter-spacing: .04em; line-height: 1.35; color: #F4F7FB; }
+.final__obrigado { font-family: var(--serif); font-style: italic; font-size: 56px; color: var(--ouro-claro); margin-bottom: 50px; }
+.final__assinatura {
+  font-size: 20px; letter-spacing: .3em; text-transform: uppercase; color: rgba(244,247,251,.6);
+  border-top: 1px solid rgba(227,190,140,.25); padding-top: 26px;
+}
+
+/* Emerson: nas páginas escuras os blocos elevados ganham um fio dourado */
+.perfil__cartao, .direcao__linhas { border: 1px solid rgba(196,151,107,.35); }

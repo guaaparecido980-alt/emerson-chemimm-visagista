@@ -1,0 +1,328 @@
+/* =============================================================================
+   DOSSIÊ DE VISAGISMO — INTERFACE DO SISTEMA
+   -----------------------------------------------------------------------------
+   Esta folha estiliza a ferramenta que o Emerson opera. O documento entregue ao
+   cliente é estilizado em `dossie.css` e não é afetado por nada daqui.
+============================================================================= */
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  overflow-x: hidden;   /* rede de proteção: nenhum elemento alarga a página */
+  font-family: "Newsreader", Georgia, -apple-system, "Segoe UI", Arial, sans-serif;
+  background: #05070A;
+  color: #E6EBF2;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: #E3BE8C; }
+
+/* ===========================================================================
+   BARRA SUPERIOR
+=========================================================================== */
+.topo {
+  min-height: 62px;
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 18px;
+  background: #080B12;
+  border-bottom: 1px solid #1E293B;
+  position: sticky; top: 0; z-index: 40;
+}
+.topo__marca { display: flex; flex-direction: column; line-height: 1.15; margin-right: auto; min-width: 0; }
+.topo__marca b {
+  font-family: "Fraunces", serif; font-weight: 500;
+  font-size: 18px; letter-spacing: .12em; color: #F4F7FB; white-space: nowrap;
+}
+.topo__marca span { font-size: 9.5px; letter-spacing: .26em; text-transform: uppercase; color: #76829A; }
+.acoes { display: flex; align-items: center; gap: 8px; }
+
+/* ===========================================================================
+   BOTÕES
+=========================================================================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; padding: 0 16px;
+  background: #12182A; border: 1px solid #1E293B; border-radius: 4px;
+  color: #D5DCE6; cursor: pointer; white-space: nowrap; text-decoration: none;
+  font-size: 13.5px; letter-spacing: .02em;
+  transition: border-color .15s, background .15s, color .15s;
+}
+.btn:hover { border-color: #C4976B; color: #F4F7FB; }
+.btn:focus-visible { outline: 2px solid #C4976B; outline-offset: 2px; }
+.btn--ouro { background: #C4976B; border-color: #C4976B; color: #05070A; font-weight: 600; }
+.btn--ouro:hover { background: #E3BE8C; border-color: #E3BE8C; color: #05070A; }
+.btn--fantasma { background: transparent; border-color: transparent; color: #9AA5B8; }
+.btn--fantasma:hover { color: #F4F7FB; border-color: #1E293B; }
+.btn--perigo:hover { border-color: #E2703A; color: #F0A07A; }
+.btn--pequeno { height: 32px; padding: 0 12px; font-size: 12.5px; }
+.btn--largo { width: 100%; }
+.btn--alto { height: 54px; font-size: 15.5px; }
+.btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+/* ===========================================================================
+   EDITOR — DUAS COLUNAS
+=========================================================================== */
+.editor { display: grid; grid-template-columns: 470px 1fr; height: calc(100vh - 62px); }
+
+.forma { overflow-y: auto; border-right: 1px solid #1E293B; background: #14110d; }
+.forma__cabeca {
+  padding: 18px 22px 12px; border-bottom: 1px solid #161D2E;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.forma__cabeca h2 {
+  font-family: "Fraunces", serif; font-weight: 400;
+  font-size: 24px; margin: 0; color: #F4F7FB;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+}
+
+.passos { display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 22px; border-bottom: 1px solid #161D2E; }
+.passo {
+  border: 1px solid #1E293B; background: transparent; border-radius: 999px;
+  padding: 6px 12px; font-size: 12px; color: #9AA5B8; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.passo span { font-size: 10.5px; opacity: .7; }
+.passo:hover { border-color: #2A3650; color: #C9D1DD; }
+.passo[aria-selected="true"] { background: #C4976B; border-color: #C4976B; color: #05070A; font-weight: 600; }
+
+.secao { padding: 22px; display: none; }
+.secao[data-ativa="true"] { display: block; }
+.secao > h3 {
+  font-size: 11px; letter-spacing: .26em; text-transform: uppercase;
+  color: #C4976B; margin: 0 0 4px; font-weight: 600;
+}
+.secao > .secao__dica { font-size: 13px; color: #76829A; margin: 0 0 20px; line-height: 1.55; }
+
+.campo { margin-bottom: 16px; }
+.campo > label {
+  display: block; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: #9AA5B8; margin-bottom: 6px;
+}
+.campo input[type="text"], .campo input[type="date"], .campo input[type="number"],
+.campo select, .campo textarea {
+  width: 100%; background: #0D121F; border: 1px solid #1E293B; border-radius: 4px;
+  padding: 11px 12px; color: #E6EBF2;
+  font-size: 16px;   /* 16 px: abaixo disso o iPhone dá zoom sozinho ao tocar */
+}
+.campo textarea { resize: vertical; min-height: 110px; line-height: 1.55; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: #C4976B; }
+.campo__ajuda { font-size: 12px; color: #5F6B80; margin: 6px 0 0; line-height: 1.5; }
+.dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.quadra { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.etapa__rodape { margin-top: 26px; padding-top: 18px; border-top: 1px solid #161D2E; }
+
+/* miniatura do desenho dentro do formulário */
+.miniatura {
+  background: #E6EBF2; border-radius: 4px; padding: 8px; margin-bottom: 16px;
+  height: 300px; display: flex; align-items: center; justify-content: center;
+}
+.miniatura svg { width: 100%; height: 100%; }
+/* `.miniatura.miniatura--3d`: precisa vencer a altura fixa que o bloco do
+   celular dá às miniaturas — senão o rosto sai cortado */
+.miniatura.miniatura--3d { display: block; height: auto; padding: 0; background: #12182A; overflow: hidden; }
+.miniatura--3d .rosto3d { height: auto; aspect-ratio: 1000 / 896; }
+
+/* seleção de perfil em cartões */
+.perfis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+.perfilBtn {
+  background: #0D121F; border: 1px solid #1E293B; border-radius: 4px;
+  padding: 14px 12px; cursor: pointer; text-align: left;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.perfilBtn:hover { border-color: #2A3650; }
+.perfilBtn[aria-pressed="true"] { border-color: #C4976B; background: #241f16; }
+.perfilBtn__emblema { width: 32px; height: 32px; color: #C4976B; }
+.perfilBtn[aria-pressed="true"] .perfilBtn__emblema { color: #E3BE8C; }
+.perfilBtn__emblema svg { width: 100%; height: 100%; }
+.perfilBtn b { font-family: "Fraunces", serif; font-weight: 500; font-size: 18px; color: #F4F7FB; }
+.perfilBtn span { font-size: 12px; color: #76829A; line-height: 1.45; }
+
+.previa {
+  border: 1px solid #1E293B; border-radius: 4px; padding: 13px 15px;
+  background: #0D121F; font-size: 13px; color: #9AA5B8; line-height: 1.6;
+  margin-bottom: 16px;
+}
+.previa b { color: #E3BE8C; display: block; margin-bottom: 4px; font-weight: 600; }
+
+/* fotos */
+.fotos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.fotos--etapa { margin-bottom: 18px; }
+.slot {
+  border: 1px dashed #352e23; border-radius: 4px; overflow: hidden;
+  background: #0D121F; position: relative; aspect-ratio: 3 / 4;
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+}
+.slot:hover { border-color: #C4976B; }
+.slot--preenchido { border-style: solid; border-color: #1E293B; }
+.slot img { width: 100%; height: 100%; object-fit: cover; }
+.slot__vazio { text-align: center; padding: 12px; color: #5F6B80; font-size: 12px; line-height: 1.5; }
+.slot__vazio b { display: block; color: #9AA5B8; font-size: 13px; margin-bottom: 3px; }
+.slot__rotulo {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(transparent, rgba(5,7,10,.94));
+  color: #C9D1DD; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+  padding: 18px 8px 7px; text-align: center; pointer-events: none;
+}
+.slot__limpar {
+  position: absolute; top: 6px; right: 6px; width: 30px; height: 30px;
+  border: 0; border-radius: 4px; background: rgba(5,7,10,.82); color: #C9D1DD;
+  cursor: pointer; display: grid; place-items: center;
+}
+.slot__editar {
+  position: absolute; left: 8px; right: 8px; bottom: 30px; height: 38px;
+  border: 0; border-radius: 4px; background: #C4976B; color: #05070A;
+  font: 600 13px/1 inherit; font-family: inherit; cursor: pointer;
+}
+.slot__editar:hover { background: #E3BE8C; }
+.slot__limpar:hover { background: #4a2019; color: #F6CDB8; }
+
+/* lista de linhas editáveis (rotina, produtos) */
+.linhas { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+.linha { display: flex; gap: 8px; align-items: flex-start; }
+.linha input { flex: 1; min-width: 0; }
+.linha .btn { flex: none; }
+
+/* ===========================================================================
+   PRÉ-VISUALIZAÇÃO
+=========================================================================== */
+.visor { display: flex; flex-direction: column; background: #030406; min-width: 0; }
+.visor__barra {
+  min-height: 52px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 8px 14px; border-bottom: 1px solid #12182A; background: #05070A;
+}
+.visor__conta { font-size: 12.5px; color: #9AA5B8; }
+.visor__conta--leve { color: #5F6B80; margin-right: auto; }
+.visor__palco {
+  flex: 1; overflow: auto; padding: 20px;
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+/* A página mantém 1080 x 1920 px de verdade e só é encolhida por `scale()`.
+   A origem PRECISA ser `top left`: com `top center` a página sai deslocada
+   para a direita, cortada na borda da tela. */
+.moldura {
+  width: 1080px; height: 1920px; flex: none;
+  transform-origin: top left;
+  box-shadow: 0 20px 60px rgba(0,0,0,.55);
+  background: #F4F7FB;
+}
+.moldura__caixa { position: relative; overflow: hidden; flex: none; }
+
+/* bancada invisível onde as páginas são montadas em tamanho real para o PDF */
+.oficina { position: fixed; left: -20000px; top: 0; width: 1080px; pointer-events: none; }
+
+/* barra de progresso da exportação */
+.progresso {
+  position: fixed; inset: 0; z-index: 90;
+  background: rgba(5,7,10,.92);
+  display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 18px;
+  padding: 0 24px;
+}
+.progresso p { margin: 0; color: #C9D1DD; font-size: 15px; letter-spacing: .04em; text-align: center; }
+.progresso__trilho { width: min(320px, 100%); height: 3px; background: #1E293B; border-radius: 2px; overflow: hidden; }
+.progresso__barra { height: 100%; width: 0; background: #C4976B; transition: width .2s; }
+
+/* editor de foto: enquadrar, aproximar, girar */
+.edfoto {
+  position: fixed; inset: 0; z-index: 95;
+  background: #030406; color: #C9D1DD;
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+}
+.edfoto__topo { display: flex; flex-direction: column; gap: 2px; text-align: center; }
+.edfoto__topo b { font-weight: 600; color: #F4F7FB; font-size: 15px; }
+.edfoto__topo span { font-size: 12px; color: #8b826d; }
+.edfoto__palco { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.edfoto__quadro {
+  position: relative; overflow: hidden; background: #12182A;
+  aspect-ratio: var(--prop);
+  width: min(100%, calc((100dvh - 250px) * var(--prop)));
+  max-height: 100%;
+  outline: 2px solid #C4976B;
+  touch-action: none; cursor: grab; user-select: none;
+}
+.edfoto__quadro:active { cursor: grabbing; }
+.edfoto__quadro img { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+/* guia dos terços: só ajuda a posicionar, não sai no PDF */
+.edfoto__guia {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, transparent 33.2%, rgba(255,255,255,.28) 33.3%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,.28) 66.6%, transparent 66.8%),
+    linear-gradient(to bottom, transparent 33.2%, rgba(255,255,255,.28) 33.3%, transparent 33.5%, transparent 66.5%, rgba(255,255,255,.28) 66.6%, transparent 66.8%);
+}
+.edfoto__ctrl { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.edfoto__ctrl input[type=range] { flex: 1; max-width: 360px; accent-color: #C4976B; }
+.edfoto__rodape { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* tela final: o PDF pronto */
+.entrega {
+  position: fixed; inset: 0; z-index: 92;
+  background: rgba(5,7,10,.94);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 16px;
+}
+.entrega__caixa {
+  width: min(440px, 100%);
+  background: #080B12; border: 1px solid #1E293B; border-radius: 6px;
+  padding: 30px 24px 22px; display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+.entrega__selo { font-size: 11px; letter-spacing: .28em; text-transform: uppercase; color: #C4976B; font-weight: 600; }
+.entrega__caixa h2 { font-family: "Fraunces", serif; font-weight: 400; font-size: 30px; margin: 0; color: #F4F7FB; }
+.entrega__arquivo { margin: 0 0 8px; font-size: 12.5px; color: #76829A; word-break: break-all; }
+.entrega__dica { margin: 4px 0 0; font-size: 12.5px; color: #76829A; line-height: 1.55; }
+.entrega__dica b { color: #C9D1DD; font-weight: 600; }
+.entrega__fim { display: flex; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 14px; border-top: 1px solid #161D2E; }
+
+/* avisos */
+.aviso {
+  position: fixed; right: 16px; bottom: 16px; z-index: 95;
+  background: #1e1a13; border: 1px solid #1E293B; border-left: 3px solid #C4976B;
+  border-radius: 4px; padding: 13px 17px; color: #D5DCE6; font-size: 13.5px;
+  max-width: min(380px, calc(100% - 32px)); box-shadow: 0 12px 34px rgba(0,0,0,.5);
+}
+.aviso--erro { border-left-color: #E2703A; }
+
+@media (max-width: 1180px) {
+  .editor { grid-template-columns: 400px 1fr; }
+}
+
+/* Fora do celular as duas colunas convivem e o botão não faz sentido.
+   Esta regra precisa vir ANTES do media query: as duas têm a mesma
+   especificidade, então quem estiver por último vence. */
+.btn--alternar { display: none; }
+
+/* ===========================================================================
+   CELULAR
+   Numa tela estreita não cabem a ficha e a prévia ao mesmo tempo. O editor
+   mostra UMA das duas, e o botão "Ver dossiê" alterna.
+=========================================================================== */
+@media (max-width: 900px) {
+  .topo { padding: 10px 14px; }
+  .topo__marca b { font-size: 15px; }
+  .topo .btn { padding: 0 12px; height: 40px; }
+  .editor { grid-template-columns: 1fr; height: auto; }
+  .forma { border-right: 0; overflow: visible; }
+  .forma__cabeca { padding: 16px; }
+  .forma__cabeca h2 { font-size: 21px; }
+  .passos { padding: 12px 16px; }
+  .secao { padding: 18px 16px 26px; }
+  .btn { height: 44px; }
+  .btn--pequeno { height: 36px; }
+  .btn--alto { height: 56px; }
+  .perfis, .fotos { grid-template-columns: 1fr 1fr; }
+  .miniatura { height: 260px; }
+
+  .visor { display: none; }
+  .editor--previa .forma > :not(.forma__cabeca) { display: none; }
+  .editor--previa .visor { display: flex; min-height: calc(100vh - 130px); }
+  .editor--previa .visor__palco { padding: 14px; }
+  .btn--alternar { display: inline-flex; flex: none; }
+}
+
+@media (max-width: 420px) {
+  .topo__marca span { display: none; }
+  .perfis { grid-template-columns: 1fr; }
+}
